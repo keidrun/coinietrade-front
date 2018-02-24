@@ -1,2 +1,3 @@
-# k-front
-K project - Front end.
+# coinietrade-front
+
+CoinieTrade project - Front end and Back end.
