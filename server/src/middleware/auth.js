@@ -7,13 +7,11 @@ const auth = (req, res, next) => {
   User.findByToken(token, (err, user) => {
     if (err) throw err;
 
-    if (!user)
-      return res.json({
-        error: true
-      });
+    if (!user) return res.status(401).send({ message: 'Login Required' });
 
     req.token = token;
     req.user = user;
+
     next();
   });
 };

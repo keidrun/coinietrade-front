@@ -1,9 +1,8 @@
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 module.exports = app => {
-  app.get('/api/users', (req, res) => {
-    User.find({}, (err, users) => {
-      res.status(200).send(users);
-    });
-  });
+  app.post('/api/user', auth, (req, res) => {});
+
+  app.delete('/api/user', auth, (req, res) => {});
 };

@@ -4,6 +4,29 @@ const auth = require('../middleware/auth');
 const User = require('../models/User');
 
 module.exports = app => {
+  app.get('/api/auth', auth, (req, res) => {
+    res.json({
+      id: req.user._id,
+      displayName: req.user.displayName,
+      avatarUrl: req.user.avatarUrl
+    });
+  });
+
+  // Logout
+  app.get('/api/logout', auth, (req, res) => {
+    const user = req.user;
+    const token = req.token;
+
+    req.logout(); // clear cookie['user'] with passport
+
+    user.deleteToken(req.token, (err, user) => {
+      if (err) return res.status(400).send(err);
+
+      res.clearCookie(keys.cookieKey);
+      res.redirect('/');
+    });
+  });
+
   // Facebook auth route
   app.get(
     '/auth/facebook',
@@ -16,11 +39,8 @@ module.exports = app => {
     '/auth/facebook/callback',
     passport.authenticate('facebook'),
     (req, res) => {
-      const user = req.user;
-      res.cookie(keys.cookieKey, user.token).json({
-        isAuth: true,
-        id: user._id
-      });
+      const token = req.user.token;
+      res.cookie(keys.cookieKey, token).redirect('/dashboard');
     }
   );
 
@@ -36,31 +56,8 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
-      const user = req.user;
-      res.cookie(keys.cookieKey, user.token).json({
-        isAuth: true,
-        id: user._id
-      });
+      const token = req.user.token;
+      res.cookie(keys.cookieKey, token).redirect('/dashboard');
     }
   );
-
-  // Logout
-  app.get('/api/logout', auth, (req, res) => {
-    req.logout();
-    User.deleteToken(req.token, (err, user) => {
-      if (err) return res.status(400).send(err);
-
-      res.sendStatus(200);
-    });
-  });
-
-  // Check auth status
-  app.get('/api/auth', auth, (req, res) => {
-    res.json({
-      isAuth: true,
-      id: req.user._id,
-      displayName: req.user.displayName,
-      avatarUrl: req.user.avatarUrl
-    });
-  });
 };

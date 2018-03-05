@@ -89,7 +89,7 @@ userSchema.statics.findByToken = function(token, cb) {
   });
 };
 
-userSchema.statics.deleteToken = function(availableToken, cb) {
+userSchema.methods.deleteToken = function(token, cb) {
   let user = this;
 
   user.update({ $unset: { token: 1 } }, function(err, user) {

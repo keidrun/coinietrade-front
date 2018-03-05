@@ -1,0 +1,11 @@
+.nav_login_link {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+.nav_logged_link {
+    text-decoration: none;
+    color: blue;
+    font-size: 1rem;
+}
