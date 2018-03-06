@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import Layout from '../hoc/Layout';
+import Layout from '../hoc/Layout/Layout';
 import Landing from './Landing/Landing';
 const Dashboard = () => <h2>Dashboard</h2>;
 const Tradeboad = () => <h2>Tradeboad</h2>;

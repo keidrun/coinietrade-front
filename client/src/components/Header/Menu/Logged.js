@@ -20,17 +20,17 @@ class Logged extends Component {
         link: '/dashboard'
       },
       {
-        icon: 'home',
+        icon: 'exchange',
         text: 'Trade',
         link: '/trade'
       },
       {
-        icon: 'home',
+        icon: 'cog',
         text: 'Settings',
         link: '/settings'
       },
       {
-        icon: 'home',
+        icon: 'info-circle',
         text: 'Help',
         link: '/help'
       }
@@ -67,7 +67,7 @@ class Logged extends Component {
         <MenuItem
           primaryText={
             <a href="/api/logout" className={styles.nav_logged_link}>
-              <FontAwesome name="home" /> Sign out
+              <FontAwesome name="sign-out" /> Sign out
             </a>
           }
         />
