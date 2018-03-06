@@ -10,6 +10,15 @@ const config = {
     googleClientId: process.env.GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.GOOGLE_CLIENT_SECRET
   },
+  integration: {
+    mongoURL: process.env.PRE_MONGO_URL,
+    tokenSecret: process.env.PRE_TOKEN_SECRET,
+    cookieKey: process.env.PRE_COOKIE_KEY,
+    facebookClientId: process.env.PRE_FACEBOOK_CLIENT_ID,
+    facebookClientSecret: process.env.PRE_FACEBOOK_CLIENT_SECRET,
+    googleClientId: process.env.PRE_GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.PRE_GOOGLE_CLIENT_SECRET
+  },
   default: {
     mongoURL: process.env.DEV_MONGO_URL,
     tokenSecret: process.env.DEV_TOKEN_SECRET,

@@ -1,0 +1,7 @@
+.dockerignore
+.git
+node_modules
+server/test
+client/*
+!client/build
+db/
