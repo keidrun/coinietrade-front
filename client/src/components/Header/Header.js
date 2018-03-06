@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import AppBar from 'material-ui/AppBar';
+import { fetchUser } from '../../actions';
 
+import AppBar from 'material-ui/AppBar';
 import Login from './Menu/Login';
 import Logged from './Menu/Logged';
 
 import styles from './Header.css';
 
 class Header extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   renderTitle() {
     const isLoggedin = this.props.user;
 
@@ -23,11 +28,11 @@ class Header extends Component {
   }
 
   renderContent() {
-    const isLoggedin = this.props.user;
+    const isLogged = this.props.user;
 
-    switch (isLoggedin) {
-      case null:
-        return; // API not working
+    switch (isLogged) {
+      case null: // API not working
+        return;
       case false:
         return <Login />;
       default:
@@ -52,4 +57,4 @@ function mapStateToProps({ user }) {
   return { user };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { fetchUser })(Header);
