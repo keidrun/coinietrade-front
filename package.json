@@ -35,11 +35,17 @@
     "start": "node server/src/server.js ",
     "test": "mocha server/test/*.test.js",
     "build": "yarn --cwd client build",
-    "up": "docker-compose up -d",
-    "db:up": "docker-compose up -d db",
-    "down": "docker-compose down",
     "dev:server": "nodemon server/src/server.js",
     "dev:client": "yarn --cwd client start",
-    "dev": "npm-run-all -p dev:*"
+    "dev": "npm-run-all -p dev:*",
+    "up": "docker-compose -f docker-compose.dev.yml up -d",
+    "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
+    "db:up": "docker-compose -f docker-compose.dev.yml up -d db",
+    "down": "docker-compose -f docker-compose.dev.yml down",
+    "ps": "docker-compose -f docker-compose.dev.yml ps",
+    "prod:build": "yarn build && docker-compose build --no-cache web",
+    "prod:deploy":
+      "docker push `node -pe \"require('dotenv').config().parsed.REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.APP\"`/`node -pe \"require('dotenv').config().parsed.PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod": "npm-run-all -s prod:*"
   }
 }
