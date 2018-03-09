@@ -18,7 +18,6 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.7",
-    "npm-run-all": "^4.1.2",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0"
@@ -28,6 +27,7 @@
     "dotenv": "^5.0.0",
     "mocha": "^5.0.1",
     "nock": "^9.2.3",
+    "npm-run-all": "^4.1.2",
     "react-scripts": "^1.1.1",
     "sinon": "^4.4.2"
   },
@@ -35,18 +35,21 @@
     "start": "node server/src/server.js ",
     "test": "mocha server/test/*.test.js",
     "build": "yarn --cwd client build",
-    "dev:mongo": "docker ps | grep 27019 || yarn db:up",
-    "dev:server": "sleep 5 && nodemon server/src/server.js",
-    "dev:client": "yarn --cwd client start",
-    "dev": "npm-run-all -p dev:*",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
     "db:up": "docker-compose -f docker-compose.dev.yml up -d db",
     "down": "docker-compose -f docker-compose.dev.yml down",
     "ps": "docker-compose -f docker-compose.dev.yml ps",
-    "prod:build": "yarn build && docker-compose build --no-cache web",
+    "dev:mongo": "docker ps | grep 27019 || yarn db:up",
+    "dev:server": "sleep 5 && nodemon server/src/server.js",
+    "dev:client": "yarn --cwd client start",
+    "inte": "yarn build && yarn up",
+    "prod:build":
+      "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
+    "prod:push":
+      "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod:deploy":
-      "docker push `node -pe \"require('dotenv').config().parsed.REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.APP\"`/`node -pe \"require('dotenv').config().parsed.PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod": "npm-run-all -s prod:*"
   }
 }

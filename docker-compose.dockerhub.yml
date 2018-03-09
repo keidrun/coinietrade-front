@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    image: ${REGISTRY}/${APP}/${PROCESS_TYPE}:$TAG
+    image: ${DOCKERHUB_USER}/${DOCKERHUB_REPOSITORY}:$TAG
     build: .
     command: yarn start
     env_file:
