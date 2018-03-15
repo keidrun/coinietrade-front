@@ -5,9 +5,14 @@ const auth = (req, res, next) => {
   const token = req.cookies[keys.cookieKey];
 
   User.findByToken(token, (err, user) => {
-    if (err) throw err;
+    if (err) return next(err);
 
-    if (!user) return res.status(401).send({ message: 'Login Required' });
+    if (!user)
+      return res.status(401).send({
+        error: {
+          message: 'Login Required'
+        }
+      });
 
     req.token = token;
     req.user = user;

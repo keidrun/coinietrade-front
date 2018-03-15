@@ -5,6 +5,8 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const keys = require('./config/keys').get(process.env.NODE_ENV);
 
+const errorHandler = require('./middleware/errorHandler');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -33,6 +35,8 @@ if (
     );
   });
 }
+
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);

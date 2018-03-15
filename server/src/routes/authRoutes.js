@@ -20,7 +20,12 @@ module.exports = app => {
     req.logout(); // clear cookie['user'] with passport
 
     user.deleteToken(req.token, (err, user) => {
-      if (err) return res.status(400).send(err);
+      if (err)
+        return res.status(400).send({
+          error: {
+            message: err.message
+          }
+        });
 
       res.clearCookie(keys.cookieKey);
       res.redirect('/');
