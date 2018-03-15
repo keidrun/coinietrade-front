@@ -12,7 +12,7 @@ const loginButtonStyles = {
 };
 
 const Landing = () => (
-  <div className={styles.landing}>
+  <div>
     <div className={styles.hero}>
       <h2>Welcome to CoinieTrade !</h2>
       <p>

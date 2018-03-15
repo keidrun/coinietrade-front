@@ -1,11 +1,7 @@
-.landing a {
-    color: white;
-}
-
 .hero {
     position: relative;
     height: 80vh;
-    background-color: lightgray;
+    background-color: #000;
     background-image: url("/assets/coinietrade-hero.jpg");
     background-size: cover;
     background-attachment: fixed;
@@ -16,8 +12,8 @@
     position: absolute;
     top: 7%;
     color: white;
-    font-weight: bold;
-    font-size: 4rem;
+    font-weight: 700;
+    font-size: 6rem;
     text-align: center;
 }
 
@@ -25,8 +21,8 @@
     position: absolute;
     top: 22%;
     color: white;
-    font-weight: bold;
-    font-size: 2rem;
+    font-weight: 700;
+    font-size: 3rem;
     text-align: center;
 }
 
@@ -43,21 +39,34 @@
 .login_form h3 {
     margin-top: 50px;
     color: white;
+    font-weight: 400;
+    font-size: 1.7rem;
 }
 
 .login_form .button_area {
     margin-top: 40px;
 }
 
+.login_form .button_area span {
+    color: white;
+    font-size: 3rem;
+}
+
 .footer {
     height: 10vh;
     color: white;
+    font-size: 2rem;
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.footer a:hover {
+.footer span {
+    color: white;
+    font-size: 4rem;
+}
+
+.footer span:hover {
     color: lightgray;
 }

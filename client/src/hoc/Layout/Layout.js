@@ -7,7 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import Header from '../../components/Header/Header';
 
-import styles from './Layout.css';
+import './base.css';
 
 const muiTheme = getMuiTheme(customMuiTheme, {
   appBar: {
@@ -19,7 +19,7 @@ const muiTheme = getMuiTheme(customMuiTheme, {
 });
 
 const Layout = props => (
-  <div className={styles.base}>
+  <div>
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
         <Header />

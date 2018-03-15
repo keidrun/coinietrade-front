@@ -25,6 +25,11 @@ class Logged extends Component {
         link: '/trade'
       },
       {
+        icon: 'meetup',
+        text: 'Meetup',
+        link: '/meetup'
+      },
+      {
         icon: 'cog',
         text: 'Settings',
         link: '/settings'

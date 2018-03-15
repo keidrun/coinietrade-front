@@ -1,0 +1,28 @@
+* {
+    color: #000;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    font-family: 'PT Sans', sans-serif;
+    font-weight: 400;
+}
+
+* h1,
+h2,
+h3,
+h4,
+h5 {
+    width: 100%;
+    text-align: center;
+    font-family: 'Rammetto One', cursive;
+    font-weight: 400;
+}
+
+* p {
+    width: 100%;
+}
+
+* a {
+    text-decoration: none;
+}
