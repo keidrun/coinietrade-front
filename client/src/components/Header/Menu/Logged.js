@@ -19,11 +19,11 @@ class Logged extends Component {
         text: 'Dashboard',
         link: '/dashboard'
       },
-      {
-        icon: 'exchange',
-        text: 'Trade',
-        link: '/trade'
-      },
+      // {
+      //   icon: 'exchange',
+      //   text: 'Trade',
+      //   link: '/trade'
+      // },
       {
         icon: 'meetup',
         text: 'Meetup',

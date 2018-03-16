@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -7,8 +8,9 @@ const keys = require('./config/keys').get(process.env.NODE_ENV);
 
 const errorHandler = require('./middleware/errorHandler');
 
-const app = express();
 const PORT = process.env.PORT || 5000;
+const app = express();
+const server = http.createServer(app);
 
 require('./services/passportStrategies');
 
@@ -21,6 +23,7 @@ app.use(passport.initialize());
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
+require('./routes/socketRoutes')(server);
 
 if (
   process.env.NODE_ENV === 'production' ||
@@ -38,8 +41,6 @@ if (
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);
 });
-
-process.on('unhandledRejection', console.dir);
