@@ -24,19 +24,16 @@ const X_AXIS_NUM = 61;
 class Dashboard extends Component {
   state = {
     bitflyer: {
-      firstPrices: [],
       bidPrices: [],
       askPrices: [],
       lastPrices: []
     },
     coincheck: {
-      firstPrices: [],
       bidPrices: [],
       askPrices: [],
       lastPrices: []
     },
     zaif: {
-      firstPrices: [],
       bidPrices: [],
       askPrices: [],
       lastPrices: []
@@ -44,55 +41,27 @@ class Dashboard extends Component {
   };
 
   mapDataToCompanyObj = (data, companyName) => {
-    const lastLength = this.state[companyName].lastPrices.length;
-    let firstPrices, bidPrices, askPrices, lastPrices;
-    if (lastLength === 0) {
-      firstPrices = [0];
-      bidPrices = [...this.state[companyName].bidPrices, data[companyName].bid];
-      askPrices = [...this.state[companyName].askPrices, data[companyName].ask];
-      lastPrices = [
-        ...this.state[companyName].lastPrices,
-        data[companyName].last
-      ];
-    } else if (lastLength > X_AXIS_NUM) {
-      firstPrices = [
-        ...this.state[companyName].firstPrices.slice(1),
-        this.state[companyName].lastPrices[lastLength - 1]
-      ];
-      bidPrices = [
-        ...this.state[companyName].bidPrices.slice(1),
-        data[companyName].bid
-      ];
-      askPrices = [
-        ...this.state[companyName].askPrices.slice(1),
-        data[companyName].ask
-      ];
-      lastPrices = [
-        ...this.state[companyName].lastPrices.slice(1),
-        data[companyName].last
-      ];
-    } else {
-      firstPrices = [
-        ...this.state[companyName].firstPrices,
-        this.state[companyName].lastPrices[lastLength - 1]
-      ];
-      bidPrices = [...this.state[companyName].bidPrices, data[companyName].bid];
-      askPrices = [...this.state[companyName].askPrices, data[companyName].ask];
-      lastPrices = [
-        ...this.state[companyName].lastPrices,
-        data[companyName].last
-      ];
-    }
+    const bidPrices = [
+      ...this.state[companyName].bidPrices,
+      data[companyName].bid
+    ];
+    const askPrices = [
+      ...this.state[companyName].askPrices,
+      data[companyName].ask
+    ];
+    const lastPrices = [
+      ...this.state[companyName].lastPrices,
+      data[companyName].last
+    ];
 
     return {
-      firstPrices,
       bidPrices,
       askPrices,
       lastPrices
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
     socket.on('connect', () => {
       console.log('CLIENT: connected to server');
     });
@@ -113,7 +82,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className={styles.dashboard}>
-        <h2>Bid and Ask</h2>
+        <h2>Bid and Ask of Bitcoin</h2>
         <Chart
           xAxisNum={X_AXIS_NUM}
           bitflyerBids={this.state.bitflyer.bidPrices}

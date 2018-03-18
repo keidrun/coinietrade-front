@@ -8,7 +8,8 @@ const config = {
     facebookClientId: process.env.PROD_FACEBOOK_CLIENT_ID,
     facebookClientSecret: process.env.PROD_FACEBOOK_CLIENT_SECRET,
     googleClientId: process.env.PROD_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.PROD_GOOGLE_CLIENT_SECRET
+    googleClientSecret: process.env.PROD_GOOGLE_CLIENT_SECRET,
+    meetupApiKey: process.env.PROD_MEETUP_API_KEY
   },
   integration: {
     mongoURL: process.env.PRE_MONGO_URI,
@@ -17,7 +18,8 @@ const config = {
     facebookClientId: process.env.PRE_FACEBOOK_CLIENT_ID,
     facebookClientSecret: process.env.PRE_FACEBOOK_CLIENT_SECRET,
     googleClientId: process.env.PRE_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.PRE_GOOGLE_CLIENT_SECRET
+    googleClientSecret: process.env.PRE_GOOGLE_CLIENT_SECRET,
+    meetupApiKey: process.env.PRE_MEETUP_API_KEY
   },
   default: {
     mongoURL: process.env.DEV_MONGO_URI,
@@ -26,7 +28,8 @@ const config = {
     facebookClientId: process.env.DEV_FACEBOOK_CLIENT_ID,
     facebookClientSecret: process.env.DEV_FACEBOOK_CLIENT_SECRET,
     googleClientId: process.env.DEV_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.DEV_GOOGLE_CLIENT_SECRET
+    googleClientSecret: process.env.DEV_GOOGLE_CLIENT_SECRET,
+    meetupApiKey: process.env.DEV_MEETUP_API_KEY
   }
 };
 

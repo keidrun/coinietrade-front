@@ -23,6 +23,7 @@ app.use(passport.initialize());
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
+require('./routes/eventRoutes')(app);
 require('./routes/socketRoutes')(server);
 
 if (

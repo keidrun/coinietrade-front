@@ -180,7 +180,6 @@ const Chart = ({
         zaifAsks
       )}
       options={options}
-      height="130"
     />
   </div>
 );
