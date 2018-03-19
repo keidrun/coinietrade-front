@@ -39,18 +39,24 @@ class Dashboard extends Component {
   };
 
   mapDataToCompanyObj = (data, companyName) => {
-    const bidPrices = [
+    let bidPrices = [
       ...this.state[companyName].bidPrices,
       data[companyName].bid
     ];
-    const askPrices = [
+    let askPrices = [
       ...this.state[companyName].askPrices,
       data[companyName].ask
     ];
-    const lastPrices = [
+    let lastPrices = [
       ...this.state[companyName].lastPrices,
       data[companyName].last
     ];
+
+    if (this.state[companyName].bidPrices.length > X_AXIS_NUM) {
+      bidPrices.shift();
+      askPrices.shift();
+      lastPrices.shift();
+    }
 
     return {
       bidPrices,
