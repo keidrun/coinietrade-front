@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchEvents } from '../../actions';
+import { fetchEvents, clearEvents } from '../../actions';
+import { getPosition } from '../../utils/geoLocation';
+
+import styles from './Event.css';
+import GridEventList from './GridList/GridEventList';
+import FlatButton from 'material-ui/FlatButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const SEARCH_TEXT = 'bitcoin';
-const EVENTS_NUM = 5;
-
-const getPosition = options => {
-  if (!navigator.geolocation) {
-    throw new Error('Unable to get location.');
-  }
-
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, options);
-  });
-};
+const EVENTS_NUM = 6;
 
 class Events extends Component {
   state = {
+    loading: true,
     position: {
       latitude: '',
       longitude: ''
@@ -45,6 +42,16 @@ class Events extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.events.hasOwnProperty('events')) {
+      this.setState({ loading: false });
+    }
+  }
+
+  componentWillUnmount() {
+    this.props.clearEvents();
+  }
+
   loadmore = async () => {
     const restartIndex = this.props.events.events.length;
     this.props.fetchEvents(
@@ -57,12 +64,33 @@ class Events extends Component {
     );
   };
 
+  renderEvents = events =>
+    events.events ? <GridEventList events={events.events} /> : null;
+
+  renderLoadMore = events =>
+    events.events &&
+    events.events.length > 0 &&
+    events.events.length < events.total ? (
+      <div className={styles.loadmore} onClick={this.loadmore}>
+        <FlatButton label="More" fullWidth={true} primary={true} />
+      </div>
+    ) : null;
+
+  renderLoading = () => {
+    return this.state.loading ? (
+      <div className={styles.loading}>
+        <CircularProgress size={180} thickness={10} color="#f0f0f0" />
+      </div>
+    ) : null;
+  };
+
   render() {
-    console.log(this.props.events);
     return (
-      <div>
-        Events
-        <div onClick={this.loadmore}>More</div>
+      <div className={styles.event}>
+        <h2>Upcoming Events for Bitcoin</h2>
+        {this.renderLoading()}
+        {this.renderEvents(this.props.events)}
+        {this.renderLoadMore(this.props.events)}
       </div>
     );
   }
@@ -72,4 +100,4 @@ function mapStateToProps({ events }) {
   return { events };
 }
 
-export default connect(mapStateToProps, { fetchEvents })(Events);
+export default connect(mapStateToProps, { fetchEvents, clearEvents })(Events);

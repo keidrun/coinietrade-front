@@ -10,7 +10,7 @@ const options = {
     yAxes: [
       {
         ticks: {
-          stepSize: 100
+          stepSize: 500
         }
       }
     ]

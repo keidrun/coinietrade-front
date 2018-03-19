@@ -1,7 +1,5 @@
 .dashboard {
     margin: 20px;
-}
-
-.dashboard h2 {
-    font-size: 4.0rem;
+    padding: 20px;
+    border: thin solid #0f0f0f0f;
 }

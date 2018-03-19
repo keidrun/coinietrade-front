@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_EVENTS } from './types';
+import { FETCH_USER, FETCH_EVENTS, CLEAR_EVENTS } from './types';
 
 export const fetchUser = () => async dispatch => {
   try {
@@ -36,4 +36,14 @@ export const fetchEvents = (
   } catch (err) {
     dispatch({ type: FETCH_EVENTS, payload: err });
   }
+};
+
+export const clearEvents = () => dispatch => {
+  dispatch({
+    type: CLEAR_EVENTS,
+    payload: {
+      total: 0,
+      events: []
+    }
+  });
 };

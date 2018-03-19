@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Chart from '../../widgets/Chart';
-
 import styles from './Dashboard.css';
 
 import io from 'socket.io-client';
-
 let socket;
 if (
   process.env.NODE_ENV === 'production' ||

@@ -1,0 +1,15 @@
+.event {
+    margin: 20px;
+    display: 'flex';
+    flexWrap: 'wrap';
+    justifyContent: 'space-around';
+}
+
+.loadmore:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+}
+
+.loading {
+    margin: 20px;
+    text-align: center;
+}
