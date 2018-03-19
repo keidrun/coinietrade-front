@@ -87,7 +87,7 @@ class Events extends Component {
   render() {
     return (
       <div className={styles.event}>
-        <h2>Upcoming Events for Bitcoin</h2>
+        <h2>Upcoming Events about Bitcoin</h2>
         {this.renderLoading()}
         {this.renderEvents(this.props.events)}
         {this.renderLoadMore(this.props.events)}

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions';
 
+import styles from './Auth.css';
+import CircularProgress from 'material-ui/CircularProgress';
+
 /**
  * Auth check and reload HOC
  * @param {*} ComposedClass every component that needs auth
@@ -41,7 +44,11 @@ export default function(ComposedClass, shouldReload) {
 
     render() {
       if (this.state.loading) {
-        return <div className="loading">Loading...</div>;
+        return (
+          <div className={styles.loading}>
+            <CircularProgress size={180} thickness={10} color="#f0f0f0" />
+          </div>
+        );
       }
 
       return <ComposedClass {...this.props} user={this.props.user} />;
