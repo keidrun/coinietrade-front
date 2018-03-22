@@ -3,9 +3,8 @@ const auth = require('../middleware/auth');
 
 module.exports = app => {
   app.get('/api/user', auth, async (req, res) => {
-    const userId = req.user._id;
     try {
-      const user = await User.findById(userId);
+      const user = await User.findById(req.user._id);
       res.send(user);
     } catch (err) {
       res.status(400).send({
@@ -17,11 +16,8 @@ module.exports = app => {
   });
 
   app.put('/api/user', auth, async (req, res) => {
-    const userId = req.user._id;
-    const newData = req.body;
-
     try {
-      const updatedUser = await User.findByIdAndUpdate(userId, newData, {
+      const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
         new: true
       });
       res.send(updatedUser);
@@ -33,10 +29,8 @@ module.exports = app => {
   });
 
   app.delete('/api/user', auth, async (req, res) => {
-    const userId = req.user._id;
-
     try {
-      const deletedUser = await User.findByIdAndRemove(userId);
+      const deletedUser = await User.findByIdAndRemove(req.user._id);
       res.send(deletedUser);
     } catch (err) {
       res.status(400).send({

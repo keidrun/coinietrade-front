@@ -62,6 +62,9 @@ const userSchema = new Schema({
     avatarUrl: String,
     gender: String,
     language: String
+  },
+  settingId: {
+    type: String
   }
 });
 
