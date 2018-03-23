@@ -65,18 +65,26 @@ const userSchema = new Schema({
   },
   settingId: {
     type: String
+  },
+  apikeyId: {
+    type: String
   }
 });
 
-userSchema.methods.generateToken = function(cb) {
+userSchema.methods.generateToken = function() {
   let user = this;
+
   const token = jwt.sign(user._id.toHexString(), keys.tokenSecret);
 
   user.token = token;
-  user.save(function(err, user) {
-    if (err) return cb(err);
 
-    cb(null, user);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const savedUser = await user.save();
+      resolve(savedUser);
+    } catch (err) {
+      reject(err);
+    }
   });
 };
 
@@ -92,13 +100,16 @@ userSchema.statics.findByToken = function(token, cb) {
   });
 };
 
-userSchema.methods.deleteToken = function(token, cb) {
+userSchema.methods.deleteToken = function(token) {
   let user = this;
 
-  user.update({ $unset: { token: 1 } }, function(err, user) {
-    if (err) return cb(err);
-
-    cb(null, user);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const updatedUser = await user.update({ $unset: { token: 1 } });
+      resolve(updatedUser);
+    } catch (err) {
+      reject(err);
+    }
   });
 };
 

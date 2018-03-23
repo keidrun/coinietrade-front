@@ -13,23 +13,23 @@ module.exports = app => {
   });
 
   // Logout
-  app.get('/api/logout', auth, (req, res) => {
+  app.get('/api/logout', auth, async (req, res) => {
     const user = req.user;
     const token = req.token;
 
     req.logout(); // clear cookie['user'] with passport
 
-    user.deleteToken(req.token, (err, user) => {
-      if (err)
-        return res.status(400).send({
-          error: {
-            message: err.message
-          }
-        });
-
+    try {
+      const loggedoutUser = await user.deleteToken(req.token);
       res.clearCookie(keys.cookieKey);
       res.redirect('/');
-    });
+    } catch (err) {
+      return res.status(400).send({
+        error: {
+          message: err.message
+        }
+      });
+    }
   });
 
   // Facebook auth route

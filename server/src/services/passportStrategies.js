@@ -23,54 +23,46 @@ passport.use(
       clientSecret: keys.facebookClientSecret,
       callbackURL: '/auth/facebook/callback'
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ 'facebook.id': profile.id })
-        .then(existingUser => {
-          if (existingUser) {
-            // Login
-            existingUser.generateToken((err, user) => {
-              if (err) return done(err);
-
-              done(null, existingUser);
-            });
-          } else {
-            // Sign up
-            const facebookId = profile.id;
-            const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
-            new User({
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ 'facebook.id': profile.id });
+        if (user) {
+          // Login
+          const passedUser = await user.generateToken();
+          done(null, passedUser);
+        } else {
+          // Sign up
+          const facebookId = profile.id;
+          const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
+          let newUser = await new User({
+            displayName: profile.displayName,
+            familyName: profile.name.familyName,
+            givenName: profile.name.givenName,
+            middleName: profile.name.middleName,
+            email: profile.email,
+            avatarUrl: profile.profileUrl || profilePictureURL,
+            gender: profile.gender,
+            facebook: {
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+              id: facebookId,
               displayName: profile.displayName,
-              familyName: profile.name.familyName,
-              givenName: profile.name.givenName,
-              middleName: profile.name.middleName,
+              name: {
+                familyName: profile.name.familyName,
+                givenName: profile.name.givenName,
+                middleName: profile.name.middleName
+              },
               email: profile.email,
-              avatarUrl: profile.profileUrl || profilePictureURL,
-              gender: profile.gender,
-              facebook: {
-                accessToken: accessToken,
-                refreshToken: refreshToken,
-                id: facebookId,
-                displayName: profile.displayName,
-                name: {
-                  familyName: profile.name.familyName,
-                  givenName: profile.name.givenName,
-                  middleName: profile.name.middleName
-                },
-                email: profile.email,
-                avatarUrl: profile.profileUrl,
-                gender: profile.gender
-              }
-            })
-              .save()
-              .then(user => {
-                user.generateToken((err, user) => {
-                  if (err) return done(err);
-
-                  done(null, user);
-                });
-              });
-          }
-        })
-        .catch(err => done(err));
+              avatarUrl: profile.profileUrl,
+              gender: profile.gender
+            }
+          }).save();
+          const passedUser = await newUser.generateToken();
+          done(null, passedUser);
+        }
+      } catch (err) {
+        done(err);
+      }
     }
   )
 );
@@ -82,52 +74,44 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: '/auth/google/callback'
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ 'google.id': profile.id })
-        .then(existingUser => {
-          if (existingUser) {
-            // Login
-            existingUser.generateToken((err, user) => {
-              if (err) return done(err);
-
-              done(null, existingUser);
-            });
-          } else {
-            // Sign up
-            new User({
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ 'google.id': profile.id });
+        if (user) {
+          // Login
+          const passedUser = await user.generateToken();
+          done(null, passedUser);
+        } else {
+          // Sign up
+          let newUser = await new User({
+            displayName: profile.displayName,
+            familyName: profile.name.familyName,
+            givenName: profile.name.givenName,
+            email: profile.emails[0].value,
+            avatarUrl: profile.photos[0].value,
+            gender: profile.gender,
+            language: profile.language,
+            google: {
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+              id: profile.id,
               displayName: profile.displayName,
-              familyName: profile.name.familyName,
-              givenName: profile.name.givenName,
+              name: {
+                familyName: profile.name.familyName,
+                givenName: profile.name.givenName
+              },
               email: profile.emails[0].value,
               avatarUrl: profile.photos[0].value,
               gender: profile.gender,
-              language: profile.language,
-              google: {
-                accessToken: accessToken,
-                refreshToken: refreshToken,
-                id: profile.id,
-                displayName: profile.displayName,
-                name: {
-                  familyName: profile.name.familyName,
-                  givenName: profile.name.givenName
-                },
-                email: profile.emails[0].value,
-                avatarUrl: profile.photos[0].value,
-                gender: profile.gender,
-                language: profile.language
-              }
-            })
-              .save()
-              .then(user => {
-                user.generateToken((err, user) => {
-                  if (err) return done(err);
-
-                  done(null, user);
-                });
-              });
-          }
-        })
-        .catch(err => done(err));
+              language: profile.language
+            }
+          }).save();
+          const passedUser = await newUser.generateToken();
+          done(null, passedUser);
+        }
+      } catch (err) {
+        done(err);
+      }
     }
   )
 );
