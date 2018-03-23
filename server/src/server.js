@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const keys = require('./config/keys').get(process.env.NODE_ENV);
+const helmet = require('helmet');
 
 const errorHandler = require('./middleware/errorHandler');
 
@@ -16,6 +17,17 @@ require('./services/passportStrategies');
 
 mongoose.connect(keys.mongoURL);
 
+app.use(
+  helmet({
+    dnsPrefetchControl: true,
+    frameguard: true,
+    hidePoweredBy: true,
+    hsts: true,
+    ieNoOpen: true,
+    noSniff: true,
+    xssFilter: true
+  })
+);
 app.use(bodyParser.json());
 app.use(cookieParser());
 
