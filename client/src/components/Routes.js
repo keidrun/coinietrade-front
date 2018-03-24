@@ -10,7 +10,7 @@ import Landing from './Landing/Landing';
 import Dashboard from './Dashboard/Dashboard';
 // const Tradeboad = () => <h2>Tradeboad</h2>;
 import Events from './Events/Events';
-const Settings = () => <h2>Settings</h2>;
+import Settings from './Setting/Setting';
 const Help = () => <h2>Help</h2>;
 
 class Routes extends Component {

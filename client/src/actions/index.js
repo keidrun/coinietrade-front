@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_EVENTS, CLEAR_EVENTS } from './types';
+import {
+  FETCH_USER,
+  FETCH_EVENTS,
+  CLEAR_EVENTS,
+  FETCH_PROFILE,
+  UPDATE_PROFILE
+} from './types';
 
 export const fetchUser = () => async dispatch => {
   try {
@@ -34,7 +40,7 @@ export const fetchEvents = (
       });
     }
   } catch (err) {
-    dispatch({ type: FETCH_EVENTS, payload: err });
+    dispatch({ type: FETCH_EVENTS, payload: err.error });
   }
 };
 
@@ -46,4 +52,42 @@ export const clearEvents = () => dispatch => {
       events: []
     }
   });
+};
+
+export const fetchProfile = () => async dispatch => {
+  try {
+    const resUser = await axios.get('/api/user');
+    const resSetting = await axios.get('/api/setting');
+
+    dispatch({
+      type: FETCH_PROFILE,
+      payload: {
+        user: resUser.data,
+        setting: { chartSet: resSetting.data.chartSet }
+      }
+    });
+  } catch (err) {
+    dispatch({ type: FETCH_PROFILE, payload: err.error });
+  }
+};
+
+export const updateProfile = profile => async dispatch => {
+  try {
+    const resUser = await axios.put('/api/user', profile.user);
+    let resSetting;
+    if (!resUser.data.settingId) {
+      resSetting = await axios.post('/api/setting', profile.setting);
+    } else {
+      resSetting = await axios.put('/api/setting', profile.setting);
+    }
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: {
+        user: resUser.data,
+        setting: resSetting.data
+      }
+    });
+  } catch (err) {
+    dispatch({ type: UPDATE_PROFILE, payload: err.error });
+  }
 };
