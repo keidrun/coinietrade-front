@@ -9,22 +9,25 @@ const validateUserSchema = checkSchema({
     }
   },
   email: {
+    optional: true,
     in: ['body'],
     isEmail: {
       errorMessage: 'The format of email was wrong.'
     }
   },
   gender: {
+    optional: true,
     in: ['body'],
     isIn: {
-      options: ['male', 'female'],
+      options: [['male', 'female']],
       errorMessage: 'The gender was wrong.'
     }
   },
   language: {
+    optional: true,
     in: ['body'],
     isIn: {
-      options: ['en', 'jp'],
+      options: [['en', 'jp']],
       errorMessage: 'The language was wrong.'
     }
   }
