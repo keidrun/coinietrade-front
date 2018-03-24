@@ -4,6 +4,7 @@ import { fetchProfile, updateProfile } from '../../actions';
 
 class Setting extends Component {
   state = {
+    isDisabled: true,
     formdata: {
       user: {
         displayName: '',
@@ -33,8 +34,8 @@ class Setting extends Component {
 
   componentWillReceiveProps(nextProps) {
     const nextProfile = nextProps.profile;
-    console.log(nextProfile);
     this.setState({
+      isDisabled: false,
       formdata: {
         user: {
           displayName: this.checkedProperty(
@@ -84,6 +85,8 @@ class Setting extends Component {
   submitForm = event => {
     event.preventDefault();
 
+    this.setState({ isDisabled: true });
+
     this.props.updateProfile({
       ...this.state.formdata
     });
@@ -101,6 +104,7 @@ class Setting extends Component {
               placeholder="Enter name"
               value={this.state.formdata.user.displayName}
               onChange={event => this.handleInput(event, 'displayName')}
+              disabled={this.state.isDisabled}
             />
           </div>
 
@@ -111,6 +115,7 @@ class Setting extends Component {
               placeholder="Enter email"
               value={this.state.formdata.user.email}
               onChange={event => this.handleInput(event, 'email')}
+              disabled={this.state.isDisabled}
             />
           </div>
 
@@ -119,6 +124,7 @@ class Setting extends Component {
             <select
               value={this.state.formdata.user.gender}
               onChange={event => this.handleInput(event, 'gender')}
+              disabled={this.state.isDisabled}
             >
               <option value="male">male</option>
               <option value="female">female</option>
@@ -130,6 +136,7 @@ class Setting extends Component {
             <select
               value={this.state.formdata.user.language}
               onChange={event => this.handleInput(event, 'language')}
+              disabled={this.state.isDisabled}
             >
               <option value="en">English</option>
               <option value="jp">Japanese</option>
@@ -145,6 +152,7 @@ class Setting extends Component {
                 value={this.state.formdata.setting.chartSet.bitflyerChart}
                 checked={this.state.formdata.setting.chartSet.bitflyerChart}
                 onChange={event => this.handleCheckbox(event, 'bitflyerChart')}
+                disabled={this.state.isDisabled}
               />
               <label htmlFor="bitflyerChart">bitflyer</label>
               <input
@@ -153,6 +161,7 @@ class Setting extends Component {
                 value={this.state.formdata.setting.chartSet.coincheckChart}
                 checked={this.state.formdata.setting.chartSet.coincheckChart}
                 onChange={event => this.handleCheckbox(event, 'coincheckChart')}
+                disabled={this.state.isDisabled}
               />
               <label htmlFor="coincheckChart">coincheck</label>
               <input
@@ -161,12 +170,15 @@ class Setting extends Component {
                 value={this.state.formdata.setting.chartSet.zaifChart}
                 checked={this.state.formdata.setting.chartSet.zaifChart}
                 onChange={event => this.handleCheckbox(event, 'zaifChart')}
+                disabled={this.state.isDisabled}
               />
               <label htmlFor="zaifChart">zaif</label>
             </section>
           </div>
 
-          <button type="submit">Update</button>
+          <button type="submit" disabled={this.state.isDisabled}>
+            Update
+          </button>
         </form>
       </div>
     );

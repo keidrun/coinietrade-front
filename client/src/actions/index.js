@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  ERRORS,
   FETCH_USER,
   FETCH_EVENTS,
   CLEAR_EVENTS,
@@ -13,6 +14,7 @@ export const fetchUser = () => async dispatch => {
     dispatch({ type: FETCH_USER, payload: res.data });
   } catch (err) {
     dispatch({ type: FETCH_USER, payload: false });
+    dispatch({ type: ERRORS, payload: err.response.data });
   }
 };
 
@@ -40,7 +42,8 @@ export const fetchEvents = (
       });
     }
   } catch (err) {
-    dispatch({ type: FETCH_EVENTS, payload: err.error });
+    dispatch({ type: FETCH_EVENTS, payload: {} });
+    dispatch({ type: ERRORS, payload: err.response.data });
   }
 };
 
@@ -67,7 +70,8 @@ export const fetchProfile = () => async dispatch => {
       }
     });
   } catch (err) {
-    dispatch({ type: FETCH_PROFILE, payload: err.error });
+    dispatch({ type: FETCH_PROFILE, payload: {} });
+    dispatch({ type: ERRORS, payload: err.response.data });
   }
 };
 
@@ -88,6 +92,7 @@ export const updateProfile = profile => async dispatch => {
       }
     });
   } catch (err) {
-    dispatch({ type: UPDATE_PROFILE, payload: err.error });
+    dispatch({ type: UPDATE_PROFILE, payload: profile });
+    dispatch({ type: ERRORS, payload: err.response.data });
   }
 };
