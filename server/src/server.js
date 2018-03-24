@@ -35,6 +35,7 @@ app.use(passport.initialize());
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
+require('./routes/apikeyRoutes')(app);
 require('./routes/settingRoutes')(app);
 require('./routes/eventRoutes')(app);
 require('./routes/socketRoutes')(server);

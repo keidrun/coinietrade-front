@@ -35,7 +35,7 @@ module.exports = app => {
     try {
       const user = await User.findById(req.user._id);
       const setting = await Setting.findById(user.settingId);
-      res.send(setting);
+      res.send(setting || {});
     } catch (err) {
       res.status(400).send({
         error: {
