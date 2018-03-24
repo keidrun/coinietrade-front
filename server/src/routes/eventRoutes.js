@@ -51,8 +51,12 @@ module.exports = app => {
         })
       });
     } catch (err) {
-      res.status(400).send({
-        error: err.message
+      res.status(400).json({
+        errors: {
+          events: {
+            msg: err.message
+          }
+        }
       });
     }
   });

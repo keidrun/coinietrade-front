@@ -16,16 +16,20 @@ module.exports = app => {
         try {
           const deletedSetting = await Setting.findByIdAndRemove(setting._id);
         } catch (err) {
-          res.status(400).send({
-            error: {
-              message: err.message
+          res.status(400).json({
+            errors: {
+              route: {
+                msg: err.message
+              }
             }
           });
         }
       }
-      res.status(400).send({
-        error: {
-          message: err.message
+      res.status(400).json({
+        errors: {
+          route: {
+            msg: err.message
+          }
         }
       });
     }
@@ -37,9 +41,11 @@ module.exports = app => {
       const setting = await Setting.findById(user.settingId);
       res.send(setting || {});
     } catch (err) {
-      res.status(400).send({
-        error: {
-          message: err.message
+      res.status(400).json({
+        errors: {
+          route: {
+            msg: err.message
+          }
         }
       });
     }
@@ -55,8 +61,12 @@ module.exports = app => {
       );
       res.send(updatedSetting);
     } catch (err) {
-      res.status(400).send({
-        error: err.message
+      res.status(400).json({
+        errors: {
+          route: {
+            msg: err.message
+          }
+        }
       });
     }
   });
@@ -70,8 +80,12 @@ module.exports = app => {
       });
       res.send(deletedSetting);
     } catch (err) {
-      res.status(400).send({
-        error: err.message
+      res.status(400).json({
+        errors: {
+          route: {
+            msg: err.message
+          }
+        }
       });
     }
   });

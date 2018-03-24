@@ -24,9 +24,11 @@ module.exports = app => {
       res.clearCookie(keys.cookieKey);
       res.redirect('/');
     } catch (err) {
-      return res.status(400).send({
-        error: {
-          message: err.message
+      res.status(400).json({
+        errors: {
+          route: {
+            msg: err.message
+          }
         }
       });
     }
