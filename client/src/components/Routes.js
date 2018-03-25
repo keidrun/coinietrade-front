@@ -11,7 +11,7 @@ import Dashboard from './Dashboard/Dashboard';
 // const Tradeboad = () => <h2>Tradeboad</h2>;
 import Events from './Events/Events';
 import Settings from './Setting/Setting';
-const Help = () => <h2>Help</h2>;
+import Help from './Help/Help';
 
 class Routes extends Component {
   render() {
