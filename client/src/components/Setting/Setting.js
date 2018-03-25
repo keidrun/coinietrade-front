@@ -57,8 +57,6 @@ class Setting extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-
     const nextProfile = nextProps.profile;
     this.setState({
       isDisabled: false,
@@ -132,7 +130,7 @@ class Setting extends Component {
   render() {
     return (
       <div className={styles.setting}>
-        <h2>Setting</h2>
+        <h2>Settings</h2>
         <form onSubmit={this.submitForm} className={styles.form}>
           <div className={styles.text_field}>
             <h4>Name</h4>

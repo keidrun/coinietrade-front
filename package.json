@@ -25,7 +25,8 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "qs": "^6.5.1",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -52,12 +53,9 @@
     "dev:client": "yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
     "inte": "yarn build && yarn up",
-    "prod:build":
-      "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
-    "prod:push":
-      "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "prod:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod:build": "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
+    "prod:push": "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod:deploy": "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod": "npm-run-all -s prod:*"
   }
 }
