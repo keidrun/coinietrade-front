@@ -3,7 +3,8 @@
     display: 'flex';
     flexWrap: 'wrap';
     justifyContent: 'space-around';
-    width: 610px;
+    width: 600px;
+    box-sizing: border-box;
 }
 
 .form {
@@ -28,7 +29,7 @@
 
 .select_field {
     margin: 20px;
-    width: 260px;
+    width: 240px;
     float: left;
 }
 
@@ -48,6 +49,7 @@
 
 .checkbox_area {
     margin: 20px auto;
+    clear: both;
 }
 
 .checkbox_area h4 {
