@@ -1,0 +1,76 @@
+.setting {
+    margin: 20px auto;
+    display: 'flex';
+    flexWrap: 'wrap';
+    justifyContent: 'space-around';
+    width: 610px;
+}
+
+.form {
+    margin-top: 20px;
+    border: dashed 5px #000;
+}
+
+.text_field {
+    margin: 20px auto;
+}
+
+.text_field h4 {
+    margin-left: 20px;
+    font-size: 3rem;
+    display: inline;
+}
+
+.text_field input {
+    font-size: 4rem;
+    text-align: center;
+}
+
+.select_field {
+    margin: 20px;
+    width: 260px;
+    float: left;
+}
+
+.select_field h4 {
+    font-size: 3rem;
+    display: inline;
+}
+
+.select_field div {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.select_item div {
+    font-size: 2rem;
+}
+
+.checkbox_area {
+    margin: 20px auto;
+}
+
+.checkbox_area h4 {
+    margin-left: 20px;
+    font-size: 3rem;
+    display: inline;
+}
+
+.checkbox {
+    margin-left: 40px;
+    margin-top: 10px;
+    max-width: 150px;
+    font-size: 5rem;
+    display: inline;
+    float: left;
+}
+
+.button_area {
+    margin: 10px auto;
+    width: 200px;
+}
+
+.button_area div {
+    color: white;
+    font-size: 2rem;
+}
