@@ -39,7 +39,16 @@ module.exports = app => {
     try {
       const user = await User.findById(req.user._id);
       const setting = await Setting.findById(user.settingId);
-      res.send(setting || {});
+      if (!user || !setting) {
+        return res.status(404).json({
+          errors: {
+            route: {
+              msg: 'Not the setting data found.'
+            }
+          }
+        });
+      }
+      res.send(setting);
     } catch (err) {
       res.status(400).json({
         errors: {

@@ -60,15 +60,25 @@ export const clearEvents = () => dispatch => {
 export const fetchProfile = () => async dispatch => {
   try {
     const resUser = await axios.get('/api/user');
-    const resSetting = await axios.get('/api/setting');
-
-    dispatch({
-      type: FETCH_PROFILE,
-      payload: {
-        user: resUser.data,
-        setting: { chartSet: resSetting.data.chartSet }
-      }
-    });
+    try {
+      const resSetting = await axios.get('/api/setting');
+      dispatch({
+        type: FETCH_PROFILE,
+        payload: {
+          user: resUser.data,
+          setting: { chartSet: resSetting.data.chartSet }
+        }
+      });
+    } catch (err) {
+      dispatch({
+        type: FETCH_PROFILE,
+        payload: {
+          user: resUser.data,
+          setting: {}
+        }
+      });
+      dispatch({ type: ERRORS, payload: err.response.data });
+    }
   } catch (err) {
     dispatch({ type: FETCH_PROFILE, payload: {} });
     dispatch({ type: ERRORS, payload: err.response.data });

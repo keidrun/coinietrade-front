@@ -57,6 +57,8 @@ class Setting extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+
     const nextProfile = nextProps.profile;
     this.setState({
       isDisabled: false,

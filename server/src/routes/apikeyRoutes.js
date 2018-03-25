@@ -67,7 +67,16 @@ module.exports = app => {
   //   try {
   //     const user = await User.findById(req.user._id);
   //     const apykey = await Apikey.findById(user.apikeyId);
-  //     res.send(apykey || {});
+  //     if (!user || !apykey) {
+  //       res.status(404).json({
+  //         errors: {
+  //           route: {
+  //             msg: 'Not the apikey data found.'
+  //           }
+  //         }
+  //       });
+  //     }
+  //     res.send(apykey);
   //   } catch (err) {
   //     res.status(400).send({
   //       error: {
