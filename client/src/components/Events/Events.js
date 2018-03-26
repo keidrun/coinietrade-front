@@ -89,7 +89,9 @@ class Events extends Component {
       <div className={styles.event}>
         <h2>Upcoming Events about Bitcoin</h2>
         {this.renderLoading()}
-        {this.renderEvents(this.props.events)}
+        <div className={styles.flex_wrapper}>
+          {this.renderEvents(this.props.events)}
+        </div>
         {this.renderLoadMore(this.props.events)}
       </div>
     );

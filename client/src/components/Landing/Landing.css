@@ -1,5 +1,13 @@
+.flex_wrapper {
+    display: flex;
+    flex-wrap: 'wrap';
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: column;
+}
+
 .hero {
-    position: relative;
     height: 80vh;
     background-color: #000;
     background-image: url("/assets/coinietrade-hero.jpg");
@@ -9,8 +17,7 @@
 }
 
 .hero h2 {
-    position: absolute;
-    top: 7%;
+    margin-top: 5%;
     color: white;
     font-weight: 700;
     font-size: 6rem;
@@ -18,8 +25,7 @@
 }
 
 .hero p {
-    position: absolute;
-    top: 22%;
+    margin-top: 20px;
     color: white;
     font-weight: 700;
     font-size: 3rem;
@@ -27,11 +33,9 @@
 }
 
 .login_form {
-    position: absolute;
+    margin-top: 20px;
     height: 300px;
     width: 500px;
-    top: 30vh;
-    left: 30%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -53,7 +57,10 @@
 }
 
 .footer {
+    position: fixed;
+    bottom: 0;
     height: 10vh;
+    width: 100%;
     color: white;
     font-size: 2rem;
     background-color: black;

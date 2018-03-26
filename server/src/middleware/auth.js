@@ -8,7 +8,7 @@ const auth = (req, res, next) => {
     if (err) return next(err);
 
     if (!user)
-      res.status(401).json({
+      return res.status(401).json({
         errors: {
           route: {
             msg: 'Login Required'

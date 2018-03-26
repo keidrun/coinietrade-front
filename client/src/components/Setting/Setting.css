@@ -1,15 +1,22 @@
 .setting {
-    margin: 20px auto;
-    display: 'flex';
-    flexWrap: 'wrap';
-    justifyContent: 'space-around';
-    width: 600px;
+    margin: 0 auto;
+    padding-top: 20px;
+    height: 100%;
+}
+
+.flex_wrapper {
+    display: flex;
+    flex-wrap: 'wrap';
+    justify-content: center;
     box-sizing: border-box;
+    align-items: center;
 }
 
 .form {
     margin-top: 20px;
     border: dashed 5px #000;
+    background-color: white;
+    width: 600px;
 }
 
 .text_field {

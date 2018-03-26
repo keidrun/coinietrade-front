@@ -12,8 +12,8 @@ const loginButtonStyles = {
 };
 
 const Landing = () => (
-  <div>
-    <div className={styles.hero}>
+  <div className={styles.hero}>
+    <div className={styles.flex_wrapper}>
       <h2>Welcome to CoinieTrade !</h2>
       <p>
         Bitcoin monitaring and trading site<br /> through other exchange sites.
@@ -37,13 +37,14 @@ const Landing = () => (
           />
         </div>
       </div>
+
+      <footer className={styles.footer}>
+        &copy; 2018 Keisuke Sasaki.&nbsp;&nbsp;&nbsp;&nbsp;Please send your
+        feedback to &nbsp;&nbsp;<a href="mailto:coinietradefeedback@gmail.com?subject=[FEEDBACK]">
+          <FontAwesome name="fas fa-envelope fa-2x" />
+        </a>
+      </footer>
     </div>
-    <footer className={styles.footer}>
-      &copy; 2018 Keisuke Sasaki.&nbsp;&nbsp;&nbsp;&nbsp;Please send your
-      feedback to &nbsp;&nbsp;<a href="mailto:coinietradefeedback@gmail.com?subject=[FEEDBACK]">
-        <FontAwesome name="fas fa-envelope fa-2x" />
-      </a>
-    </footer>
   </div>
 );
 

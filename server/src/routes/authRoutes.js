@@ -4,10 +4,21 @@ const auth = require('../middleware/auth');
 
 module.exports = app => {
   app.get('/api/auth', auth, (req, res) => {
+    const user = req.user;
+    if (!user) {
+      return res.status(404).json({
+        errors: {
+          route: {
+            msg: 'Not the user data found.'
+          }
+        }
+      });
+    }
+
     res.json({
-      id: req.user._id,
-      displayName: req.user.displayName,
-      avatarUrl: req.user.avatarUrl
+      id: user._id,
+      displayName: user.displayName,
+      avatarUrl: user.avatarUrl
     });
   });
 

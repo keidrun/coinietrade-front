@@ -9,6 +9,8 @@ import Header from '../../components/Header/Header';
 
 import './base.css';
 
+import styles from './Layout.css';
+
 const muiTheme = getMuiTheme(customMuiTheme, {
   appBar: {
     height: 80
@@ -23,7 +25,7 @@ const Layout = props => (
     <MuiThemeProvider muiTheme={muiTheme}>
       <div>
         <Header />
-        <div>{props.children}</div>
+        <div className={styles.background}>{props.children}</div>
       </div>
     </MuiThemeProvider>
   </div>

@@ -131,137 +131,141 @@ class Setting extends Component {
     return (
       <div className={styles.setting}>
         <h2>Settings</h2>
-        <form onSubmit={this.submitForm} className={styles.form}>
-          <div className={styles.text_field}>
-            <h4>Name</h4>
-            <br />
-            <TextField
-              id="1"
-              type="text"
-              placeholder="Enter name"
-              value={this.state.formdata.user.displayName}
-              onChange={event => this.handleInput(event, 'displayName')}
-              disabled={this.state.isDisabled}
-              underlineFocusStyle={muiStyles.underlineStyle}
-              style={muiStyles.textField}
-            />
-          </div>
-
-          <div className={styles.text_field}>
-            <h4>Email</h4>
-            <br />
-            <TextField
-              id="2"
-              type="email"
-              placeholder="Enter email"
-              value={this.state.formdata.user.email}
-              onChange={event => this.handleInput(event, 'email')}
-              disabled={this.state.isDisabled}
-              underlineFocusStyle={muiStyles.underlineStyle}
-              style={muiStyles.textField}
-            />
-          </div>
-
-          <div className={styles.select_field}>
-            <h4>Gender</h4>
-            <br />
-            <SelectField
-              underlineFocusStyle={muiStyles.underlineStyle}
-              value={this.state.formdata.user.gender}
-              onChange={(event, index, value) =>
-                this.handleSelectField(event, index, value, 'gender')
-              }
-              disabled={this.state.isDisabled}
-            >
-              <MenuItem
-                className={styles.select_item}
-                value="male"
-                primaryText="Male"
-              />
-              <MenuItem
-                className={styles.select_item}
-                value="female"
-                primaryText="Female"
-              />
-            </SelectField>
-          </div>
-
-          <div className={styles.select_field}>
-            <h4>Language</h4>
-            <br />
-            <SelectField
-              underlineFocusStyle={muiStyles.underlineStyle}
-              value={this.state.formdata.user.language}
-              onChange={(event, index, value) =>
-                this.handleSelectField(event, index, value, 'language')
-              }
-              disabled={this.state.isDisabled}
-            >
-              <MenuItem
-                className={styles.select_item}
-                value="en"
-                primaryText="English"
-              />
-              <MenuItem
-                className={styles.select_item}
-                value="jp"
-                primaryText="Japanese"
-              />
-            </SelectField>
-          </div>
-
-          <div className={styles.checkbox_area}>
-            <section>
-              <h4>Chart</h4>
+        <div className={styles.flex_wrapper}>
+          <form onSubmit={this.submitForm} className={styles.form}>
+            <div className={styles.text_field}>
+              <h4>Name</h4>
               <br />
-              <Checkbox
-                type="checkbox"
-                name="chart"
-                value={this.state.formdata.setting.chartSet.bitflyerChart}
-                checked={this.state.formdata.setting.chartSet.bitflyerChart}
-                onCheck={event => this.handleCheckbox(event, 'bitflyerChart')}
+              <TextField
+                id="1"
+                type="text"
+                placeholder="Enter name"
+                value={this.state.formdata.user.displayName}
+                onChange={event => this.handleInput(event, 'displayName')}
                 disabled={this.state.isDisabled}
-                label="bitflyer"
-                labelPosition="left"
-                className={styles.checkbox}
+                underlineFocusStyle={muiStyles.underlineStyle}
+                style={muiStyles.textField}
               />
-              <Checkbox
-                type="checkbox"
-                name="chart"
-                value={this.state.formdata.setting.chartSet.coincheckChart}
-                checked={this.state.formdata.setting.chartSet.coincheckChart}
-                onCheck={event => this.handleCheckbox(event, 'coincheckChart')}
-                disabled={this.state.isDisabled}
-                label="coincheck"
-                labelPosition="left"
-                className={styles.checkbox}
-              />
-              <Checkbox
-                type="checkbox"
-                name="chart"
-                value={this.state.formdata.setting.chartSet.zaifChart}
-                checked={this.state.formdata.setting.chartSet.zaifChart}
-                onCheck={event => this.handleCheckbox(event, 'zaifChart')}
-                disabled={this.state.isDisabled}
-                label="zaif"
-                labelPosition="left"
-                className={styles.checkbox}
-              />
-            </section>
-          </div>
+            </div>
 
-          <br />
-          <div className={styles.button_area}>
-            <RaisedButton
-              secondary={true}
-              style={muiStyles.button}
-              type="submit"
-              disabled={this.state.isDisabled}
-            >
-              Update
-            </RaisedButton>
-          </div>
-        </form>
+            <div className={styles.text_field}>
+              <h4>Email</h4>
+              <br />
+              <TextField
+                id="2"
+                type="email"
+                placeholder="Enter email"
+                value={this.state.formdata.user.email}
+                onChange={event => this.handleInput(event, 'email')}
+                disabled={this.state.isDisabled}
+                underlineFocusStyle={muiStyles.underlineStyle}
+                style={muiStyles.textField}
+              />
+            </div>
+
+            <div className={styles.select_field}>
+              <h4>Gender</h4>
+              <br />
+              <SelectField
+                underlineFocusStyle={muiStyles.underlineStyle}
+                value={this.state.formdata.user.gender}
+                onChange={(event, index, value) =>
+                  this.handleSelectField(event, index, value, 'gender')
+                }
+                disabled={this.state.isDisabled}
+              >
+                <MenuItem
+                  className={styles.select_item}
+                  value="male"
+                  primaryText="Male"
+                />
+                <MenuItem
+                  className={styles.select_item}
+                  value="female"
+                  primaryText="Female"
+                />
+              </SelectField>
+            </div>
+
+            <div className={styles.select_field}>
+              <h4>Language</h4>
+              <br />
+              <SelectField
+                underlineFocusStyle={muiStyles.underlineStyle}
+                value={this.state.formdata.user.language}
+                onChange={(event, index, value) =>
+                  this.handleSelectField(event, index, value, 'language')
+                }
+                disabled={this.state.isDisabled}
+              >
+                <MenuItem
+                  className={styles.select_item}
+                  value="en"
+                  primaryText="English"
+                />
+                <MenuItem
+                  className={styles.select_item}
+                  value="jp"
+                  primaryText="Japanese"
+                />
+              </SelectField>
+            </div>
+
+            <div className={styles.checkbox_area}>
+              <section>
+                <h4>Chart</h4>
+                <br />
+                <Checkbox
+                  type="checkbox"
+                  name="chart"
+                  value={this.state.formdata.setting.chartSet.bitflyerChart}
+                  checked={this.state.formdata.setting.chartSet.bitflyerChart}
+                  onCheck={event => this.handleCheckbox(event, 'bitflyerChart')}
+                  disabled={this.state.isDisabled}
+                  label="bitflyer"
+                  labelPosition="left"
+                  className={styles.checkbox}
+                />
+                <Checkbox
+                  type="checkbox"
+                  name="chart"
+                  value={this.state.formdata.setting.chartSet.coincheckChart}
+                  checked={this.state.formdata.setting.chartSet.coincheckChart}
+                  onCheck={event =>
+                    this.handleCheckbox(event, 'coincheckChart')
+                  }
+                  disabled={this.state.isDisabled}
+                  label="coincheck"
+                  labelPosition="left"
+                  className={styles.checkbox}
+                />
+                <Checkbox
+                  type="checkbox"
+                  name="chart"
+                  value={this.state.formdata.setting.chartSet.zaifChart}
+                  checked={this.state.formdata.setting.chartSet.zaifChart}
+                  onCheck={event => this.handleCheckbox(event, 'zaifChart')}
+                  disabled={this.state.isDisabled}
+                  label="zaif"
+                  labelPosition="left"
+                  className={styles.checkbox}
+                />
+              </section>
+            </div>
+
+            <br />
+            <div className={styles.button_area}>
+              <RaisedButton
+                secondary={true}
+                style={muiStyles.button}
+                type="submit"
+                disabled={this.state.isDisabled}
+              >
+                Update
+              </RaisedButton>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

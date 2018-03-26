@@ -86,16 +86,21 @@ class Dashboard extends Component {
   render() {
     return (
       <div className={styles.dashboard}>
-        <h2>Bid and Ask of Bitcoin</h2>
-        <Chart
-          xAxisNum={X_AXIS_NUM}
-          bitflyerBids={this.state.bitflyer.bidPrices}
-          bitflyerAsks={this.state.bitflyer.askPrices}
-          coincheckBids={this.state.coincheck.bidPrices}
-          coincheckAsks={this.state.coincheck.askPrices}
-          zaifBids={this.state.zaif.bidPrices}
-          zaifAsks={this.state.zaif.askPrices}
-        />
+        <h2>Dashboard</h2>
+        <div className={styles.content}>
+          <div className={styles.chart}>
+            <h4>Bid and Ask of Bitcoin</h4>
+            <Chart
+              xAxisNum={X_AXIS_NUM}
+              bitflyerBids={this.state.bitflyer.bidPrices}
+              bitflyerAsks={this.state.bitflyer.askPrices}
+              coincheckBids={this.state.coincheck.bidPrices}
+              coincheckAsks={this.state.coincheck.askPrices}
+              zaifBids={this.state.zaif.bidPrices}
+              zaifAsks={this.state.zaif.askPrices}
+            />
+          </div>
+        </div>
       </div>
     );
   }
