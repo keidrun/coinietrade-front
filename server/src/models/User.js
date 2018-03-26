@@ -100,7 +100,7 @@ userSchema.statics.findByToken = function(token, cb) {
   });
 };
 
-userSchema.methods.deleteToken = function(token) {
+userSchema.methods.deleteToken = function() {
   let user = this;
 
   return new Promise(async (resolve, reject) => {

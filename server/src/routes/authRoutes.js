@@ -1,7 +1,6 @@
 const passport = require('passport');
 const keys = require('../config/keys').get(process.env.NODE_ENV);
 const auth = require('../middleware/auth');
-const User = require('../models/User');
 
 module.exports = app => {
   app.get('/api/auth', auth, (req, res) => {
@@ -15,12 +14,11 @@ module.exports = app => {
   // Logout
   app.get('/api/logout', auth, async (req, res) => {
     const user = req.user;
-    const token = req.token;
 
     req.logout(); // clear cookie['user'] with passport
 
     try {
-      const loggedoutUser = await user.deleteToken(req.token);
+      await user.deleteToken();
       res.clearCookie(keys.cookieKey);
       res.redirect('/');
     } catch (err) {

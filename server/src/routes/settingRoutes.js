@@ -7,14 +7,14 @@ module.exports = app => {
     let setting;
     try {
       setting = await new Setting(req.body).save();
-      const updatedUser = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         settingId: setting._id
       });
       res.send(setting);
     } catch (err) {
       if (setting !== undefined) {
         try {
-          const deletedSetting = await Setting.findByIdAndRemove(setting._id);
+          await Setting.findByIdAndRemove(setting._id);
         } catch (err) {
           res.status(400).json({
             errors: {
@@ -84,7 +84,7 @@ module.exports = app => {
     try {
       const user = await User.findById(req.user._id);
       const deletedSetting = await Setting.findByIdAndRemove(user.settingId);
-      const deletedUser = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         $unset: { settingId: 1 }
       });
       res.send(deletedSetting);

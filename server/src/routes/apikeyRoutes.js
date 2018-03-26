@@ -7,14 +7,14 @@ module.exports = app => {
     let apikey;
     try {
       apikey = await new Apikey(req.body).save();
-      const updatedUser = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         apikeyId: apikey._id
       });
       res.send(apikey);
     } catch (err) {
       if (apikey !== undefined) {
         try {
-          const deletedApikey = await Apikey.findByIdAndRemove(apikey._id);
+          await Apikey.findByIdAndRemove(apikey._id);
         } catch (err) {
           res.status(400).send({
             error: {
@@ -51,7 +51,7 @@ module.exports = app => {
     try {
       const user = await User.findById(req.user._id);
       const deletedApikey = await Apikey.findByIdAndRemove(user.apikeyId);
-      const deletedUser = await User.findByIdAndUpdate(req.user._id, {
+      await User.findByIdAndUpdate(req.user._id, {
         $unset: { apikeyId: 1 }
       });
       res.send(deletedApikey);

@@ -1,4 +1,6 @@
+/* eslint-disable */
 require('dotenv').config();
+/* eslint-enable */
 
 const config = {
   production: {
@@ -36,6 +38,6 @@ const config = {
   }
 };
 
-exports.get = function get(env) {
+module.exports.get = function get(env) {
   return config[env] || config.default;
 };
