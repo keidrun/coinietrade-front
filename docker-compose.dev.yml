@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     environment:
-     - NODE_ENV=integration
+     - NODE_ENV=test
     ports:
       - '5000:5000'
     volumes:
@@ -15,7 +15,7 @@ services:
     depends_on:
       - 'db'
   db:
-    image: mongo:latest
+    image: mongo:3.6.3
     ports:
       - '27019:27017'
     volumes:

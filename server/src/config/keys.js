@@ -14,7 +14,7 @@ const config = {
     meetupApiKey: process.env.PROD_MEETUP_API_KEY,
     encryptKey: process.env.PROD_ENCRYPT_KEY
   },
-  integration: {
+  test: {
     mongoURL: process.env.PRE_MONGO_URI,
     tokenSecret: process.env.PRE_TOKEN_SECRET,
     cookieKey: process.env.PRE_COOKIE_KEY,

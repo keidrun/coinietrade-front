@@ -43,7 +43,7 @@
   "scripts": {
     "start": "node server/src/server.js ",
     "lint": "eslint server/src/**/**.js",
-    "test": "mocha server/test/**/*.test.js",
+    "test": "NODE_ENV=test mocha server/test/**/*.test.js",
     "watch:lint": "nodemon --exec yarn lint",
     "watch:test": "nodemon --exec yarn test",
     "watch": "npm-run-all -p watch:*",
@@ -57,8 +57,6 @@
     "dev:server": "sleep 5 && nodemon server/src/server.js",
     "dev:client": "yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
-    "integration-test":
-      "yarn build && yarn up && yarn lint && yarn test && yarn down",
     "prod:build":
       "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
     "prod:push":

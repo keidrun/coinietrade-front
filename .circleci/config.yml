@@ -1,9 +1,12 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/repo
     docker:
       - image: circleci/node:9.8.0
-    working_directory: ~/repo
+      - image: circleci/mongo:3.6.3
+        environment:
+          PRE_MONGO_URI: mongodb://db:27017/coinietradeFront-test
     steps:
       - checkout
       - restore_cache:
@@ -15,4 +18,14 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      - run:
+          name: Eslint Server
+          command: |
+            yarn lint
+      - run:
+          name: Test Server
+          command: |
+            yarn test
