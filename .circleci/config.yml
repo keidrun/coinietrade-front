@@ -5,8 +5,6 @@ jobs:
     docker:
       - image: circleci/node:9.8.0
       - image: circleci/mongo:3.6.3
-        environment:
-          PRE_MONGO_URI: mongodb://db:27017/coinietradeFront-test
     steps:
       - checkout
       - restore_cache:
@@ -28,4 +26,8 @@ jobs:
       - run:
           name: Test Server
           command: |
-            yarn test
+            yarn test-ci
+      # - run:
+      #     name: Build and Push to DockerHub then Deploy to Heroku of staging
+      #     command: |
+      #       yarn stage

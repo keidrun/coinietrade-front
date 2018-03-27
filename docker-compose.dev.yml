@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     environment:
-     - NODE_ENV=test
+     - NODE_ENV=pre
     ports:
       - '5000:5000'
     volumes:

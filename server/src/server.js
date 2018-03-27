@@ -40,7 +40,12 @@ require('./routes/settingRoutes')(app);
 require('./routes/eventRoutes')(app);
 require('./routes/socketRoutes')(server);
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
+if (
+  process.env.NODE_ENV === 'production' ||
+  process.env.NODE_ENV === 'staging' ||
+  process.env.NODE_ENV === 'pre' ||
+  process.env.NODE_ENV === 'ci'
+) {
   app.use(express.static('client/build'));
 
   const path = require('path');
