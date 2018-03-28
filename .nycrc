@@ -1,0 +1,11 @@
+{
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 30,
+    "statements": 30,
+    "functions": 0,
+    "branches": 0,
+    "include": ["server/src/**/*.js"],
+    "exclude": ["server/src/config/keys.js"],
+    "cache": true
+}

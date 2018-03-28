@@ -2,8 +2,10 @@ logs
 *.log
 yarn-debug.log*
 yarn-error.log*
-/coverage
-/node_modules
-.env
+coverage/
+.nyc_output/
+coverage.lcov
+node_modules/
 .vscode/
+.env
 db/

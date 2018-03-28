@@ -30,12 +30,14 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "codecov": "^3.0.0",
     "dotenv": "^5.0.0",
     "eslint": "^4.19.1",
     "eslint-plugin-node": "^6.0.1",
     "mocha": "^5.0.1",
     "nock": "^9.2.3",
     "npm-run-all": "^4.1.2",
+    "nyc": "^11.6.0",
     "react-scripts": "^1.1.1",
     "sinon": "^4.4.2",
     "supertest": "^3.0.0"
@@ -43,8 +45,10 @@
   "scripts": {
     "start": "node server/src/server.js ",
     "lint": "eslint server/src/**/**.js",
-    "test": "NODE_ENV=test mocha server/test/**/*test*.js",
-    "test-ci": "NODE_ENV=ci mocha server/test/**/*test*.js",
+    "test": "NODE_ENV=test nyc mocha server/test/**/*test*.js",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "test-ci":
+      "NODE_ENV=ci nyc mocha server/test/**/*test*.js && yarn coverage",
     "watch:lint": "nodemon --exec yarn lint",
     "watch:test": "nodemon --exec yarn test",
     "watch": "npm-run-all -p watch:*",
@@ -59,12 +63,17 @@
     "dev:client": "yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
     "pre": "yarn build && yarn up",
-    "prod:build":
+    "stage:build":
       "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
-    "prod:push":
+    "stage:push":
       "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "stage:deploy":
+      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "stage": "npm-run-all -s stage:*",
+    "prod:pull":
+      "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod": "npm-run-all -s prod:*"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "allowSyntheticDefaultImports": false
+  },
+  "exclude": [
+    "client/node_modules",
+    "client/build",
+    "node_modules",
+    "db",
+    "coverage"
+  ]
+}
