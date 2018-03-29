@@ -41,15 +41,15 @@ class Dashboard extends Component {
   mapDataToCompanyObj = (data, companyName) => {
     let bidPrices = [
       ...this.state[companyName].bidPrices,
-      data[companyName].bid || 0
+      data[companyName].hasOwnProperty('bid') ? data[companyName].bid : 0
     ];
     let askPrices = [
       ...this.state[companyName].askPrices,
-      data[companyName].ask || 0
+      data[companyName].hasOwnProperty('ask') ? data[companyName].ask : 0
     ];
     let lastPrices = [
       ...this.state[companyName].lastPrices,
-      data[companyName].last || 0
+      data[companyName].hasOwnProperty('last') ? data[companyName].last : 0
     ];
 
     if (this.state[companyName].bidPrices.length > X_AXIS_NUM) {

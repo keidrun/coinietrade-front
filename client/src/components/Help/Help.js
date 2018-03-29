@@ -17,7 +17,7 @@ const Help = () => (
           >
             Keisuke Sasaki
           </a>{' '}
-          (called 'Keid' in github)
+          (called 'Keid' in Github)
         </p>
         <p />
         <h4>Version</h4>
@@ -33,7 +33,7 @@ const Help = () => (
           </a>
         </p>
         <h4>Feedback</h4>
-        <p>I really need your feedback to make the site much better.</p>
+        <p>I really need your feedback to make this site much better.</p>
         <p>
           Please send your email to{' '}
           <a href="mailto:coinietradefeedback@gmail.com?subject=[FEEDBACK]">

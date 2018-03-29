@@ -1,0 +1,13 @@
+{
+  "name": "CoinieTrade Bitcoin Monitoring and Trading Website",
+  "short_name": "CoinieTrade",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/icons/icon48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": "1.0"
+    }
+  ]
+}

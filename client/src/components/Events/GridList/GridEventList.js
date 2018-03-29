@@ -15,9 +15,13 @@ const GridEventList = ({ events }) => (
           key={event.id}
           title={event.name}
           subtitle={
-            <span>
-              At {event.date} {event.time}
-            </span>
+            event.date ? (
+              <span>
+                On {event.date} {event.time}
+              </span>
+            ) : (
+              <span />
+            )
           }
           actionIcon={
             <IconButton>
