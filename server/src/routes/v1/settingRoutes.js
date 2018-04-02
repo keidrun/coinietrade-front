@@ -1,9 +1,13 @@
-const Setting = require('../models/Setting');
-const User = require('../models/User');
-const auth = require('../middleware/auth');
+const Setting = require('../../models/Setting');
+const User = require('../../models/User');
+const auth = require('../../middleware/auth');
+
+const RESOURCE_NAME = 'setting';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 module.exports = app => {
-  app.post('/api/setting', auth, async (req, res) => {
+  app.post(URI, auth, async (req, res) => {
     let setting;
     try {
       setting = await new Setting(req.body).save();
@@ -35,7 +39,7 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/setting', auth, async (req, res) => {
+  app.get(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       const setting = await Setting.findById(user.settingId);
@@ -60,7 +64,7 @@ module.exports = app => {
     }
   });
 
-  app.put('/api/setting', auth, async (req, res) => {
+  app.put(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       const updatedSetting = await Setting.findByIdAndUpdate(
@@ -80,7 +84,7 @@ module.exports = app => {
     }
   });
 
-  app.delete('/api/setting', auth, async (req, res) => {
+  app.delete(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       const deletedSetting = await Setting.findByIdAndRemove(user.settingId);

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Chart from '../../widgets/Chart';
 import styles from './Dashboard.css';
 
+import { BASE_URI } from '../../utils/apiVersion';
+
 import io from 'socket.io-client';
 let socket;
 if (
@@ -9,11 +11,11 @@ if (
   process.env.NODE_ENV === 'integration'
 ) {
   socket = io({
-    path: '/socket'
+    path: `${BASE_URI}/socket`
   });
 } else {
   socket = io('http://localhost:5000', {
-    path: '/socket'
+    path: `${BASE_URI}/socket`
   });
 }
 

@@ -8,9 +8,11 @@ import {
   UPDATE_PROFILE
 } from './types';
 
+import { BASE_URI } from '../utils/apiVersion';
+
 export const fetchUser = () => async dispatch => {
   try {
-    const res = await axios.get('/api/auth');
+    const res = await axios.get(`${BASE_URI}/auth`);
     dispatch({ type: FETCH_USER, payload: res.data });
   } catch (err) {
     dispatch({ type: FETCH_USER, payload: false });
@@ -28,7 +30,7 @@ export const fetchEvents = (
 ) => async dispatch => {
   try {
     const res = await axios.get(
-      `/api/events?text=${text}&lat=${lat}&lon=${lon}&index=${index}&num=${num}`
+      `${BASE_URI}/events?text=${text}&lat=${lat}&lon=${lon}&index=${index}&num=${num}`
     );
     if (!list) {
       dispatch({ type: FETCH_EVENTS, payload: res.data });
@@ -59,9 +61,9 @@ export const clearEvents = () => dispatch => {
 
 export const fetchProfile = () => async dispatch => {
   try {
-    const resUser = await axios.get('/api/user');
+    const resUser = await axios.get(`${BASE_URI}/user`);
     try {
-      const resSetting = await axios.get('/api/setting');
+      const resSetting = await axios.get(`${BASE_URI}/setting`);
       dispatch({
         type: FETCH_PROFILE,
         payload: {
@@ -87,12 +89,12 @@ export const fetchProfile = () => async dispatch => {
 
 export const updateProfile = profile => async dispatch => {
   try {
-    const resUser = await axios.put('/api/user', profile.user);
+    const resUser = await axios.put(`${BASE_URI}/user`, profile.user);
     let resSetting;
     if (!resUser.data.settingId) {
-      resSetting = await axios.post('/api/setting', profile.setting);
+      resSetting = await axios.post(`${BASE_URI}/setting`, profile.setting);
     } else {
-      resSetting = await axios.put('/api/setting', profile.setting);
+      resSetting = await axios.put(`${BASE_URI}/setting`, profile.setting);
     }
     dispatch({
       type: UPDATE_PROFILE,

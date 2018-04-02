@@ -9,6 +9,8 @@ import FontAwesome from 'react-fontawesome';
 
 import styles from './Menu.css';
 
+import { BASE_URI } from '../../../utils/apiVersion';
+
 class Logged extends Component {
   static muiName = 'IconMenu';
 
@@ -71,7 +73,10 @@ class Logged extends Component {
         {this.renderMenu()}
         <MenuItem
           primaryText={
-            <a href="/api/logout" className={styles.nav_logged_link}>
+            <a
+              href={`${BASE_URI}/auth/logout`}
+              className={styles.nav_logged_link}
+            >
               <FontAwesome name="sign-out" /> Sign out
             </a>
           }

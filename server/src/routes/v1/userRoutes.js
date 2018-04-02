@@ -1,12 +1,16 @@
-const User = require('../models/User');
-const auth = require('../middleware/auth');
+const User = require('../../models/User');
+const auth = require('../../middleware/auth');
 const {
   validateUserSchema,
   handleValidationErrors
-} = require('../middleware/validationHandlers');
+} = require('../../middleware/validationHandlers');
+
+const RESOURCE_NAME = 'user';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 module.exports = app => {
-  app.get('/api/user', auth, async (req, res) => {
+  app.get(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       res.send(user);
@@ -22,7 +26,7 @@ module.exports = app => {
   });
 
   app.put(
-    '/api/user',
+    URI,
     auth,
     validateUserSchema,
     handleValidationErrors,
@@ -48,7 +52,7 @@ module.exports = app => {
     }
   );
 
-  app.delete('/api/user', auth, async (req, res) => {
+  app.delete(URI, auth, async (req, res) => {
     try {
       const deletedUser = await User.findByIdAndRemove(req.user._id);
       res.send(deletedUser);

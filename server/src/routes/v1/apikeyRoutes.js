@@ -1,9 +1,13 @@
-const Apikey = require('../models/Apikey');
-const User = require('../models/User');
-const auth = require('../middleware/auth');
+const Apikey = require('../../models/Apikey');
+const User = require('../../models/User');
+const auth = require('../../middleware/auth');
+
+const RESOURCE_NAME = 'apikey';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 module.exports = app => {
-  app.post('/api/apikey', auth, async (req, res) => {
+  app.post(URI, auth, async (req, res) => {
     let apikey;
     try {
       apikey = await new Apikey(req.body).save();
@@ -31,7 +35,7 @@ module.exports = app => {
     }
   });
 
-  app.put('/api/apikey', auth, async (req, res) => {
+  app.put(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       const updatedApikey = await Apikey.findByIdAndUpdate(
@@ -47,7 +51,7 @@ module.exports = app => {
     }
   });
 
-  app.delete('/api/apikey', auth, async (req, res) => {
+  app.delete(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
       const deletedApikey = await Apikey.findByIdAndRemove(user.apikeyId);
@@ -63,7 +67,7 @@ module.exports = app => {
   });
 
   // // DON'T OPEN IN PUBLIC FOR SECURITY
-  // app.get('/api/apikey', auth, async (req, res) => {
+  // app.get(URI, auth, async (req, res) => {
   //   try {
   //     const user = await User.findById(req.user._id);
   //     const apykey = await Apikey.findById(user.apikeyId);

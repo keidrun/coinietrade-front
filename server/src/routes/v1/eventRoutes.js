@@ -1,13 +1,17 @@
 const axios = require('axios');
 const qs = require('qs');
-const auth = require('../middleware/auth');
-const keys = require('../config/keys').get(process.env.NODE_ENV);
+const auth = require('../../middleware/auth');
+const keys = require('../../config/keys').get(process.env.NODE_ENV);
+
+const RESOURCE_NAME = 'events';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 const PAGE = 20;
 const RADIUS_MILE = 6;
 
 module.exports = app => {
-  app.get('/api/events', auth, async (req, res) => {
+  app.get(URI, auth, async (req, res) => {
     const query = qs.parse(req.query);
 
     const searchText = !query.text ? '' : `&text=${query.text}`;

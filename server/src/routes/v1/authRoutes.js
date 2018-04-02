@@ -1,9 +1,13 @@
 const passport = require('passport');
-const keys = require('../config/keys').get(process.env.NODE_ENV);
-const auth = require('../middleware/auth');
+const keys = require('../../config/keys').get(process.env.NODE_ENV);
+const auth = require('../../middleware/auth');
+
+const RESOURCE_NAME = 'auth';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 module.exports = app => {
-  app.get('/api/auth', auth, (req, res) => {
+  app.get(URI, auth, (req, res) => {
     const user = req.user;
     if (!user) {
       return res.status(404).json({
@@ -23,7 +27,7 @@ module.exports = app => {
   });
 
   // Logout
-  app.get('/api/logout', auth, async (req, res) => {
+  app.get(`${URI}/logout`, auth, async (req, res) => {
     const user = req.user;
 
     req.logout(); // clear cookie['user'] with passport

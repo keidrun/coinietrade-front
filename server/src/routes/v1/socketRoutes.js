@@ -1,12 +1,16 @@
 const socketIO = require('socket.io');
-const { getAllTickers } = require('../utils/exchangeApi');
+const { getAllTickers } = require('../../utils/exchangeApi');
+
+const RESOURCE_NAME = 'socket';
+const VERSION = 'v1';
+const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 const INTERVAL_MSEC = 1000;
 const CLEAR_INTERVAL_MSEC = 1000;
 
 module.exports = server => {
   const io = socketIO(server, {
-    path: '/socket'
+    path: URI
   });
 
   io.on('connection', socket => {
