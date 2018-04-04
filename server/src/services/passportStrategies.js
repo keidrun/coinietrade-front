@@ -2,6 +2,7 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys').get(process.env.NODE_ENV);
+const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 
 const User = require('../models/User');
 
@@ -20,7 +21,7 @@ passport.use(
     {
       clientID: keys.facebookClientId,
       clientSecret: keys.facebookClientSecret,
-      callbackURL: '/auth/facebook/callback'
+      callbackURL: `${proxyURL}/auth/facebook/callback`
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -71,7 +72,7 @@ passport.use(
     {
       clientID: keys.googleClientId,
       clientSecret: keys.googleClientSecret,
-      callbackURL: '/auth/google/callback'
+      callbackURL: `${proxyURL}/auth/google/callback`
     },
     async (accessToken, refreshToken, profile, done) => {
       try {

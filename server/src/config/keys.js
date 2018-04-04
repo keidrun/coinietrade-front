@@ -12,7 +12,8 @@ const config = {
     googleClientId: process.env.PROD_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.PROD_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.PROD_MEETUP_API_KEY,
-    encryptKey: process.env.PROD_ENCRYPT_KEY
+    encryptKey: process.env.PROD_ENCRYPT_KEY,
+    proxyURL: process.env.PROD_PROXY_URL
   },
   staging: {
     mongoURL: process.env.STAGE_MONGO_URI,
@@ -23,7 +24,8 @@ const config = {
     googleClientId: process.env.STAGE_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.STAGE_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.STAGE_MEETUP_API_KEY,
-    encryptKey: process.env.STAGE_ENCRYPT_KEY
+    encryptKey: process.env.STAGE_ENCRYPT_KEY,
+    proxyURL: process.env.STAGE_PROXY_URL
   },
   pre: {
     mongoURL: process.env.PRE_MONGO_URI,
@@ -34,7 +36,8 @@ const config = {
     googleClientId: process.env.PRE_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.PRE_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.PRE_MEETUP_API_KEY,
-    encryptKey: process.env.PRE_ENCRYPT_KEY
+    encryptKey: process.env.PRE_ENCRYPT_KEY,
+    proxyURL: process.env.PRE_PROXY_URL
   },
   ci: {
     mongoURL: process.env.CITEST_MONGO_URI,
@@ -45,7 +48,8 @@ const config = {
     googleClientId: process.env.CITEST_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.CITEST_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.CITEST_MEETUP_API_KEY,
-    encryptKey: process.env.CITEST_ENCRYPT_KEY
+    encryptKey: process.env.CITEST_ENCRYPT_KEY,
+    proxyURL: process.env.CITEST_PROXY_URL
   },
   test: {
     mongoURL: process.env.TEST_MONGO_URI,
@@ -56,7 +60,8 @@ const config = {
     googleClientId: process.env.TEST_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.TEST_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.TEST_MEETUP_API_KEY,
-    encryptKey: process.env.TEST_ENCRYPT_KEY
+    encryptKey: process.env.TEST_ENCRYPT_KEY,
+    proxyURL: process.env.TEST_PROXY_URL
   },
   default: {
     mongoURL: process.env.DEV_MONGO_URI,
@@ -67,7 +72,8 @@ const config = {
     googleClientId: process.env.DEV_GOOGLE_CLIENT_ID,
     googleClientSecret: process.env.DEV_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.DEV_MEETUP_API_KEY,
-    encryptKey: process.env.DEV_ENCRYPT_KEY
+    encryptKey: process.env.DEV_ENCRYPT_KEY,
+    proxyURL: process.env.DEV_PROXY_URL
   }
 };
 

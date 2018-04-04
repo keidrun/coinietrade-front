@@ -15,7 +15,7 @@ const server = http.createServer(app);
 
 require('./services/passportStrategies');
 
-mongoose.connect(keys.mongoURL);
+mongoose.connect(process.env.MONGODB_URI || keys.mongoURL);
 
 app.use(
   helmet({
