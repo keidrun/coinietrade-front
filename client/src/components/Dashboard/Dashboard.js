@@ -41,18 +41,37 @@ class Dashboard extends Component {
   };
 
   mapDataToCompanyObj = (data, companyName) => {
-    let bidPrices = [
-      ...this.state[companyName].bidPrices,
-      data[companyName].hasOwnProperty('bid') ? data[companyName].bid : 0
-    ];
-    let askPrices = [
-      ...this.state[companyName].askPrices,
-      data[companyName].hasOwnProperty('ask') ? data[companyName].ask : 0
-    ];
-    let lastPrices = [
-      ...this.state[companyName].lastPrices,
-      data[companyName].hasOwnProperty('last') ? data[companyName].last : 0
-    ];
+    let bidPrices = [],
+      askPrices = [],
+      lastPrices = [];
+
+    if (data[companyName] !== undefined) {
+      bidPrices = [...this.state[companyName].bidPrices, data[companyName].bid];
+      askPrices = [...this.state[companyName].askPrices, data[companyName].ask];
+      lastPrices = [
+        ...this.state[companyName].lastPrices,
+        data[companyName].last
+      ];
+    } else if (this.state[companyName].bidPrices.length !== 0) {
+      bidPrices = [
+        ...this.state[companyName].bidPrices,
+        this.state[companyName].bidPrices[
+          this.state[companyName].bidPrices.length - 1
+        ]
+      ];
+      askPrices = [
+        ...this.state[companyName].askPrices,
+        this.state[companyName].askPrices[
+          this.state[companyName].askPrices.length - 1
+        ]
+      ];
+      lastPrices = [
+        ...this.state[companyName].lastPrices,
+        this.state[companyName].lastPrices[
+          this.state[companyName].lastPrices.length - 1
+        ]
+      ];
+    }
 
     if (this.state[companyName].bidPrices.length > X_AXIS_NUM) {
       bidPrices.shift();
