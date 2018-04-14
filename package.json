@@ -4,7 +4,7 @@
   "description": "CoinieTrade front end and back end.",
   "main": "index.js",
   "engines": {
-    "node": "9.8.0",
+    "node": "9.11.1",
     "yarn": "1.5.1"
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
@@ -59,6 +59,7 @@
     "env:diff": "diff .env ../coinietrade-env/front/.env || :",
     "env:commit":
       "cp -rf .env ../coinietrade-env/front/ && git -C ../coinietrade-env/front/ commit -am 'Update env file.'",
+    "env:base64": "cat ../coinietrade-env/front/.env | base64",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
     "db:up": "docker-compose -f docker-compose.dev.yml up -d db",
@@ -68,7 +69,10 @@
     "dev:server": "sleep 5 && nodemon server/src/server.js",
     "dev:client": "yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
-    "pre": "yarn build && yarn up",
+    "ci:up": "yarn build && yarn up",
+    "ci:lint": "docker-compose -f docker-compose.dev.yml exec web yarn lint",
+    "ci:test": "docker-compose -f docker-compose.dev.yml exec web yarn test-ci",
+    "ci": "npm-run-all -s ci:*",
     "stage:build":
       "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
     "stage:push":

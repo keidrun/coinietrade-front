@@ -27,7 +27,7 @@ const config = {
     encryptKey: process.env.STAGE_ENCRYPT_KEY,
     proxyURL: process.env.STAGE_PROXY_URL
   },
-  pre: {
+  ci: {
     mongoURL: process.env.PRE_MONGO_URI,
     tokenSecret: process.env.PRE_TOKEN_SECRET,
     cookieKey: process.env.PRE_COOKIE_KEY,
@@ -38,18 +38,6 @@ const config = {
     meetupApiKey: process.env.PRE_MEETUP_API_KEY,
     encryptKey: process.env.PRE_ENCRYPT_KEY,
     proxyURL: process.env.PRE_PROXY_URL
-  },
-  ci: {
-    mongoURL: process.env.CITEST_MONGO_URI,
-    tokenSecret: process.env.CITEST_TOKEN_SECRET,
-    cookieKey: process.env.CITEST_COOKIE_KEY,
-    facebookClientId: process.env.CITEST_FACEBOOK_CLIENT_ID,
-    facebookClientSecret: process.env.CITEST_FACEBOOK_CLIENT_SECRET,
-    googleClientId: process.env.CITEST_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.CITEST_GOOGLE_CLIENT_SECRET,
-    meetupApiKey: process.env.CITEST_MEETUP_API_KEY,
-    encryptKey: process.env.CITEST_ENCRYPT_KEY,
-    proxyURL: process.env.CITEST_PROXY_URL
   },
   test: {
     mongoURL: process.env.TEST_MONGO_URI,

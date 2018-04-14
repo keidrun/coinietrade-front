@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     environment:
-     - NODE_ENV=pre
+      - NODE_ENV=ci
     ports:
       - '5000:5000'
     volumes:
