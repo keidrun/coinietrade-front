@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "codecov": "^3.0.0",
     "dotenv": "^5.0.0",
     "eslint": "^4.19.1",
     "eslint-plugin-node": "^6.0.1",
@@ -46,7 +45,7 @@
     "start": "node server/src/server.js ",
     "lint": "eslint server/src/**/**.js",
     "test": "NODE_ENV=test nyc mocha server/test/**/*test*.js",
-    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov",
     "test-ci":
       "NODE_ENV=ci nyc mocha server/test/**/*test*.js && yarn coverage",
     "watch:lint": "nodemon --exec yarn lint",
@@ -59,7 +58,7 @@
     "env:diff": "diff .env ../coinietrade-env/front/.env || :",
     "env:commit":
       "cp -rf .env ../coinietrade-env/front/ && git -C ../coinietrade-env/front/ commit -am 'Update env file.'",
-    "env:base64": "cat ../coinietrade-env/front/.env | base64",
+    "env:base64": "cat .env | base64",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
     "db:up": "docker-compose -f docker-compose.dev.yml up -d db",
