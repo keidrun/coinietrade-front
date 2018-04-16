@@ -13,7 +13,7 @@ jobs:
           name: Decode dotenv file
           command: echo $ENV_FILE | base64 --decode > .env
       - run:
-          name: Install tools
+          name: Setup Nodejs and Yarn
           command: |
             # install nvm and nodejs
             curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
@@ -31,6 +31,9 @@ jobs:
           name: Setup Heroku
           command: bash .circleci/setup-heroku.sh
       - run:
+          name: Setup dockerize
+          command: bash .circleci/setup-dockerize.sh
+      - run:
           name: Check versions
           command: |
             grep -H "" /etc/*version ; grep -H "" /etc/*release
@@ -39,43 +42,44 @@ jobs:
             node --version
             yarn --version
             heroku --version
+            dockerize --version
       - run:
-          name: Install modules for Client
+          name: Install dependencies for Client
           command: |
             # if 404 occurred, remove yarn.lock OR yarn upgrade locally before
             #rm client/yarn.lock
             yarn --cwd client install
       - run:
-         name: Install modules for Server
+         name: Install dependencies for Server
          command: yarn install
       - run:
-          name: Run docker containers for CI
+          name: Run Docker containers for CI
           command: yarn ci:up
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      #- run:
-      #    name: Wait for db
-      #    command: dockerize -wait tcp://localhost:27017 -timeout 1m
       - run:
-          name: Lint Server
+         name: Wait for db
+         command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      - run:
+          name: Rub lint for Server
           command: yarn ci:lint
       - run:
-         name: Test Server and Report coverage to Codecov
+         name: Run tests for Server and Report coverage to Codecov
          command: |
           yarn ci:test
           bash <(curl -s https://codecov.io/bash)
       - run:
-          name: Build image for production
+          name: Build Docker image for production
           command: yarn stage:build
       - run:
-          name: Push image to DockerHub for production
+          name: Push Docker image to DockerHub for production
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             yarn stage:push
       - run:
-          name: Deploy image to Heroku for staging
+          name: Deploy Docker image to Heroku for staging
           command: |
             heroku container:login
             yarn stage:deploy
