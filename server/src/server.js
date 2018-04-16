@@ -38,7 +38,6 @@ require('./routes/apiRoutes')(app, server);
 if (
   process.env.NODE_ENV === 'production' ||
   process.env.NODE_ENV === 'staging' ||
-  process.env.NODE_ENV === 'pre' ||
   process.env.NODE_ENV === 'ci'
 ) {
   app.use(express.static('client/build'));

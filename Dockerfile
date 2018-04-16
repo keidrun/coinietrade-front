@@ -5,7 +5,7 @@ LABEL maintainer="Keid"
 RUN mkdir /app
 WORKDIR /app
 
-RUN npm install -g yarn nodemon
+RUN npm install -g yarn@1.6.0 nodemon
 RUN chmod +x /usr/local/bin/yarn
 
 COPY package.json package.json

@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": "9.11.1",
-    "yarn": "1.5.1"
+    "yarn": "1.6.0"
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
   "author": "keidrun",
@@ -68,9 +68,11 @@
     "dev:server": "sleep 5 && nodemon server/src/server.js",
     "dev:client": "yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
-    "ci:up": "yarn build && yarn up",
-    "ci:lint": "docker-compose -f docker-compose.dev.yml exec web yarn lint",
-    "ci:test": "docker-compose -f docker-compose.dev.yml exec web yarn test-ci",
+    "ci_ps": "docker-compose -f docker-compose.ci.yml ps",
+    "ci:up": "yarn build && docker-compose -f docker-compose.ci.yml up -d",
+    "ci:lint": "docker-compose -f docker-compose.ci.yml exec web yarn lint",
+    "ci:test": "docker-compose -f docker-compose.ci.yml exec web yarn test-ci",
+    "ci:down": "docker-compose -f docker-compose.ci.yml down",
     "ci": "npm-run-all -s ci:*",
     "stage:build":
       "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
