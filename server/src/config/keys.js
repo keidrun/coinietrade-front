@@ -16,16 +16,16 @@ const config = {
     proxyURL: process.env.PROD_PROXY_URL
   },
   staging: {
-    mongoURL: process.env.STAGE_MONGO_URI,
-    tokenSecret: process.env.STAGE_TOKEN_SECRET,
-    cookieKey: process.env.STAGE_COOKIE_KEY,
-    facebookClientId: process.env.STAGE_FACEBOOK_CLIENT_ID,
-    facebookClientSecret: process.env.STAGE_FACEBOOK_CLIENT_SECRET,
-    googleClientId: process.env.STAGE_GOOGLE_CLIENT_ID,
-    googleClientSecret: process.env.STAGE_GOOGLE_CLIENT_SECRET,
-    meetupApiKey: process.env.STAGE_MEETUP_API_KEY,
-    encryptKey: process.env.STAGE_ENCRYPT_KEY,
-    proxyURL: process.env.STAGE_PROXY_URL
+    mongoURL: process.env.STAGING_MONGO_URI,
+    tokenSecret: process.env.STAGING_TOKEN_SECRET,
+    cookieKey: process.env.STAGING_COOKIE_KEY,
+    facebookClientId: process.env.STAGING_FACEBOOK_CLIENT_ID,
+    facebookClientSecret: process.env.STAGING_FACEBOOK_CLIENT_SECRET,
+    googleClientId: process.env.STAGING_GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.STAGING_GOOGLE_CLIENT_SECRET,
+    meetupApiKey: process.env.STAGING_MEETUP_API_KEY,
+    encryptKey: process.env.STAGING_ENCRYPT_KEY,
+    proxyURL: process.env.STAGING_PROXY_URL
   },
   ci: {
     mongoURL: process.env.PRE_MONGO_URI,

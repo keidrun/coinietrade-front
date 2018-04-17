@@ -72,14 +72,14 @@ jobs:
           bash <(curl -s https://codecov.io/bash)
       - run:
           name: Build Docker image for production
-          command: yarn stage:build
+          command: yarn staging:build
       - run:
           name: Push Docker image to DockerHub for production
           command: |
             echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
-            yarn stage:push
+            yarn staging:push
       - run:
           name: Deploy Docker image to Heroku for staging
           command: |
             heroku container:login
-            yarn stage:deploy
+            yarn staging:deploy

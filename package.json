@@ -1,7 +1,7 @@
 {
   "name": "coinietrade-front",
   "version": "0.0.1",
-  "description": "CoinieTrade front end and back end.",
+  "description": "CoinieTrade front end and Gateway.",
   "main": "index.js",
   "engines": {
     "node": "9.11.1",
@@ -74,13 +74,13 @@
     "ci:test": "docker-compose -f docker-compose.ci.yml exec web yarn test-ci",
     "ci:down": "docker-compose -f docker-compose.ci.yml down",
     "ci": "npm-run-all -s ci:*",
-    "stage:build":
+    "staging:build":
       "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
-    "stage:push":
+    "staging:push":
       "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "stage:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGE_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "stage": "npm-run-all -s stage:*",
+    "staging:deploy":
+      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "staging": "npm-run-all -s staging:*",
     "prod-blue:pull":
       "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod-blue:deploy":
@@ -90,15 +90,6 @@
       "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod-green:deploy":
       "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "prod-green": "npm-run-all -s prod-green:*",
-    "prod-blue-clock:deploy":
-      "heroku container:push clock --recursive --remote production-blue",
-    "prod-blue-clock:start": "heroku ps:scale clock=1 --remote production-blue",
-    "prod-blue-clock:stop": "heroku ps:scale clock=0 --remote production-blue",
-    "prod-green-clock:deploy":
-      "heroku container:push clock --recursive --remote production-green",
-    "prod-green-clock:start":
-      "heroku ps:scale clock=1 --remote production-green",
-    "prod-green-clock:stop": "heroku ps:scale clock=0 --remote production-green"
+    "prod-green": "npm-run-all -s prod-green:*"
   }
 }

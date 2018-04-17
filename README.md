@@ -1,6 +1,6 @@
 # coinietrade-front
 
-Keid's CoinieTrade project - Front end and Back end.
+Keid's CoinieTrade project - Front end and Gateway.
 
 ## License
 
