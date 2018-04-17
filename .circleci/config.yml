@@ -76,7 +76,7 @@ jobs:
       - run:
           name: Push Docker image to DockerHub for production
           command: |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
             yarn stage:push
       - run:
           name: Deploy Docker image to Heroku for staging

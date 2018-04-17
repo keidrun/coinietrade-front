@@ -90,6 +90,15 @@
       "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod-green:deploy":
       "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "prod-green": "npm-run-all -s prod-green:*"
+    "prod-green": "npm-run-all -s prod-green:*",
+    "prod-blue-clock:deploy":
+      "heroku container:push clock --recursive --remote production-blue",
+    "prod-blue-clock:start": "heroku ps:scale clock=1 --remote production-blue",
+    "prod-blue-clock:stop": "heroku ps:scale clock=0 --remote production-blue",
+    "prod-green-clock:deploy":
+      "heroku container:push clock --recursive --remote production-green",
+    "prod-green-clock:start":
+      "heroku ps:scale clock=1 --remote production-green",
+    "prod-green-clock:stop": "heroku ps:scale clock=0 --remote production-green"
   }
 }
