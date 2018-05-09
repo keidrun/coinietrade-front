@@ -4,7 +4,7 @@
   "description": "CoinieTrade front end and Gateway.",
   "main": "index.js",
   "engines": {
-    "node": "9.11.1",
+    "node": "10.0.0",
     "yarn": "1.6.0"
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
@@ -46,8 +46,7 @@
     "lint": "eslint server/src/**/**.js",
     "test": "NODE_ENV=test nyc mocha server/test/**/*test*.js",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov",
-    "test-ci":
-      "NODE_ENV=ci nyc mocha server/test/**/*test*.js && yarn coverage",
+    "test-ci": "NODE_ENV=ci nyc mocha server/test/**/*test*.js && yarn coverage",
     "watch:lint": "nodemon --exec yarn lint",
     "watch:test": "nodemon --exec yarn test",
     "watch": "npm-run-all -p watch:*",
@@ -56,8 +55,7 @@
     "env:tree": "git -C ../coinietrade-env/front/ tree",
     "env:status": "git -C ../coinietrade-env/front/ status",
     "env:diff": "diff .env ../coinietrade-env/front/.env || :",
-    "env:commit":
-      "cp -rf .env ../coinietrade-env/front/ && git -C ../coinietrade-env/front/ commit -am 'Update env file.'",
+    "env:commit": "cp -rf .env ../coinietrade-env/front/ && git -C ../coinietrade-env/front/ commit -am 'Update env file.'",
     "env:base64": "cat .env | base64",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
@@ -74,22 +72,15 @@
     "ci:test": "docker-compose -f docker-compose.ci.yml exec web yarn test-ci",
     "ci:down": "docker-compose -f docker-compose.ci.yml down",
     "ci": "npm-run-all -s ci:*",
-    "staging:build":
-      "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
-    "staging:push":
-      "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "staging:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "staging:build": "yarn build && docker-compose -f docker-compose.dockerhub.yml build --no-cache web",
+    "staging:push": "docker push `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "staging:deploy": "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_APP\"`/`node -pe \"require('dotenv').config().parsed.STAGING_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "staging": "npm-run-all -s staging:*",
-    "prod-blue:pull":
-      "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "prod-blue:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_BLUE\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_BLUE\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod-blue:pull": "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod-blue:deploy": "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_BLUE\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_BLUE\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod-blue": "npm-run-all -s prod-blue:*",
-    "prod-green:pull":
-      "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
-    "prod-green:deploy":
-      "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod-green:pull": "docker pull `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
+    "prod-green:deploy": "docker tag `node -pe \"require('dotenv').config().parsed.DOCKERHUB_USER\"`/`node -pe \"require('dotenv').config().parsed.DOCKERHUB_REPOSITORY\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"` && docker push `node -pe \"require('dotenv').config().parsed.PROD_HEROKU_REGISTRY\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_APP_GREEN\"`/`node -pe \"require('dotenv').config().parsed.PROD_HEROKU_PROCESS_TYPE\"`:`node -pe \"require('dotenv').config().parsed.TAG\"`",
     "prod-green": "npm-run-all -s prod-green:*"
   }
 }
