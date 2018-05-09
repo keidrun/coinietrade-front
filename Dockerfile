@@ -5,6 +5,7 @@ LABEL maintainer="Keid"
 RUN mkdir /app
 WORKDIR /app
 
+RUN npm config set registry "https://registry.npmjs.org"
 RUN npm install -g yarn@1.6.0 nodemon
 RUN chmod +x /usr/local/bin/yarn
 
