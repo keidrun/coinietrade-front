@@ -1,10 +1,10 @@
 const expect = require('chai').expect;
-const { ObjectID } = require('mongodb');
 const User = require('../../src/models/User');
+const uuid = require('uuid');
 
 const users = [
   {
-    _id: new ObjectID(),
+    _id: uuid.v4(),
     displayName: 'Peter Griffin with Facebook',
     familyName: 'Griffin',
     givenName: 'Peter',
@@ -32,7 +32,7 @@ const users = [
     }
   },
   {
-    _id: new ObjectID(),
+    _id: uuid.v4(),
     displayName: 'Peter Griffin with Google',
     familyName: 'Griffin',
     givenName: 'Peter',

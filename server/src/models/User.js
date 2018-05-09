@@ -2,36 +2,47 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys').get(process.env.NODE_ENV);
+const uuid = require('uuid');
 
 const userSchema = new Schema({
+  _id: {
+    type: String,
+    required: true,
+    default: () => uuid.v4()
+  },
   displayName: {
     type: String,
     minlength: 1,
     maxlength: 50,
-    required: true
+    required: true,
+    trim: true
   },
   familyName: {
     type: String,
-    maxlength: 50
+    maxlength: 50,
+    trim: true
   },
   givenName: {
     type: String,
-    maxlength: 50
+    maxlength: 50,
+    trim: true
   },
   middleName: {
     type: String,
-    maxlength: 50
+    maxlength: 50,
+    trim: true
   },
   email: {
     type: String,
     trim: true,
-    unique: 1
+    unique: true
   },
   avatarUrl: String,
   gender: String,
   language: String,
   role: {
     type: Number,
+    required: true,
     default: 0
   },
   token: String,
@@ -65,16 +76,13 @@ const userSchema = new Schema({
   },
   settingId: {
     type: String
-  },
-  apikeyId: {
-    type: String
   }
 });
 
 userSchema.methods.generateToken = function() {
   let user = this;
 
-  const token = jwt.sign(user._id.toHexString(), keys.tokenSecret);
+  const token = jwt.sign(user._id, keys.tokenSecret);
 
   user.token = token;
 
