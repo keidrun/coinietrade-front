@@ -2,9 +2,7 @@ const { checkSchema, validationResult } = require('express-validator/check');
 const { isEmpty, isEmail } = require('validator');
 
 const customChecks = {
-  isEmptyOrEmail: params => {
-    return isEmpty(params) ? true : isEmail(params);
-  }
+  isEmptyOrEmail: params => (isEmpty(params) ? true : isEmail(params)),
 };
 
 const validateUserSchema = checkSchema({
@@ -12,37 +10,40 @@ const validateUserSchema = checkSchema({
     in: ['body'],
     isLength: {
       options: { min: 1, max: 50 },
-      errorMessage: 'The length of displayName must be between 1 and 50.'
+      errorMessage: 'The length of displayName must be between 1 and 50.',
     },
-    errorMessage: 'The format of displayName was wrong.'
+    errorMessage: 'The format of displayName was wrong.',
   },
   email: {
     optional: true,
     in: ['body'],
     custom: {
-      options: params => customChecks.isEmptyOrEmail(params)
+      options: params => customChecks.isEmptyOrEmail(params),
     },
-    errorMessage: 'The format of email was wrong.'
+    errorMessage: 'The format of email was wrong.',
   },
   gender: {
     optional: true,
     in: ['body'],
     isIn: {
-      options: [['male', 'female']]
+      options: [['male', 'female']],
     },
-    errorMessage: 'The format of gender was wrong.'
+    errorMessage: 'The format of gender was wrong.',
   },
   language: {
     optional: true,
     in: ['body'],
     isIn: {
-      options: [['en', 'jp']]
+      options: [['en', 'jp']],
     },
-    errorMessage: 'The format of language was wrong.'
-  }
+    errorMessage: 'The format of language was wrong.',
+  },
 });
 
+/* eslint-disable consistent-return */
 const handleValidationErrors = (req, res, next) => {
+  /* eslint-enable consistent-return */
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });
@@ -52,5 +53,5 @@ const handleValidationErrors = (req, res, next) => {
 
 module.exports = {
   validateUserSchema,
-  handleValidationErrors
+  handleValidationErrors,
 };

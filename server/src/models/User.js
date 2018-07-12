@@ -1,41 +1,42 @@
 const mongoose = require('mongoose');
+const uuid = require('uuid');
+
 const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys').get(process.env.NODE_ENV);
-const uuid = require('uuid');
 
 const userSchema = new Schema({
   _id: {
     type: String,
     required: true,
-    default: () => uuid.v4()
+    default: () => uuid.v4(),
   },
   displayName: {
     type: String,
     minlength: 1,
     maxlength: 50,
     required: true,
-    trim: true
+    trim: true,
   },
   familyName: {
     type: String,
     maxlength: 50,
-    trim: true
+    trim: true,
   },
   givenName: {
     type: String,
     maxlength: 50,
-    trim: true
+    trim: true,
   },
   middleName: {
     type: String,
     maxlength: 50,
-    trim: true
+    trim: true,
   },
   email: {
     type: String,
     trim: true,
-    unique: true
+    unique: true,
   },
   avatarUrl: String,
   gender: String,
@@ -43,7 +44,7 @@ const userSchema = new Schema({
   role: {
     type: Number,
     required: true,
-    default: 0
+    default: 0,
   },
   token: String,
   facebook: {
@@ -54,11 +55,11 @@ const userSchema = new Schema({
     name: {
       familyName: String,
       givenName: String,
-      middleName: String
+      middleName: String,
     },
     email: String,
     avatarUrl: String,
-    gender: String
+    gender: String,
   },
   google: {
     accessToken: String,
@@ -67,20 +68,20 @@ const userSchema = new Schema({
     displayName: String,
     name: {
       familyName: String,
-      givenName: String
+      givenName: String,
     },
     email: String,
     avatarUrl: String,
     gender: String,
-    language: String
+    language: String,
   },
   settingId: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-userSchema.methods.generateToken = function() {
-  let user = this;
+userSchema.methods.generateToken = function generateToken() {
+  const user = this;
 
   const token = jwt.sign(user._id, keys.tokenSecret);
 
@@ -96,20 +97,21 @@ userSchema.methods.generateToken = function() {
   });
 };
 
-userSchema.statics.findByToken = function(token, cb) {
-  let user = this;
+userSchema.statics.findByToken = function findByToken(token, cb) {
+  const user = this;
 
-  jwt.verify(token, keys.tokenSecret, function(err, decodedId) {
-    user.findOne({ _id: decodedId, token: token }, function(err, user) {
+  jwt.verify(token, keys.tokenSecret, (err, decodedId) => {
+    /* eslint-disable consistent-return */
+    user.findOne({ _id: decodedId, token }, (err, finedUser) => {
+      /* eslint-enable consistent-return */
       if (err) return cb(err);
-
-      cb(null, user);
+      cb(null, finedUser);
     });
   });
 };
 
-userSchema.methods.deleteToken = function() {
-  let user = this;
+userSchema.methods.deleteToken = function deleteToken() {
+  const user = this;
 
   return new Promise(async (resolve, reject) => {
     try {

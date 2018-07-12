@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const auth = require('../../middleware/auth');
 const {
   validateUserSchema,
-  handleValidationErrors
+  handleValidationErrors,
 } = require('../../middleware/validationHandlers');
 
 const RESOURCE_NAME = 'user';
@@ -18,9 +18,9 @@ module.exports = app => {
       res.status(400).json({
         errors: {
           route: {
-            msg: err.message
-          }
-        }
+            msg: err.message,
+          },
+        },
       });
     }
   });
@@ -36,20 +36,20 @@ module.exports = app => {
           req.user._id,
           req.body,
           {
-            new: true
-          }
+            new: true,
+          },
         );
         res.send(updatedUser);
       } catch (err) {
         res.status(400).json({
           errors: {
             route: {
-              msg: err.message
-            }
-          }
+              msg: err.message,
+            },
+          },
         });
       }
-    }
+    },
   );
 
   app.delete(URI, auth, async (req, res) => {
@@ -60,9 +60,9 @@ module.exports = app => {
       res.status(400).json({
         errors: {
           route: {
-            msg: err.message
-          }
-        }
+            msg: err.message,
+          },
+        },
       });
     }
   });

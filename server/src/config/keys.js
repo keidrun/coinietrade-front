@@ -13,7 +13,7 @@ const config = {
     googleClientSecret: process.env.PROD_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.PROD_MEETUP_API_KEY,
     encryptKey: process.env.PROD_ENCRYPT_KEY,
-    proxyURL: process.env.PROD_PROXY_URL
+    proxyURL: process.env.PROD_PROXY_URL,
   },
   staging: {
     mongoURL: process.env.STAGING_MONGO_URI,
@@ -25,7 +25,7 @@ const config = {
     googleClientSecret: process.env.STAGING_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.STAGING_MEETUP_API_KEY,
     encryptKey: process.env.STAGING_ENCRYPT_KEY,
-    proxyURL: process.env.STAGING_PROXY_URL
+    proxyURL: process.env.STAGING_PROXY_URL,
   },
   ci: {
     mongoURL: process.env.PRE_MONGO_URI,
@@ -37,7 +37,7 @@ const config = {
     googleClientSecret: process.env.PRE_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.PRE_MEETUP_API_KEY,
     encryptKey: process.env.PRE_ENCRYPT_KEY,
-    proxyURL: process.env.PRE_PROXY_URL
+    proxyURL: process.env.PRE_PROXY_URL,
   },
   test: {
     mongoURL: process.env.TEST_MONGO_URI,
@@ -49,7 +49,7 @@ const config = {
     googleClientSecret: process.env.TEST_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.TEST_MEETUP_API_KEY,
     encryptKey: process.env.TEST_ENCRYPT_KEY,
-    proxyURL: process.env.TEST_PROXY_URL
+    proxyURL: process.env.TEST_PROXY_URL,
   },
   default: {
     mongoURL: process.env.DEV_MONGO_URI,
@@ -61,8 +61,8 @@ const config = {
     googleClientSecret: process.env.DEV_GOOGLE_CLIENT_SECRET,
     meetupApiKey: process.env.DEV_MEETUP_API_KEY,
     encryptKey: process.env.DEV_ENCRYPT_KEY,
-    proxyURL: process.env.DEV_PROXY_URL
-  }
+    proxyURL: process.env.DEV_PROXY_URL,
+  },
 };
 
 module.exports.get = function get(env) {
