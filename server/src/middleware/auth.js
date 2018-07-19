@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const keys = require('../config/keys').get(process.env.NODE_ENV);
+const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const auth = (req, res, next) => {
   const token = req.cookies[keys.cookieKey];

@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const keys = require('./config/keys').get(process.env.NODE_ENV);
 const helmet = require('helmet');
+const keys = require('../config/keys').get(process.env.NODE_ENV);
 
 const errorHandler = require('./middleware/errorHandler');
 
@@ -15,7 +15,10 @@ const server = http.createServer(app);
 
 require('./services/passportStrategies');
 
-mongoose.connect(process.env.MONGODB_URI || keys.mongoURL);
+mongoose.connect(
+  process.env.MONGODB_URI || keys.mongoURL,
+  { useNewUrlParser: true },
+);
 
 app.use(
   helmet({
@@ -25,8 +28,8 @@ app.use(
     hsts: true,
     ieNoOpen: true,
     noSniff: true,
-    xssFilter: true
-  })
+    xssFilter: true,
+  }),
 );
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -42,10 +45,11 @@ if (
 ) {
   app.use(express.static('client/build'));
 
+  // eslint-disable-next-line global-require
   const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(
-      path.resolve(__dirname, '../../client', 'build', 'index.html')
+      path.resolve(__dirname, '../../client', 'build', 'index.html'),
     );
   });
 }

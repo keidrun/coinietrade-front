@@ -1,6 +1,5 @@
-/* eslint-disable */
+// eslint-disable-next-line
 require('dotenv').config();
-/* eslint-enable */
 
 const config = {
   production: {

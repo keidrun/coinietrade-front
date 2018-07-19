@@ -3,7 +3,7 @@ const uuid = require('uuid');
 
 const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
-const keys = require('../config/keys').get(process.env.NODE_ENV);
+const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const userSchema = new Schema({
   _id: {

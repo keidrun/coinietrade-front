@@ -1,7 +1,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('../config/keys').get(process.env.NODE_ENV);
+const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 

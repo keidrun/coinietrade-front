@@ -1,6 +1,14 @@
-const expect = require('chai').expect;
 const User = require('../../src/models/User');
 const uuid = require('uuid');
+const { setupDatabase, teardownDatabase } = require('../helpers/databaseHelper');
+
+beforeAll(async () => {
+  await setupDatabase();
+});
+
+beforeEach(async () => {
+  await User.remove({});
+});
 
 const users = [
   {
@@ -61,39 +69,32 @@ const users = [
   }
 ];
 
-beforeEach(() => {
-  return User.remove({});
-});
-
 describe('User model', () => {
-  it('should save a user', () => {
+  test('should save a user', async() => {
     const user = new User(users[0]);
 
-    expect(user.isNew).to.be.true;
-    return user.save().then(() => {
-      expect(user.isNew).to.be.false;
-    });
+    expect(user.isNew).toBeTruthy();
+    const savedUser = await user.save();
+    expect(savedUser.isNew).toBeFalsy();
   });
 
-  it('should find a facebook user', () => {
+  test('should find a facebook user', async() => {
     const user = new User(users[0]);
     const userId = users[0]._id;
 
-    return user.save().then(() => {
-      return User.findById(userId).then(user => {
-        expect(user.displayName).to.equal('Peter Griffin with Facebook');
-      });
-    });
+    const savedUser = await user.save();
+    const foundUser = await User.findById(userId);
+
+    expect(foundUser.displayName).toBe('Peter Griffin with Facebook');
   });
 
-  it('should find a google user', () => {
+  test('should find a google user', async() => {
     const user = new User(users[1]);
     const userId = users[1]._id;
 
-    return user.save().then(() => {
-      return User.findById(userId).then(user => {
-        expect(user.displayName).to.equal('Peter Griffin with Google');
-      });
-    });
+    const savedUser = await user.save();
+    const foundUser = await User.findById(userId);
+
+    expect(foundUser.displayName).toBe('Peter Griffin with Google');
   });
 });
