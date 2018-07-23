@@ -5,7 +5,10 @@ const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 
-const User = require('../models/User');
+const { User } = require('../models/User');
+const { BackendApiClient } = require('../utils/BackendApiClient');
+
+const apiClient = new BackendApiClient();
 
 passport.serializeUser((user, done) => {
   done(null, user._id);
@@ -47,17 +50,14 @@ passport.use(
               accessToken,
               refreshToken,
               id: facebookId,
-              displayName: profile.displayName,
-              name: {
-                familyName: profile.name.familyName,
-                givenName: profile.name.givenName,
-                middleName: profile.name.middleName,
-              },
-              email: profile.email,
-              avatarUrl: profile.profileUrl,
-              gender: profile.gender,
             },
           }).save();
+
+          // Add Policy
+          await apiClient.addPolicy({
+            userId: newUser._id,
+          });
+
           const passedUser = await newUser.generateToken();
           done(null, passedUser);
         }
@@ -96,17 +96,14 @@ passport.use(
               accessToken,
               refreshToken,
               id: profile.id,
-              displayName: profile.displayName,
-              name: {
-                familyName: profile.name.familyName,
-                givenName: profile.name.givenName,
-              },
-              email: profile.emails[0].value,
-              avatarUrl: profile.photos[0].value,
-              gender: profile.gender,
-              language: profile.language,
             },
           }).save();
+
+          // Add Policy
+          await apiClient.addPolicy({
+            userId: newUser._id,
+          });
+
           const passedUser = await newUser.generateToken();
           done(null, passedUser);
         }

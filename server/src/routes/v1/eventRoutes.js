@@ -27,7 +27,7 @@ module.exports = app => {
         }&photo-host=public&page=${PAGE}&radius=${RADIUS_MILE}&order=time${searchText}${latitude}${longitude}`,
       );
 
-      res.send({
+      return res.send({
         total: response.data.events.length,
         events: response.data.events.slice(begin, end).map(event => ({
           id: event.id,
@@ -53,7 +53,7 @@ module.exports = app => {
         })),
       });
     } catch (err) {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
           events: {
             msg: err.message,

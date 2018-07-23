@@ -40,7 +40,7 @@ const Landing = () => (
 
       <footer className={styles.footer}>
         &copy; 2018 Keisuke Sasaki.&nbsp;&nbsp;&nbsp;&nbsp;Please send your
-        feedback to &nbsp;&nbsp;<a href="mailto:coinietradefeedback@gmail.com?subject=[FEEDBACK]">
+        feedback to &nbsp;&nbsp;<a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">
           <FontAwesome name="fas fa-envelope fa-2x" />
         </a>
       </footer>

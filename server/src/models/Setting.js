@@ -30,4 +30,4 @@ const settingSchema = new Schema({
 
 const Setting = mongoose.model('settings', settingSchema);
 
-module.exports = Setting;
+module.exports = { Setting };

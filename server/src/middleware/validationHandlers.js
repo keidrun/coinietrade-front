@@ -1,5 +1,6 @@
 const { checkSchema, validationResult } = require('express-validator/check');
 const { isEmpty, isEmail } = require('validator');
+const { GENDER, LANGUAGE } = require('../models/User');
 
 const customChecks = {
   isEmptyOrEmail: params => (isEmpty(params) ? true : isEmail(params)),
@@ -26,7 +27,7 @@ const validateUserSchema = checkSchema({
     optional: true,
     in: ['body'],
     isIn: {
-      options: [['male', 'female']],
+      options: [Object.values(GENDER)],
     },
     errorMessage: 'The format of gender was wrong.',
   },
@@ -34,16 +35,14 @@ const validateUserSchema = checkSchema({
     optional: true,
     in: ['body'],
     isIn: {
-      options: [['en', 'jp']],
+      options: [Object.values(LANGUAGE)],
     },
     errorMessage: 'The format of language was wrong.',
   },
 });
 
-/* eslint-disable consistent-return */
+// eslint-disable-next-line consistent-return
 const handleValidationErrors = (req, res, next) => {
-  /* eslint-enable consistent-return */
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.mapped() });

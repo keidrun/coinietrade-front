@@ -46,7 +46,7 @@ export default function(ComposedClass, shouldReload) {
       if (this.state.loading) {
         return (
           <div className={styles.loading}>
-            <CircularProgress size={180} thickness={10} color="#f0f0f0" />
+            <CircularProgress size={180} thickness={10} color="#000000" />
           </div>
         );
       }

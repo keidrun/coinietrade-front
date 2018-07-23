@@ -13,6 +13,8 @@ const config = {
     meetupApiKey: process.env.PROD_MEETUP_API_KEY,
     encryptKey: process.env.PROD_ENCRYPT_KEY,
     proxyURL: process.env.PROD_PROXY_URL,
+    endpointApiURL: process.env.PROD_ENDPOINT_API_URL,
+    endpointApiKey: process.env.PROD_ENDPOINT_API_KEY,
   },
   staging: {
     mongoURL: process.env.STAGING_MONGO_URI,
@@ -25,6 +27,8 @@ const config = {
     meetupApiKey: process.env.STAGING_MEETUP_API_KEY,
     encryptKey: process.env.STAGING_ENCRYPT_KEY,
     proxyURL: process.env.STAGING_PROXY_URL,
+    endpointApiURL: process.env.STAGING_ENDPOINT_API_URL,
+    endpointApiKey: process.env.STAGING_ENDPOINT_API_KEY,
   },
   ci: {
     mongoURL: process.env.PRE_MONGO_URI,
@@ -37,6 +41,8 @@ const config = {
     meetupApiKey: process.env.PRE_MEETUP_API_KEY,
     encryptKey: process.env.PRE_ENCRYPT_KEY,
     proxyURL: process.env.PRE_PROXY_URL,
+    endpointApiURL: process.env.PRE_ENDPOINT_API_URL,
+    endpointApiKey: process.env.PRE_ENDPOINT_API_KEY,
   },
   test: {
     mongoURL: process.env.TEST_MONGO_URI,
@@ -49,6 +55,8 @@ const config = {
     meetupApiKey: process.env.TEST_MEETUP_API_KEY,
     encryptKey: process.env.TEST_ENCRYPT_KEY,
     proxyURL: process.env.TEST_PROXY_URL,
+    endpointApiURL: process.env.TEST_ENDPOINT_API_URL,
+    endpointApiKey: process.env.TEST_ENDPOINT_API_KEY,
   },
   default: {
     mongoURL: process.env.DEV_MONGO_URI,
@@ -61,6 +69,8 @@ const config = {
     meetupApiKey: process.env.DEV_MEETUP_API_KEY,
     encryptKey: process.env.DEV_ENCRYPT_KEY,
     proxyURL: process.env.DEV_PROXY_URL,
+    endpointApiURL: process.env.DEV_ENDPOINT_API_URL,
+    endpointApiKey: process.env.DEV_ENDPOINT_API_KEY,
   },
 };
 

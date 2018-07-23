@@ -1,4 +1,4 @@
-const User = require('../../models/User');
+const { User } = require('../../models/User');
 const auth = require('../../middleware/auth');
 const {
   validateUserSchema,
@@ -13,9 +13,9 @@ module.exports = app => {
   app.get(URI, auth, async (req, res) => {
     try {
       const user = await User.findById(req.user._id);
-      res.send(user);
+      return res.send(user);
     } catch (err) {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
           route: {
             msg: err.message,
@@ -39,9 +39,9 @@ module.exports = app => {
             new: true,
           },
         );
-        res.send(updatedUser);
+        return res.send(updatedUser);
       } catch (err) {
-        res.status(400).json({
+        return res.status(400).json({
           errors: {
             route: {
               msg: err.message,
@@ -55,9 +55,9 @@ module.exports = app => {
   app.delete(URI, auth, async (req, res) => {
     try {
       const deletedUser = await User.findByIdAndRemove(req.user._id);
-      res.send(deletedUser);
+      return res.send(deletedUser);
     } catch (err) {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
           route: {
             msg: err.message,

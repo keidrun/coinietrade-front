@@ -1,6 +1,6 @@
-const User = require('../../src/models/User');
 const uuid = require('uuid');
-const { setupDatabase, teardownDatabase } = require('../helpers/databaseHelper');
+const { User } = require('../../src/models/User');
+const { setupDatabase } = require('../helpers/databaseHelper');
 
 beforeAll(async () => {
   await setupDatabase();
@@ -32,12 +32,12 @@ const users = [
       name: {
         familyName: 'Griffin',
         givenName: 'Peter',
-        middleName: 'Guy'
+        middleName: 'Guy',
       },
       email: 'peter@example.com',
       avatarUrl: 'https://somewhere/avatar',
-      gender: 'male'
-    }
+      gender: 'male',
+    },
   },
   {
     _id: uuid.v4(),
@@ -59,18 +59,18 @@ const users = [
       displayName: 'Peter Griffin',
       name: {
         familyName: 'Griffin',
-        givenName: 'Peter'
+        givenName: 'Peter',
       },
       email: 'peter@example.com',
       avatarUrl: 'https://somewhere/avatar',
       gender: 'male',
-      language: 'en'
-    }
-  }
+      language: 'en',
+    },
+  },
 ];
 
 describe('User model', () => {
-  test('should save a user', async() => {
+  test('should save a user', async () => {
     const user = new User(users[0]);
 
     expect(user.isNew).toBeTruthy();
@@ -78,21 +78,21 @@ describe('User model', () => {
     expect(savedUser.isNew).toBeFalsy();
   });
 
-  test('should find a facebook user', async() => {
+  test('should find a facebook user', async () => {
     const user = new User(users[0]);
     const userId = users[0]._id;
 
-    const savedUser = await user.save();
+    await user.save();
     const foundUser = await User.findById(userId);
 
     expect(foundUser.displayName).toBe('Peter Griffin with Facebook');
   });
 
-  test('should find a google user', async() => {
+  test('should find a google user', async () => {
     const user = new User(users[1]);
     const userId = users[1]._id;
 
-    const savedUser = await user.save();
+    await user.save();
     const foundUser = await User.findById(userId);
 
     expect(foundUser.displayName).toBe('Peter Griffin with Google');

@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const { User } = require('../models/User');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const auth = (req, res, next) => {

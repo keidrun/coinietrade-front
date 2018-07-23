@@ -35,9 +35,9 @@ module.exports = app => {
     try {
       await user.deleteToken();
       res.clearCookie(keys.cookieKey);
-      res.redirect('/');
+      return res.redirect('/');
     } catch (err) {
-      res.status(400).json({
+      return res.status(400).json({
         errors: {
           route: {
             msg: err.message,
@@ -60,7 +60,7 @@ module.exports = app => {
     passport.authenticate('facebook'),
     (req, res) => {
       const { token } = req.user;
-      res.cookie(keys.cookieKey, token).redirect('/dashboard');
+      return res.cookie(keys.cookieKey, token).redirect('/dashboard');
     },
   );
 
@@ -77,7 +77,7 @@ module.exports = app => {
     passport.authenticate('google'),
     (req, res) => {
       const { token } = req.user;
-      res.cookie(keys.cookieKey, token).redirect('/dashboard');
+      return res.cookie(keys.cookieKey, token).redirect('/dashboard');
     },
   );
 };

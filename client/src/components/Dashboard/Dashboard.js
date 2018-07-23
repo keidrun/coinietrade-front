@@ -110,7 +110,7 @@ class Dashboard extends Component {
         <h2>Dashboard</h2>
         <div className={styles.content}>
           <div className={styles.chart}>
-            <h4>Bid and Ask of Bitcoin</h4>
+            <h4>Bid and Ask of Bitcoin [JPY/BTC]</h4>
             <Chart
               xAxisNum={X_AXIS_NUM}
               bitflyerBids={this.state.bitflyer.bidPrices}

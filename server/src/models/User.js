@@ -5,12 +5,23 @@ const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
+const GENDER = {
+  MALE: 'male',
+  FEMALE: 'female',
+};
+
+const LANGUAGE = {
+  ENGLISH: 'en',
+  JAPANESE: 'jp',
+};
+
 const userSchema = new Schema({
   _id: {
     type: String,
     required: true,
     default: () => uuid.v4(),
   },
+  token: String,
   displayName: {
     type: String,
     minlength: 1,
@@ -39,41 +50,23 @@ const userSchema = new Schema({
     unique: true,
   },
   avatarUrl: String,
-  gender: String,
-  language: String,
-  role: {
-    type: Number,
-    required: true,
-    default: 0,
+  gender: {
+    type: String,
+    enum: Object.values(GENDER),
   },
-  token: String,
+  language: {
+    type: String,
+    enum: Object.values(LANGUAGE),
+  },
   facebook: {
     accessToken: String,
     refreshToken: String,
     id: String,
-    displayName: String,
-    name: {
-      familyName: String,
-      givenName: String,
-      middleName: String,
-    },
-    email: String,
-    avatarUrl: String,
-    gender: String,
   },
   google: {
     accessToken: String,
     refreshToken: String,
     id: String,
-    displayName: String,
-    name: {
-      familyName: String,
-      givenName: String,
-    },
-    email: String,
-    avatarUrl: String,
-    gender: String,
-    language: String,
   },
   settingId: {
     type: String,
@@ -101,9 +94,8 @@ userSchema.statics.findByToken = function findByToken(token, cb) {
   const user = this;
 
   jwt.verify(token, keys.tokenSecret, (err, decodedId) => {
-    /* eslint-disable consistent-return */
+    // eslint-disable-next-line consistent-return
     user.findOne({ _id: decodedId, token }, (err, finedUser) => {
-      /* eslint-enable consistent-return */
       if (err) return cb(err);
       cb(null, finedUser);
     });
@@ -125,4 +117,8 @@ userSchema.methods.deleteToken = function deleteToken() {
 
 const User = mongoose.model('users', userSchema);
 
-module.exports = User;
+module.exports = {
+  User,
+  GENDER,
+  LANGUAGE,
+};

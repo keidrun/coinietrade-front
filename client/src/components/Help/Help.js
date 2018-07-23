@@ -11,21 +11,21 @@ const Help = () => (
         <h4>Auther</h4>
         <p>
           <a
-            href="https://github.com/keidrun"
+            href="https://www.linkedin.com/in/keisuke-sasaki-03b124109/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Keisuke Sasaki
           </a>{' '}
-          (called 'Keid' in Github)
+          (Linkedin profile)
         </p>
         <p />
         <h4>Version</h4>
         <p>{TAG}</p>
-        <h4>Github</h4>
+        <h4>Documents</h4>
         <p>
           <a
-            href="https://github.com/keidrun/coinietrade-doc"
+            href="https://docs.coinietrade.com"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -36,7 +36,7 @@ const Help = () => (
         <p>I really need your feedback to make this site much better.</p>
         <p>
           Please send your email to{' '}
-          <a href="mailto:coinietradefeedback@gmail.com?subject=[FEEDBACK]">
+          <a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">
             HERE
           </a>!
         </p>
