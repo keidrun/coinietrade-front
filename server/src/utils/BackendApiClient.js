@@ -11,10 +11,10 @@ const DEFAULT_RULE_EXPIRED_DATE = moment()
   .toISOString();
 
 class BackendApiClient {
-  constructor(timeout) {
+  constructor(timeout = DEFAULT_API_TIMEOUT_MILLIS) {
     this.client = axios.create({
       baseURL: API_BASE_URL,
-      timeout: timeout || DEFAULT_API_TIMEOUT_MILLIS,
+      timeout,
       headers: { 'x-api-key': keys.endpointApiKey },
     });
   }
@@ -23,6 +23,7 @@ class BackendApiClient {
     this.client.defaults.adapter = adapter;
   }
 
+  // Policies API
   async getPolicies() {
     try {
       const response = await this.client.get(`/policies`);
@@ -66,6 +67,74 @@ class BackendApiClient {
   async updatePolicy(userId, data) {
     try {
       const response = await this.client.patch(`/policies/${userId}`, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Properties API
+  async getExchanges() {
+    try {
+      const response = await this.client.get('/exchanges');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Rules API
+  async getRules() {
+    try {
+      const response = await this.client.get('/rules');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRulesByUserId(userId) {
+    try {
+      const response = await this.client.get(`/rules/${userId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async addRule(data) {
+    try {
+      const response = await this.client.post('/rules', data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async removeRule(userId, ruleId) {
+    try {
+      const response = await this.client.delete(`/rules/${userId}/${ruleId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Secrets API
+  async addSecret(data) {
+    try {
+      const response = await this.client.post('/secrets', data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async removeSecret(userId, secretId) {
+    try {
+      const response = await this.client.delete(
+        `/secrets/${userId}/${secretId}`,
+      );
       return response;
     } catch (error) {
       throw error;

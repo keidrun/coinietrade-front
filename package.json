@@ -1,6 +1,6 @@
 {
   "name": "coinietrade-front",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CoinieTrade front end and Gateway.",
   "main": "index.js",
   "engines": {
