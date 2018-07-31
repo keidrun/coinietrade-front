@@ -1,4 +1,4 @@
-import { FETCH_EVENTS, CLEAR_EVENTS } from '../actions/types';
+import { FETCH_EVENTS, CLEAR_EVENTS } from '../actions';
 
 export default function(state = {}, action) {
   switch (action.type) {

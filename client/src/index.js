@@ -6,11 +6,10 @@ import reduxThunk from 'redux-thunk';
 
 import Routes from './components/Routes';
 import reducers from './reducers';
-
-const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <Routes />
   </Provider>,
   document.querySelector('#root')

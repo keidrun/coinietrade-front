@@ -1,4 +1,4 @@
-const { checkSchema, validationResult } = require('express-validator/check');
+const { checkSchema } = require('express-validator/check');
 const { isEmpty, isEmail } = require('validator');
 const { GENDER, LANGUAGE } = require('../models/User');
 
@@ -6,7 +6,7 @@ const customChecks = {
   isEmptyOrEmail: params => (isEmpty(params) ? true : isEmail(params)),
 };
 
-const validateUserSchema = checkSchema({
+const updateUserValidator = checkSchema({
   displayName: {
     in: ['body'],
     isLength: {
@@ -41,16 +41,4 @@ const validateUserSchema = checkSchema({
   },
 });
 
-// eslint-disable-next-line consistent-return
-const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.mapped() });
-  }
-  next();
-};
-
-module.exports = {
-  validateUserSchema,
-  handleValidationErrors,
-};
+module.exports = updateUserValidator;

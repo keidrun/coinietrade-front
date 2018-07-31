@@ -1,9 +1,7 @@
 const { User } = require('../../models/User');
 const auth = require('../../middleware/auth');
-const {
-  validateUserSchema,
-  handleValidationErrors,
-} = require('../../middleware/validationHandlers');
+const handleValidationErrors = require('../../middleware/handleValidationErrors');
+const { updateUserValidator } = require('../../validators');
 
 const RESOURCE_NAME = 'user';
 const VERSION = 'v1';
@@ -16,11 +14,12 @@ module.exports = app => {
       return res.send(user);
     } catch (err) {
       return res.status(400).json({
-        errors: {
-          route: {
-            msg: err.message,
+        errors: [
+          {
+            message: err.message,
+            errorType: 'clientError',
           },
-        },
+        ],
       });
     }
   });
@@ -28,7 +27,7 @@ module.exports = app => {
   app.put(
     URI,
     auth,
-    validateUserSchema,
+    updateUserValidator,
     handleValidationErrors,
     async (req, res) => {
       try {
@@ -42,11 +41,12 @@ module.exports = app => {
         return res.send(updatedUser);
       } catch (err) {
         return res.status(400).json({
-          errors: {
-            route: {
-              msg: err.message,
+          errors: [
+            {
+              message: err.message,
+              errorType: 'clientError',
             },
-          },
+          ],
         });
       }
     },
@@ -58,11 +58,12 @@ module.exports = app => {
       return res.send(deletedUser);
     } catch (err) {
       return res.status(400).json({
-        errors: {
-          route: {
-            msg: err.message,
+        errors: [
+          {
+            message: err.message,
+            errorType: 'clientError',
           },
-        },
+        ],
       });
     }
   });

@@ -3,11 +3,12 @@ const errorHandler = (err, req, res, next) => {
     return next(err);
   }
   return res.status(500).json({
-    errors: {
-      route: {
-        msg: err.message,
+    errors: [
+      {
+        message: err.message,
+        errorType: 'serverError',
       },
-    },
+    ],
   });
 };
 

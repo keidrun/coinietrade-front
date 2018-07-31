@@ -11,11 +11,12 @@ module.exports = app => {
     const { user } = req;
     if (!user) {
       return res.status(404).json({
-        errors: {
-          route: {
-            msg: 'Not the user data found.',
+        errors: [
+          {
+            message: 'Not the user data found.',
+            errorType: 'clientError',
           },
-        },
+        ],
       });
     }
 
@@ -38,11 +39,12 @@ module.exports = app => {
       return res.redirect('/');
     } catch (err) {
       return res.status(400).json({
-        errors: {
-          route: {
-            msg: err.message,
+        errors: [
+          {
+            message: err.message,
+            errorType: 'clientError',
           },
-        },
+        ],
       });
     }
   });

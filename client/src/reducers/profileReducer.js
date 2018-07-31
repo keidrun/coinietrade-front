@@ -1,4 +1,4 @@
-import { FETCH_PROFILE, UPDATE_PROFILE } from '../actions/types';
+import { FETCH_PROFILE, UPDATE_PROFILE } from '../actions';
 
 export default function(state = {}, action) {
   switch (action.type) {

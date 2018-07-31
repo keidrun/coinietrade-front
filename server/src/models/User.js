@@ -68,9 +68,6 @@ const userSchema = new Schema({
     refreshToken: String,
     id: String,
   },
-  settingId: {
-    type: String,
-  },
 });
 
 userSchema.methods.generateToken = function generateToken() {

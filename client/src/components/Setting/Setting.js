@@ -7,7 +7,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import Checkbox from 'material-ui/Checkbox';
 import { pinkA200 } from 'material-ui/styles/colors';
 
 const muiStyles = {
@@ -46,7 +45,7 @@ class Setting extends Component {
     }
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchProfile();
   }
 
@@ -72,13 +71,6 @@ class Setting extends Component {
           gender: this.checkedProperty(nextProfile, 'user', 'gender', 'male'),
           language: this.checkedProperty(nextProfile, 'user', 'language', 'en')
         },
-        setting: {
-          chartSet: this.checkedProperty(nextProfile, 'setting', 'chartSet', {
-            bitflyerChart: true,
-            coincheckChart: true,
-            zaifChart: true
-          })
-        }
       }
     });
   }
@@ -99,18 +91,6 @@ class Setting extends Component {
       ...this.state.formdata
     };
     newFormdata.user[name] = value;
-
-    this.setState({
-      formdata: newFormdata
-    });
-  };
-
-  handleCheckbox = (event, name) => {
-    let newFormdata = {
-      ...this.state.formdata
-    };
-    newFormdata.setting.chartSet[name] =
-      event.target.value === 'true' ? false : true;
 
     this.setState({
       formdata: newFormdata
@@ -164,30 +144,6 @@ class Setting extends Component {
             </div>
 
             <div className={styles.select_field}>
-              <h4>Gender</h4>
-              <br />
-              <SelectField
-                underlineFocusStyle={muiStyles.underlineStyle}
-                value={this.state.formdata.user.gender}
-                onChange={(event, index, value) =>
-                  this.handleSelectField(event, index, value, 'gender')
-                }
-                disabled={this.state.isDisabled}
-              >
-                <MenuItem
-                  className={styles.select_item}
-                  value="male"
-                  primaryText="Male"
-                />
-                <MenuItem
-                  className={styles.select_item}
-                  value="female"
-                  primaryText="Female"
-                />
-              </SelectField>
-            </div>
-
-            <div className={styles.select_field}>
               <h4>Language</h4>
               <br />
               <SelectField
@@ -211,46 +167,28 @@ class Setting extends Component {
               </SelectField>
             </div>
 
-            <div className={styles.checkbox_area}>
-              <section>
-                <h4>Chart</h4>
-                <br />
-                <Checkbox
-                  type="checkbox"
-                  name="chart"
-                  value={this.state.formdata.setting.chartSet.bitflyerChart}
-                  checked={this.state.formdata.setting.chartSet.bitflyerChart}
-                  onCheck={event => this.handleCheckbox(event, 'bitflyerChart')}
-                  disabled={this.state.isDisabled}
-                  label="bitflyer"
-                  labelPosition="left"
-                  className={styles.checkbox}
+                        <div className={styles.select_field}>
+              <h4>Gender</h4>
+              <br />
+              <SelectField
+                underlineFocusStyle={muiStyles.underlineStyle}
+                value={this.state.formdata.user.gender}
+                onChange={(event, index, value) =>
+                  this.handleSelectField(event, index, value, 'gender')
+                }
+                disabled={this.state.isDisabled}
+              >
+                <MenuItem
+                  className={styles.select_item}
+                  value="male"
+                  primaryText="Male"
                 />
-                <Checkbox
-                  type="checkbox"
-                  name="chart"
-                  value={this.state.formdata.setting.chartSet.coincheckChart}
-                  checked={this.state.formdata.setting.chartSet.coincheckChart}
-                  onCheck={event =>
-                    this.handleCheckbox(event, 'coincheckChart')
-                  }
-                  disabled={this.state.isDisabled}
-                  label="coincheck"
-                  labelPosition="left"
-                  className={styles.checkbox}
+                <MenuItem
+                  className={styles.select_item}
+                  value="female"
+                  primaryText="Female"
                 />
-                <Checkbox
-                  type="checkbox"
-                  name="chart"
-                  value={this.state.formdata.setting.chartSet.zaifChart}
-                  checked={this.state.formdata.setting.chartSet.zaifChart}
-                  onCheck={event => this.handleCheckbox(event, 'zaifChart')}
-                  disabled={this.state.isDisabled}
-                  label="zaif"
-                  labelPosition="left"
-                  className={styles.checkbox}
-                />
-              </section>
+              </SelectField>
             </div>
 
             <br />

@@ -1,22 +1,20 @@
 import axios from 'axios';
-import {
-  ERRORS,
-  FETCH_USER,
-  FETCH_EVENTS,
-  CLEAR_EVENTS,
-  FETCH_PROFILE,
-  UPDATE_PROFILE
-} from './types';
-
 import { BASE_URI } from '../utils/apiVersion';
+
+export const ERRORS = 'errors';
+export const FETCH_USER = 'fetch_user';
+export const FETCH_EVENTS = 'fetch_events';
+export const CLEAR_EVENTS = 'clear_events';
+export const FETCH_PROFILE = 'fetch_profile';
+export const UPDATE_PROFILE = 'update_profile';
 
 export const fetchUser = () => async dispatch => {
   try {
     const res = await axios.get(`${BASE_URI}/auth`);
     dispatch({ type: FETCH_USER, payload: res.data });
-  } catch (err) {
+  } catch (error) {
     dispatch({ type: FETCH_USER, payload: false });
-    dispatch({ type: ERRORS, payload: err.response.data });
+    dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
 
@@ -43,9 +41,9 @@ export const fetchEvents = (
         }
       });
     }
-  } catch (err) {
+  } catch (error) {
     dispatch({ type: FETCH_EVENTS, payload: {} });
-    dispatch({ type: ERRORS, payload: err.response.data });
+    dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
 
@@ -61,50 +59,30 @@ export const clearEvents = () => dispatch => {
 
 export const fetchProfile = () => async dispatch => {
   try {
-    const resUser = await axios.get(`${BASE_URI}/user`);
-    try {
-      const resSetting = await axios.get(`${BASE_URI}/setting`);
-      dispatch({
-        type: FETCH_PROFILE,
-        payload: {
-          user: resUser.data,
-          setting: { chartSet: resSetting.data.chartSet }
-        }
-      });
-    } catch (err) {
-      dispatch({
-        type: FETCH_PROFILE,
-        payload: {
-          user: resUser.data,
-          setting: {}
-        }
-      });
-      dispatch({ type: ERRORS, payload: err.response.data });
-    }
-  } catch (err) {
+    const response = await axios.get(`${BASE_URI}/user`);
+    dispatch({
+      type: FETCH_PROFILE,
+      payload: {
+        user: response.data,
+      }
+    });
+  } catch (error) {
     dispatch({ type: FETCH_PROFILE, payload: {} });
-    dispatch({ type: ERRORS, payload: err.response.data });
+    dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
 
 export const updateProfile = profile => async dispatch => {
   try {
-    const resUser = await axios.put(`${BASE_URI}/user`, profile.user);
-    let resSetting;
-    if (!resUser.data.settingId) {
-      resSetting = await axios.post(`${BASE_URI}/setting`, profile.setting);
-    } else {
-      resSetting = await axios.put(`${BASE_URI}/setting`, profile.setting);
-    }
+    const response = await axios.put(`${BASE_URI}/user`, profile.user);
     dispatch({
       type: UPDATE_PROFILE,
       payload: {
-        user: resUser.data,
-        setting: resSetting.data
+        user: response.data,
       }
     });
-  } catch (err) {
+  } catch (error) {
     dispatch({ type: UPDATE_PROFILE, payload: profile });
-    dispatch({ type: ERRORS, payload: err.response.data });
+    dispatch({ type: ERRORS, payload: error.response.data });
   }
 };

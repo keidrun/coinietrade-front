@@ -20,7 +20,7 @@ class Events extends Component {
     }
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const position = await getPosition();
       this.setState({

@@ -54,11 +54,12 @@ module.exports = app => {
       });
     } catch (err) {
       return res.status(400).json({
-        errors: {
-          events: {
-            msg: err.message,
+        errors: [
+          {
+            message: err.message,
+            errorType: 'clientError',
           },
-        },
+        ],
       });
     }
   });

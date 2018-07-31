@@ -8,10 +8,10 @@ import CircularProgress from 'material-ui/CircularProgress';
 /**
  * Auth check and reload HOC
  * @param {*} ComposedClass every component that needs auth
- * @param {*} shouldReload null -> nothing, false -> reload to Dashboard if logged, true -> reload to Landing if NOT logged
+ * @param {*} shouldComponentReload null -> nothing, false -> reload to Dashboard if logged, true -> reload to Landing if NOT logged
  * @author Keid
  */
-export default function(ComposedClass, shouldReload) {
+export default function(ComposedClass, shouldComponentReload) {
   class AuthCheckAndReload extends Component {
     state = {
       loading: true
@@ -30,12 +30,12 @@ export default function(ComposedClass, shouldReload) {
         case null: // API not working
           return;
         case false:
-          if (shouldReload) {
+          if (shouldComponentReload) {
             return this.props.history.push('/');
           }
           break;
         default:
-          if (shouldReload === false) {
+          if (shouldComponentReload === false) {
             return this.props.history.push('/dashboard');
           }
           break;
