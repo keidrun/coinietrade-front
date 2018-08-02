@@ -12,7 +12,7 @@ const GENDER = {
 
 const LANGUAGE = {
   ENGLISH: 'en',
-  JAPANESE: 'jp',
+  JAPANESE: 'ja',
 };
 
 const userSchema = new Schema({
@@ -57,6 +57,7 @@ const userSchema = new Schema({
   language: {
     type: String,
     enum: Object.values(LANGUAGE),
+    default: LANGUAGE.ENGLISH,
   },
   facebook: {
     accessToken: String,

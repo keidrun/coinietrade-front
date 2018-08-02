@@ -7,8 +7,8 @@ const loginButtonStyles = {
   button: {
     margin: 12,
     width: 300,
-    height: 50
-  }
+    height: 50,
+  },
 };
 
 const Landing = () => (
@@ -16,7 +16,8 @@ const Landing = () => (
     <div className={styles.flex_wrapper}>
       <h2>Welcome to CoinieTrade !</h2>
       <p>
-        Bitcoin monitaring and trading site<br /> through other exchange sites.
+        Bitcoin monitaring and trading site
+        <br /> through other exchange sites.
       </p>
       <div className={styles.login_form}>
         <h3>Are you interested in Bitcoin? Sign up now!</h3>
@@ -40,7 +41,8 @@ const Landing = () => (
 
       <footer className={styles.footer}>
         &copy; 2018 Keisuke Sasaki.&nbsp;&nbsp;&nbsp;&nbsp;Please send your
-        feedback to &nbsp;&nbsp;<a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">
+        feedback to &nbsp;&nbsp;
+        <a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">
           <FontAwesome name="fas fa-envelope fa-2x" />
         </a>
       </footer>

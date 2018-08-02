@@ -10,11 +10,11 @@ const options = {
     yAxes: [
       {
         ticks: {
-          stepSize: 500
-        }
-      }
-    ]
-  }
+          stepSize: 500,
+        },
+      },
+    ],
+  },
 };
 
 const chartData = (
@@ -24,7 +24,7 @@ const chartData = (
   coincheckBids,
   coincheckAsks,
   zaifBids,
-  zaifAsks
+  zaifAsks,
 ) => {
   return {
     labels: labels(xAxisNum),
@@ -48,7 +48,7 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: bitflyerBids
+        data: bitflyerBids,
       },
       {
         label: '[Ask] bitflyer',
@@ -69,7 +69,7 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: bitflyerAsks
+        data: bitflyerAsks,
       },
       {
         label: '[Bid] coincheck',
@@ -90,7 +90,7 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: coincheckBids
+        data: coincheckBids,
       },
       {
         label: '[Ask] coincheck',
@@ -111,7 +111,7 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: coincheckAsks
+        data: coincheckAsks,
       },
       {
         label: '[Bid] zaif',
@@ -132,7 +132,7 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: zaifBids
+        data: zaifBids,
       },
       {
         label: '[Ask] zaif',
@@ -153,9 +153,9 @@ const chartData = (
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: zaifAsks
-      }
-    ]
+        data: zaifAsks,
+      },
+    ],
   };
 };
 
@@ -166,7 +166,7 @@ const Chart = ({
   coincheckBids,
   coincheckAsks,
   zaifBids,
-  zaifAsks
+  zaifAsks,
 }) => (
   <div>
     <Line
@@ -177,7 +177,7 @@ const Chart = ({
         coincheckBids,
         coincheckAsks,
         zaifBids,
-        zaifAsks
+        zaifAsks,
       )}
       options={options}
     />

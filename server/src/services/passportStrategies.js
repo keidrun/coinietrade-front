@@ -1,3 +1,4 @@
+const uuid = require('uuid');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -35,10 +36,17 @@ passport.use(
           const passedUser = await user.generateToken();
           done(null, passedUser);
         } else {
+          const userId = uuid.v4();
+          // Add Policy
+          await apiClient.addPolicy({
+            userId,
+          });
+
           // Sign up
           const facebookId = profile.id;
           const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
           const newUser = await new User({
+            _id: userId,
             displayName: profile.displayName,
             familyName: profile.name.familyName,
             givenName: profile.name.givenName,
@@ -52,11 +60,6 @@ passport.use(
               id: facebookId,
             },
           }).save();
-
-          // Add Policy
-          await apiClient.addPolicy({
-            userId: newUser._id,
-          });
 
           const passedUser = await newUser.generateToken();
           done(null, passedUser);
@@ -83,8 +86,15 @@ passport.use(
           const passedUser = await user.generateToken();
           done(null, passedUser);
         } else {
+          const userId = uuid.v4();
+          // Add Policy
+          await apiClient.addPolicy({
+            userId,
+          });
+
           // Sign up
           const newUser = await new User({
+            _id: userId,
             displayName: profile.displayName,
             familyName: profile.name.familyName,
             givenName: profile.name.givenName,
@@ -98,11 +108,6 @@ passport.use(
               id: profile.id,
             },
           }).save();
-
-          // Add Policy
-          await apiClient.addPolicy({
-            userId: newUser._id,
-          });
 
           const passedUser = await newUser.generateToken();
           done(null, passedUser);

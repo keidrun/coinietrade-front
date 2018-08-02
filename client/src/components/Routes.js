@@ -32,4 +32,7 @@ class Routes extends Component {
   }
 }
 
-export default connect(null, actions)(Routes);
+export default connect(
+  null,
+  actions,
+)(Routes);

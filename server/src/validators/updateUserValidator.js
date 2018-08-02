@@ -11,9 +11,9 @@ const updateUserValidator = checkSchema({
     in: ['body'],
     isLength: {
       options: { min: 1, max: 50 },
-      errorMessage: 'The length of displayName must be between 1 and 50.',
+      errorMessage: 'The length of a displayName must be between 1 and 50.',
     },
-    errorMessage: 'The format of displayName was wrong.',
+    errorMessage: 'The format of an displayName was wrong.',
   },
   email: {
     optional: true,
@@ -21,7 +21,7 @@ const updateUserValidator = checkSchema({
     custom: {
       options: params => customChecks.isEmptyOrEmail(params),
     },
-    errorMessage: 'The format of email was wrong.',
+    errorMessage: 'The format of an email was wrong.',
   },
   gender: {
     optional: true,
@@ -29,7 +29,7 @@ const updateUserValidator = checkSchema({
     isIn: {
       options: [Object.values(GENDER)],
     },
-    errorMessage: 'The format of gender was wrong.',
+    errorMessage: 'The format of a gender was wrong.',
   },
   language: {
     optional: true,
@@ -37,7 +37,7 @@ const updateUserValidator = checkSchema({
     isIn: {
       options: [Object.values(LANGUAGE)],
     },
-    errorMessage: 'The format of language was wrong.',
+    errorMessage: 'The format of a language was wrong.',
   },
 });
 

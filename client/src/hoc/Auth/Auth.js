@@ -14,7 +14,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 export default function(ComposedClass, shouldComponentReload) {
   class AuthCheckAndReload extends Component {
     state = {
-      loading: true
+      loading: true,
     };
 
     componentDidMount() {
@@ -59,5 +59,8 @@ export default function(ComposedClass, shouldComponentReload) {
     return { user };
   }
 
-  return connect(mapStateToProps, { fetchUser })(AuthCheckAndReload);
+  return connect(
+    mapStateToProps,
+    { fetchUser },
+  )(AuthCheckAndReload);
 }

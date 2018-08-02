@@ -12,5 +12,5 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Routes />
   </Provider>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

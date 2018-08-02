@@ -1,39 +1,39 @@
 .help {
-    margin: 0 auto;
-    padding-top: 20px;
-    height: 100%;
+  margin: 0 auto;
+  padding-top: 20px;
+  height: 100%;
 }
 
 .flex_wrapper {
-    display: flex;
-    flex-wrap: 'wrap';
-    justify-content: center;
-    box-sizing: border-box;
-    align-items: center;
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .content {
-    margin-top: 20px;
-    border: dashed 5px #000;
-    padding: 20px;
-    background-color: white;
-    width: 600px;
+  margin-top: 20px;
+  border: dashed 5px #000;
+  padding: 20px;
+  background-color: white;
+  width: 1000px;
 }
 
 .content h4 {
-    text-align: left;
+  text-align: left;
 }
 
 .content p {
-    font-size: 3rem;
-    margin: 20px;
+  font-size: 3rem;
+  margin: 20px;
 }
 
 .content a {
-    font-size: 3rem;
-    color: #ff4081;
+  font-size: 3rem;
+  color: #ff4081;
 }
 
 .content a:hover {
-    color: #ff80ab;
+  color: #ff80ab;
 }

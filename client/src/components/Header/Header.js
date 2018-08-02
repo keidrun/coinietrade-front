@@ -57,4 +57,7 @@ function mapStateToProps({ user }) {
   return { user };
 }
 
-export default connect(mapStateToProps, { fetchUser })(Header);
+export default connect(
+  mapStateToProps,
+  { fetchUser },
+)(Header);

@@ -19,7 +19,7 @@ class Logged extends Component {
       {
         icon: 'home',
         text: 'Dashboard',
-        link: '/dashboard'
+        link: '/dashboard',
       },
       // {
       //   icon: 'exchange',
@@ -29,18 +29,18 @@ class Logged extends Component {
       {
         icon: 'meetup',
         text: 'Meetup',
-        link: '/meetup'
+        link: '/meetup',
       },
       {
         icon: 'cog',
         text: 'Settings',
-        link: '/settings'
+        link: '/settings',
       },
       {
         icon: 'info-circle',
         text: 'Help',
-        link: '/help'
-      }
+        link: '/help',
+      },
     ];
 
     return menuItems.map((item, i) => {

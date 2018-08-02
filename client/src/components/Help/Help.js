@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Help.css';
 
-const TAG = '0.0.1';
+const TAG = '0.1.0';
 
 const Help = () => (
   <div className={styles.help}>
@@ -11,13 +11,13 @@ const Help = () => (
         <h4>Auther</h4>
         <p>
           <a
-            href="https://www.linkedin.com/in/keisuke-sasaki-03b124109/"
+            href="https://github.com/keidrun"
             target="_blank"
             rel="noopener noreferrer"
           >
             Keisuke Sasaki
           </a>{' '}
-          (Linkedin profile)
+          (GitHub profile)
         </p>
         <p />
         <h4>Version</h4>
@@ -36,9 +36,7 @@ const Help = () => (
         <p>I really need your feedback to make this site much better.</p>
         <p>
           Please send your email to{' '}
-          <a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">
-            HERE
-          </a>!
+          <a href="mailto:feedback@coinietrade.com?subject=[FEEDBACK]">HERE</a>!
         </p>
       </div>
     </div>

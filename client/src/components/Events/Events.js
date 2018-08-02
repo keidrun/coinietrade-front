@@ -16,8 +16,8 @@ class Events extends Component {
     loading: true,
     position: {
       latitude: '',
-      longitude: ''
-    }
+      longitude: '',
+    },
   };
 
   async componentDidMount() {
@@ -26,8 +26,8 @@ class Events extends Component {
       this.setState({
         position: {
           latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        }
+          longitude: position.coords.longitude,
+        },
       });
 
       this.props.fetchEvents(
@@ -35,7 +35,7 @@ class Events extends Component {
         this.state.position.latitude,
         this.state.position.longitude,
         0,
-        EVENTS_NUM
+        EVENTS_NUM,
       );
     } catch (err) {
       this.props.fetchEvents(SEARCH_TEXT, '', '', 0, EVENTS_NUM);
@@ -60,7 +60,7 @@ class Events extends Component {
       this.state.position.longitude,
       restartIndex,
       EVENTS_NUM,
-      this.props.events.events
+      this.props.events.events,
     );
   };
 
@@ -102,4 +102,7 @@ function mapStateToProps({ events }) {
   return { events };
 }
 
-export default connect(mapStateToProps, { fetchEvents, clearEvents })(Events);
+export default connect(
+  mapStateToProps,
+  { fetchEvents, clearEvents },
+)(Events);

@@ -11,11 +11,11 @@ if (
   process.env.NODE_ENV === 'integration'
 ) {
   socket = io({
-    path: `${BASE_URI}/socket`
+    path: `${BASE_URI}/socket`,
   });
 } else {
   socket = io('http://localhost:5000', {
-    path: `${BASE_URI}/socket`
+    path: `${BASE_URI}/socket`,
   });
 }
 
@@ -26,18 +26,18 @@ class Dashboard extends Component {
     bitflyer: {
       bidPrices: [],
       askPrices: [],
-      lastPrices: []
+      lastPrices: [],
     },
     coincheck: {
       bidPrices: [],
       askPrices: [],
-      lastPrices: []
+      lastPrices: [],
     },
     zaif: {
       bidPrices: [],
       askPrices: [],
-      lastPrices: []
-    }
+      lastPrices: [],
+    },
   };
 
   mapDataToCompanyObj = (data, companyName) => {
@@ -50,26 +50,26 @@ class Dashboard extends Component {
       askPrices = [...this.state[companyName].askPrices, data[companyName].ask];
       lastPrices = [
         ...this.state[companyName].lastPrices,
-        data[companyName].last
+        data[companyName].last,
       ];
     } else if (this.state[companyName].bidPrices.length !== 0) {
       bidPrices = [
         ...this.state[companyName].bidPrices,
         this.state[companyName].bidPrices[
           this.state[companyName].bidPrices.length - 1
-        ]
+        ],
       ];
       askPrices = [
         ...this.state[companyName].askPrices,
         this.state[companyName].askPrices[
           this.state[companyName].askPrices.length - 1
-        ]
+        ],
       ];
       lastPrices = [
         ...this.state[companyName].lastPrices,
         this.state[companyName].lastPrices[
           this.state[companyName].lastPrices.length - 1
-        ]
+        ],
       ];
     }
 
@@ -82,7 +82,7 @@ class Dashboard extends Component {
     return {
       bidPrices,
       askPrices,
-      lastPrices
+      lastPrices,
     };
   };
 
@@ -95,7 +95,7 @@ class Dashboard extends Component {
       this.setState({
         bitflyer: this.mapDataToCompanyObj(data, 'bitflyer'),
         coincheck: this.mapDataToCompanyObj(data, 'coincheck'),
-        zaif: this.mapDataToCompanyObj(data, 'zaif')
+        zaif: this.mapDataToCompanyObj(data, 'zaif'),
       });
     });
 

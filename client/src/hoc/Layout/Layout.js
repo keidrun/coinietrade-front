@@ -13,11 +13,11 @@ import styles from './Layout.css';
 
 const muiTheme = getMuiTheme(customMuiTheme, {
   appBar: {
-    height: 80
+    height: 80,
   },
   flatButton: {
-    buttonFilterColor: white
-  }
+    buttonFilterColor: white,
+  },
 });
 
 const Layout = props => (

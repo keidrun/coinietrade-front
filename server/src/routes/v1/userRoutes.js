@@ -30,6 +30,8 @@ module.exports = app => {
     updateUserValidator,
     handleValidationErrors,
     async (req, res) => {
+      // TODO Update Secret and Key
+
       try {
         const updatedUser = await User.findByIdAndUpdate(
           req.user._id,
