@@ -83,3 +83,4 @@ jobs:
           command: |
             heroku container:login
             yarn staging:deploy
+            yarn staging:release
