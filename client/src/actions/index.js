@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import axios from 'axios';
 import { BASE_URI } from '../utils/apiVersion';
 
@@ -8,12 +9,26 @@ export const CLEAR_EVENTS = 'clear_events';
 export const FETCH_PROFILE = 'fetch_profile';
 export const UPDATE_PROFILE = 'update_profile';
 
+function mapToArray(map, key) {
+  const arr = Object.values(map);
+  Object.keys(map).forEach((value, index) => {
+    arr[index][key] = value;
+  });
+  return arr;
+}
+
 export const fetchUser = () => async dispatch => {
   try {
-    const res = await axios.get(`${BASE_URI}/auth`);
-    dispatch({ type: FETCH_USER, payload: res.data });
+    const response = await axios.get(`${BASE_URI}/auth`);
+    dispatch({
+      type: FETCH_USER,
+      payload: response.data,
+    });
   } catch (error) {
-    dispatch({ type: FETCH_USER, payload: false });
+    dispatch({
+      type: FETCH_USER,
+      payload: false,
+    });
     // dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
@@ -27,22 +42,28 @@ export const fetchEvents = (
   list = null,
 ) => async dispatch => {
   try {
-    const res = await axios.get(
+    const response = await axios.get(
       `${BASE_URI}/events?text=${text}&lat=${lat}&lon=${lon}&index=${index}&num=${num}`,
     );
     if (!list) {
-      dispatch({ type: FETCH_EVENTS, payload: res.data });
+      dispatch({
+        type: FETCH_EVENTS,
+        payload: response.data,
+      });
     } else {
       dispatch({
         type: FETCH_EVENTS,
         payload: {
-          total: res.data.total,
-          events: [...list, ...res.data.events],
+          total: response.data.total,
+          events: [...list, ...response.data.events],
         },
       });
     }
   } catch (error) {
-    dispatch({ type: FETCH_EVENTS, payload: {} });
+    dispatch({
+      type: FETCH_EVENTS,
+      payload: {},
+    });
     // dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
@@ -60,20 +81,30 @@ export const clearEvents = () => dispatch => {
 export const fetchProfile = () => async dispatch => {
   try {
     const response = await axios.get(`${BASE_URI}/user`);
+    const user = response.data;
+    const { secrets } = user;
+    user.secrets = _.mapKeys(secrets, 'apiProvider');
+
     dispatch({
       type: FETCH_PROFILE,
       payload: {
-        user: response.data,
+        user: user,
       },
     });
   } catch (error) {
-    dispatch({ type: FETCH_PROFILE, payload: {} });
+    dispatch({
+      type: FETCH_PROFILE,
+      payload: {},
+    });
     // dispatch({ type: ERRORS, payload: error.response.data });
   }
 };
 
 export const updateProfile = ({ user }) => async dispatch => {
   try {
+    const { secrets } = user;
+    user.secrets = mapToArray(secrets, 'apiProvider');
+
     const response = await axios.put(`${BASE_URI}/user`, user);
     dispatch({
       type: UPDATE_PROFILE,
@@ -82,7 +113,10 @@ export const updateProfile = ({ user }) => async dispatch => {
       },
     });
   } catch (error) {
-    dispatch({ type: UPDATE_PROFILE, payload: { user } });
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: { user },
+    });
     // dispatch({ type: ERRORS, payload: error.response.data });
   }
 };

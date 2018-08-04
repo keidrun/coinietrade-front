@@ -1,6 +1,7 @@
 .setting {
   margin: 0 auto;
   padding-top: 20px;
+  padding-bottom: 40px;
   height: 100%;
 }
 
@@ -29,6 +30,12 @@
   display: inline;
 }
 
+.text_field h5 {
+  margin-left: 40px;
+  font-size: 2.5rem;
+  display: inline;
+}
+
 .text_field input {
   font-size: 4rem;
   text-align: center;
@@ -36,7 +43,6 @@
 
 .select_field {
   margin: 20px;
-  float: left;
 }
 
 .select_field h4 {

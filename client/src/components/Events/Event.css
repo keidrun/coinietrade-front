@@ -1,21 +1,21 @@
 .event {
-    margin: 0 auto;
-    padding-top: 20px;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
 .flex_wrapper {
-    display: flex;
-    flex-wrap: 'wrap';
-    justify-content: center;
-    box-sizing: border-box;
-    align-items: center;
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
 }
 
 .loadmore:hover {
-    background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .loading {
-    margin: 20px;
-    text-align: center;
+  margin: 20px;
+  text-align: center;
 }

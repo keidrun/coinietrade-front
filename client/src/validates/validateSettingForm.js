@@ -27,5 +27,37 @@ export function validateSettingForm(values) {
     errors.gender = 'Select a gender.';
   }
 
+  if (
+    values.bitflyerApiKey &&
+    (values.bitflyerApiKey.length < 10 || values.bitflyerApiKey.length > 50)
+  ) {
+    errors.bitflyerApiKey =
+      'The length of a api key must be between 10 and 50.';
+  }
+
+  if (
+    values.bitflyerApiSecret &&
+    (values.bitflyerApiSecret.length < 10 ||
+      values.bitflyerApiSecret.length > 50)
+  ) {
+    errors.bitflyerApiSecret =
+      'The length of a api secret must be between 10 and 50.';
+  }
+
+  if (
+    values.zaifApiKey &&
+    (values.zaifApiKey.length < 10 || values.zaifApiKey.length > 50)
+  ) {
+    errors.zaifApiKey = 'The length of a api key must be between 10 and 50.';
+  }
+
+  if (
+    values.zaifApiSecret &&
+    (values.zaifApiSecret.length < 10 || values.zaifApiSecret.length > 50)
+  ) {
+    errors.zaifApiSecret =
+      'The length of a api secret must be between 10 and 50.';
+  }
+
   return errors;
 }

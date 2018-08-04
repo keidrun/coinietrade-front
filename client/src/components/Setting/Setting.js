@@ -47,6 +47,10 @@ const GENDER = {
 };
 
 class Setting extends Component {
+  state = {
+    initialFormValues: {},
+  };
+
   componentDidMount() {
     this.props.fetchProfile();
   }
@@ -57,22 +61,58 @@ class Setting extends Component {
     }
   }
 
+  shouldComponentUpdate() {
+    return true;
+  }
+
   initializeFormValues(profile) {
     const { user } = profile;
+    const { secrets } = user;
     const initialValues = user
       ? {
           displayName: user.displayName,
           email: user.email,
           language: user.language,
           gender: user.gender,
+          bitflyerApiKey: secrets.bitflyer ? secrets.bitflyer.apiKeyTail : '',
+          bitflyerApiSecret: secrets.bitflyer
+            ? secrets.bitflyer.apiSecretTail
+            : '',
+          zaifApiKey: secrets.zaif ? secrets.zaif.apiKeyTail : '',
+          zaifApiSecret: secrets.zaif ? secrets.zaif.apiSecretTail : '',
         }
       : {};
     this.props.initialize(initialValues);
+    this.setState({ initialFormValues: initialValues });
   }
 
   onSubmit(values) {
-    const profile = { user: values };
-    this.props.updateProfile(profile);
+    const user = values;
+    const secrets = {};
+
+    if (
+      user.bitflyerApiKey !== this.state.initialFormValues.bitflyerApiKey &&
+      user.bitflyerApiSecret !== this.state.initialFormValues.bitflyerApiSecret
+    ) {
+      secrets.bitflyer = {
+        apiKey: user.bitflyerApiKey,
+        apiSecret: user.bitflyerApiSecret,
+      };
+    }
+    if (
+      user.zaifApiKey !== this.state.initialFormValues.zaifApiKey &&
+      user.zaifApiSecret !== this.state.initialFormValues.zaifApiSecret
+    ) {
+      secrets.zaif = {
+        apiKey: user.zaifApiKey,
+        apiSecret: user.zaifApiSecret,
+      };
+    }
+
+    user.secrets = secrets;
+
+    const profile = { user };
+    return this.props.updateProfile(profile);
   }
 
   renderTextField({ input, meta: { touched, error }, ...custom }) {
@@ -82,8 +122,8 @@ class Setting extends Component {
   renderSelectField({ input, meta: { touched, error }, children, ...custom }) {
     return (
       <SelectField
-        errorText={touched && error}
         {...input}
+        errorText={touched && error}
         onChange={(event, index, value) => input.onChange(value)}
         children={children}
         {...custom}
@@ -167,6 +207,52 @@ class Setting extends Component {
                   primaryText="Female"
                 />
               </Field>
+            </div>
+
+            <hr />
+            <div className={styles.text_field}>
+              <h4>API Keys and Secrets</h4>
+              <br />
+              <div className={styles.text_field}>
+                <h5>bitflyer</h5>
+                <br />
+                <Field
+                  name="bitflyerApiKey"
+                  component={this.renderTextField}
+                  type="text"
+                  placeholder="Enter API Key"
+                  style={muiStyles.textField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                />
+                <Field
+                  name="bitflyerApiSecret"
+                  component={this.renderTextField}
+                  type="text"
+                  placeholder="Enter API Secret"
+                  style={muiStyles.textField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                />
+              </div>
+              <div className={styles.text_field}>
+                <h5>zaif</h5>
+                <br />
+                <Field
+                  name="zaifApiKey"
+                  component={this.renderTextField}
+                  type="text"
+                  placeholder="Enter API Key"
+                  style={muiStyles.textField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                />
+                <Field
+                  name="zaifApiSecret"
+                  component={this.renderTextField}
+                  type="text"
+                  placeholder="Enter API Secret"
+                  style={muiStyles.textField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                />
+              </div>
             </div>
 
             <div className={styles.button_area}>

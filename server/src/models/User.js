@@ -23,7 +23,6 @@ const EXCHANGE_SITES = {
 const childSecretSchema = new Schema({
   _id: {
     type: String,
-    unique: true,
     required: true,
     default: () => uuid.v4(),
   },
@@ -48,7 +47,6 @@ const childSecretSchema = new Schema({
 const userSchema = new Schema({
   _id: {
     type: String,
-    unique: true,
     required: true,
     default: () => uuid.v4(),
   },
