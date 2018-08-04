@@ -37,7 +37,7 @@ passport.use(
           done(null, passedUser);
         } else {
           const userId = uuid.v4();
-          // Add Policy
+          // Add policy to backend
           await apiClient.addPolicy({
             userId,
           });
@@ -87,7 +87,7 @@ passport.use(
           done(null, passedUser);
         } else {
           const userId = uuid.v4();
-          // Add Policy
+          // Add policy to backend
           await apiClient.addPolicy({
             userId,
           });

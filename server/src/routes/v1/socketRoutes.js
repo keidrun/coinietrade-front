@@ -10,7 +10,7 @@ const CLEAR_INTERVAL_MSEC = 1000;
 
 module.exports = server => {
   const io = socketIO(server, {
-    path: URI
+    path: URI,
   });
 
   io.on('connection', socket => {

@@ -15,9 +15,40 @@ const LANGUAGE = {
   JAPANESE: 'ja',
 };
 
+const EXCHANGE_SITES = {
+  BITFLYER: 'bitflyer',
+  ZAIF: 'zaif',
+};
+
+const childSecretSchema = new Schema({
+  _id: {
+    type: String,
+    unique: true,
+    required: true,
+    default: () => uuid.v4(),
+  },
+  apiProvider: {
+    type: String,
+    unique: true,
+    required: true,
+    enum: Object.values(EXCHANGE_SITES),
+  },
+  apiKeyTail: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  apiSecretTail: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+});
+
 const userSchema = new Schema({
   _id: {
     type: String,
+    unique: true,
     required: true,
     default: () => uuid.v4(),
   },
@@ -69,6 +100,9 @@ const userSchema = new Schema({
     refreshToken: String,
     id: String,
   },
+  secrets: {
+    type: [childSecretSchema],
+  },
 });
 
 userSchema.methods.generateToken = function generateToken() {
@@ -119,4 +153,5 @@ module.exports = {
   User,
   GENDER,
   LANGUAGE,
+  EXCHANGE_SITES,
 };
