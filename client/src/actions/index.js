@@ -1,21 +1,13 @@
 import _ from 'lodash';
 import axios from 'axios';
 import { BASE_URI } from '../utils/apiVersion';
+import { mapToArray } from '../utils/smallFunctions';
 
-// export const ERRORS = 'errors';
 export const FETCH_USER = 'fetch_user';
 export const FETCH_EVENTS = 'fetch_events';
 export const CLEAR_EVENTS = 'clear_events';
 export const FETCH_PROFILE = 'fetch_profile';
 export const UPDATE_PROFILE = 'update_profile';
-
-function mapToArray(map, key) {
-  const arr = Object.values(map);
-  Object.keys(map).forEach((value, index) => {
-    arr[index][key] = value;
-  });
-  return arr;
-}
 
 export const fetchUser = () => async dispatch => {
   try {

@@ -65,11 +65,23 @@ module.exports = app => {
               }
             });
           const addedSecrets = await Promise.all(addSecretPromises);
-          const addedSecretsMap = _.mapKeys(addedSecrets, 'apiProvider');
+
+          const emptySecrets = user.secrets.filter(
+            ({ apiProvider, apiKey, apiSecret }) =>
+              !!(
+                apiProvider &&
+                (!apiKey || apiKey === '') &&
+                (!apiSecret || apiSecret === '')
+              ),
+          );
+          const removableSecretsMap = _.mapKeys(
+            addedSecrets.concat(emptySecrets),
+            'apiProvider',
+          );
 
           // Remove secrets from backend
           const removeSecretPromises = presentSecretsModel
-            .filter(secret => addedSecretsMap[secret.apiProvider])
+            .filter(secret => removableSecretsMap[secret.apiProvider])
             .map(async ({ _id, apiProvider, apiKeyTail, apiSecretTail }) => {
               try {
                 await apiClient.removeSecret(userId, _id);

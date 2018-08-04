@@ -56,10 +56,11 @@
     ]
   },
   "jest": {
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.js$",
+    "testDirectoryName": "test",
+    "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.js$",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/tests/"
+      "/test/"
     ],
     "coverageThreshold": {
       "global": {

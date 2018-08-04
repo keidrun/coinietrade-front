@@ -55,42 +55,37 @@ class Setting extends Component {
     this.props.fetchProfile();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.initialized) {
-      this.initializeFormValues(nextProps.profile);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { user } = nextProps.profile;
+    if (!nextProps.initialized && user && user.secrets) {
+      const { secrets } = user;
+      const initialValues = user
+        ? {
+            displayName: user.displayName,
+            email: user.email,
+            language: user.language,
+            gender: user.gender,
+            bitflyerApiKey: secrets.bitflyer ? secrets.bitflyer.apiKeyTail : '',
+            bitflyerApiSecret: secrets.bitflyer
+              ? secrets.bitflyer.apiSecretTail
+              : '',
+            zaifApiKey: secrets.zaif ? secrets.zaif.apiKeyTail : '',
+            zaifApiSecret: secrets.zaif ? secrets.zaif.apiSecretTail : '',
+          }
+        : {};
+      nextProps.initialize(initialValues);
+      return { initialFormValues: initialValues };
     }
-  }
-
-  shouldComponentUpdate() {
-    return true;
-  }
-
-  initializeFormValues(profile) {
-    const { user } = profile;
-    const { secrets } = user;
-    const initialValues = user
-      ? {
-          displayName: user.displayName,
-          email: user.email,
-          language: user.language,
-          gender: user.gender,
-          bitflyerApiKey: secrets.bitflyer ? secrets.bitflyer.apiKeyTail : '',
-          bitflyerApiSecret: secrets.bitflyer
-            ? secrets.bitflyer.apiSecretTail
-            : '',
-          zaifApiKey: secrets.zaif ? secrets.zaif.apiKeyTail : '',
-          zaifApiSecret: secrets.zaif ? secrets.zaif.apiSecretTail : '',
-        }
-      : {};
-    this.props.initialize(initialValues);
-    this.setState({ initialFormValues: initialValues });
+    return null;
   }
 
   onSubmit(values) {
     const user = values;
     const secrets = {};
 
-    if (
+    if (user.bitflyerApiKey === '' && user.bitflyerApiSecret === '') {
+      secrets.bitflyer = {};
+    } else if (
       user.bitflyerApiKey !== this.state.initialFormValues.bitflyerApiKey &&
       user.bitflyerApiSecret !== this.state.initialFormValues.bitflyerApiSecret
     ) {
@@ -99,7 +94,10 @@ class Setting extends Component {
         apiSecret: user.bitflyerApiSecret,
       };
     }
-    if (
+
+    if (user.zaifApiKey === '' && user.zaifApiSecret === '') {
+      secrets.zaif = {};
+    } else if (
       user.zaifApiKey !== this.state.initialFormValues.zaifApiKey &&
       user.zaifApiSecret !== this.state.initialFormValues.zaifApiSecret
     ) {
