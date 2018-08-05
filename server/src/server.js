@@ -3,22 +3,21 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const mongoose = require('mongoose');
+const socketIO = require('socket.io');
 const helmet = require('helmet');
-const keys = require('../config/keys').get(process.env.NODE_ENV);
+const morgan = require('morgan');
+const mongooseService = require('./services/mongooseService');
+const passportService = require('./services/passportService');
+const routes = require('./routes/v1');
+const sockets = require('./sockets/v1');
 
 const errorHandler = require('./middleware/errorHandler');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
-
-require('./services/passportStrategies');
-
-mongoose.connect(
-  process.env.MONGODB_URI || keys.mongoURL,
-  { useNewUrlParser: true },
-);
+passportService.configureStrategies(passport);
+mongooseService.connect();
 
 app.use(
   helmet({
@@ -31,12 +30,21 @@ app.use(
     xssFilter: true,
   }),
 );
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(passport.initialize());
 
-require('./routes/apiRoutes')(app, server);
+app.use('/auth', routes.passportRoutes);
+app.use('/api/v1/auth', routes.authRoutes);
+app.use('/api/v1/events', routes.eventRoutes);
+app.use('/api/v1/user', routes.userRoutes);
+sockets.dashboardSocket(
+  socketIO(server, {
+    path: '/api/v1/socket',
+  }),
+);
 
 if (
   process.env.NODE_ENV === 'production' ||

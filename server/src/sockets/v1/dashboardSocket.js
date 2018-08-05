@@ -1,18 +1,9 @@
-const socketIO = require('socket.io');
 const { getAllTickers } = require('../../utils/exchangeApi');
-
-const RESOURCE_NAME = 'socket';
-const VERSION = 'v1';
-const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
 const INTERVAL_MSEC = 1000;
 const CLEAR_INTERVAL_MSEC = 1000;
 
-module.exports = server => {
-  const io = socketIO(server, {
-    path: URI,
-  });
-
+const dashboardSocket = io => {
   io.on('connection', socket => {
     console.log('SERVER: connected to client');
 
@@ -33,3 +24,5 @@ module.exports = server => {
     });
   });
 };
+
+module.exports = dashboardSocket;
