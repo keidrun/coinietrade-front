@@ -1,10 +1,6 @@
 const { Router } = require('express');
 const passport = require('passport');
-const keys = require('../../../config/keys').get(process.env.NODE_ENV);
-
-const cookieOptions = {
-  maxAge: 60 * 60 * 24 * 30 * 1000, // 1 month
-};
+const { PassportController } = require('../../controllers');
 
 const passportRoutes = new Router();
 
@@ -18,12 +14,7 @@ passportRoutes.get(
 passportRoutes.get(
   '/facebook/callback',
   passport.authenticate('facebook'),
-  (req, res) => {
-    const { token } = req.user;
-    return res
-      .cookie(keys.cookieKey, token, cookieOptions)
-      .redirect('/dashboard');
-  },
+  PassportController.redirectDashboard,
 );
 
 passportRoutes.get(
@@ -36,12 +27,7 @@ passportRoutes.get(
 passportRoutes.get(
   '/google/callback',
   passport.authenticate('google'),
-  (req, res) => {
-    const { token } = req.user;
-    return res
-      .cookie(keys.cookieKey, token, cookieOptions)
-      .redirect('/dashboard');
-  },
+  PassportController.redirectDashboard,
 );
 
 module.exports = passportRoutes;
