@@ -1,9 +1,11 @@
+const { promisify } = require('util');
 const mongoose = require('mongoose');
 const uuid = require('uuid');
-
-const { Schema } = mongoose;
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
+
+const { Schema } = mongoose;
+const verifyPromise = promisify(jwt.verify);
 
 const GENDER = {
   MALE: 'male',
@@ -114,21 +116,23 @@ userSchema.methods.generateToken = function generateToken() {
     try {
       const savedUser = await user.save();
       resolve(savedUser);
-    } catch (err) {
-      reject(err);
+    } catch (error) {
+      reject(error);
     }
   });
 };
 
-userSchema.statics.findByToken = function findByToken(token, cb) {
+userSchema.statics.findByToken = function findByToken(token) {
   const user = this;
 
-  jwt.verify(token, keys.tokenSecret, (err, decodedId) => {
-    // eslint-disable-next-line consistent-return
-    user.findOne({ _id: decodedId, token }, (err, finedUser) => {
-      if (err) return cb(err);
-      cb(null, finedUser);
-    });
+  return new Promise(async (resolve, reject) => {
+    try {
+      const decodedId = await verifyPromise(token, keys.tokenSecret);
+      const foundUser = await user.findOne({ _id: decodedId, token });
+      resolve(foundUser);
+    } catch (error) {
+      reject(error);
+    }
   });
 };
 
@@ -139,8 +143,8 @@ userSchema.methods.deleteToken = function deleteToken() {
     try {
       const updatedUser = await user.update({ $unset: { token: 1 } });
       resolve(updatedUser);
-    } catch (err) {
-      reject(err);
+    } catch (error) {
+      reject(error);
     }
   });
 };

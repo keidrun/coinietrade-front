@@ -6,6 +6,10 @@ const RESOURCE_NAME = 'auth';
 const VERSION = 'v1';
 const URI = `/api/${VERSION}/${RESOURCE_NAME}`;
 
+const cookieOptions = {
+  maxAge: 60 * 60 * 24 * 30 * 1000, // 1 month
+};
+
 module.exports = app => {
   app.get(URI, auth, (req, res) => {
     const { user } = req;
@@ -37,11 +41,11 @@ module.exports = app => {
       await user.deleteToken();
       res.clearCookie(keys.cookieKey);
       return res.redirect('/');
-    } catch (err) {
+    } catch (error) {
       return res.status(400).json({
         errors: [
           {
-            message: err.message,
+            message: error.message,
             errorType: 'clientError',
           },
         ],
@@ -62,7 +66,9 @@ module.exports = app => {
     passport.authenticate('facebook'),
     (req, res) => {
       const { token } = req.user;
-      return res.cookie(keys.cookieKey, token).redirect('/dashboard');
+      return res
+        .cookie(keys.cookieKey, token, cookieOptions)
+        .redirect('/dashboard');
     },
   );
 
@@ -79,7 +85,9 @@ module.exports = app => {
     passport.authenticate('google'),
     (req, res) => {
       const { token } = req.user;
-      return res.cookie(keys.cookieKey, token).redirect('/dashboard');
+      return res
+        .cookie(keys.cookieKey, token, cookieOptions)
+        .redirect('/dashboard');
     },
   );
 };

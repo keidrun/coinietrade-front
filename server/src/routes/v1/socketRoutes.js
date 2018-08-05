@@ -18,9 +18,9 @@ module.exports = server => {
 
     const dashboardTimer = setInterval(async () => {
       try {
-        const res = await getAllTickers();
-        socket.emit('update:dashboard', res);
-      } catch (err) {
+        const response = await getAllTickers();
+        socket.emit('update:dashboard', response);
+      } catch (error) {
         socket.emit('update:dashboard', {});
       }
     }, INTERVAL_MSEC);

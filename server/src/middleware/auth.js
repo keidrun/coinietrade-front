@@ -1,14 +1,12 @@
 const { User } = require('../models/User');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
-const auth = (req, res, next) => {
+const auth = async (req, res, next) => {
   const token = req.cookies[keys.cookieKey];
 
-  // eslint-disable-next-line consistent-return
-  User.findByToken(token, (err, user) => {
-    if (err) return next(err);
-
-    if (!user)
+  try {
+    const user = await User.findByToken(token);
+    if (!user) {
       return res.status(401).json({
         errors: [
           {
@@ -17,12 +15,15 @@ const auth = (req, res, next) => {
           },
         ],
       });
+    }
 
     req.token = token;
     req.user = user;
 
-    next();
-  });
+    return next();
+  } catch (error) {
+    return next(error);
+  }
 };
 
 module.exports = auth;

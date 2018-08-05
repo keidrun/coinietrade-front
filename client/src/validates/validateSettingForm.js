@@ -12,8 +12,6 @@ export function validateSettingForm(values) {
     errors.displayName = 'Enter a name.';
   } else if (values.displayName.length < 4 || values.displayName.length > 40) {
     errors.displayName = 'The length of a name must be between 4 and 40.';
-  } else if (values.displayName && isSpaceIncluded(values.displayName)) {
-    errors.displayName = 'Cannot use any white spaces.';
   }
 
   if (!values.email) {
