@@ -5,7 +5,7 @@ const keys = require('../../config/keys').get(process.env.NODE_ENV);
 const PAGE = 20;
 const RADIUS_MILE = 6;
 
-class EventController {
+class EventsController {
   static async find(req, res) {
     const query = qs.parse(req.query);
 
@@ -60,4 +60,4 @@ class EventController {
   }
 }
 
-module.exports = EventController;
+module.exports = EventsController;

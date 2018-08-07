@@ -1,11 +1,13 @@
 const passportRoutes = require('./passportRoutes');
 const authRoutes = require('./authRoutes');
-const eventRoutes = require('./eventRoutes');
+const eventsRoutes = require('./eventsRoutes');
 const userRoutes = require('./userRoutes');
+const rulesRoutes = require('./rulesRoutes');
 
 module.exports = {
   passportRoutes,
   authRoutes,
-  eventRoutes,
+  eventsRoutes,
   userRoutes,
+  rulesRoutes,
 };

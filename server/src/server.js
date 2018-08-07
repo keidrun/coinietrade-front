@@ -38,8 +38,10 @@ app.use(passport.initialize());
 
 app.use('/auth', routes.passportRoutes);
 app.use('/api/v1/auth', routes.authRoutes);
-app.use('/api/v1/events', routes.eventRoutes);
+app.use('/api/v1/events', routes.eventsRoutes);
 app.use('/api/v1/user', routes.userRoutes);
+app.use('/api/v1/rules', routes.rulesRoutes);
+
 sockets.dashboardSocket(
   socketIO(server, {
     path: '/api/v1/socket',

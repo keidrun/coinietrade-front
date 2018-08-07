@@ -1,7 +1,7 @@
 const path = require('path');
 const nock = require('nock');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
-const { BackendApiClient } = require('../../src/utils/BackendApiClient');
+const { BackendApiClient } = require('../../src/utils');
 
 // eslint-disable-next-line import/no-dynamic-require
 const http = require(path.join(
@@ -593,6 +593,158 @@ describe('BackendApiClient', () => {
         status: 'available',
         modifiedAt: '2018-07-26T03:41:50.346Z',
         version: 0,
+        createdAt: '2018-07-26T03:41:50.346Z',
+        updatedAt: '2018-07-26T03:41:50.346Z',
+      });
+    });
+  });
+
+  describe('updateRule function', () => {
+    test('should fetch updated rule data', async () => {
+      const userId = '91c2a74a-4cab-4457-9eaf-74be4e99e289';
+      const ruleId = '0da72fac-bf71-4b8d-af2f-ee354ba31016';
+      nock(TEST_API_BASE_URL)
+        .patch(`/rules/${userId}/${ruleId}`)
+        .reply(200, {
+          userId,
+          strategy: 'simple_arbitrage',
+          coinUnit: 'btc',
+          currencyUnit: 'jpy',
+          oneSiteName: 'zaif',
+          otherSiteName: 'bitflyer',
+          counts: {
+            executionCount: 0,
+            successCount: 0,
+            failureCount: 0,
+            cancellationCount: 0,
+          },
+          priority: 7,
+          orderType: 'limit_order',
+          assetRange: 0.1,
+          assetMinLimit: 2000,
+          buyWeightRate: 1.001,
+          sellWeightRate: 0.999,
+          maxFailedLimit: 999,
+          ruleId,
+          totalProfit: 0,
+          status: 'unavailable',
+          modifiedAt: '2018-07-26T03:41:50.346Z',
+          version: 1,
+          createdAt: '2018-07-26T03:41:50.346Z',
+          updatedAt: '2018-07-26T03:41:50.346Z',
+        });
+
+      const response = await apiClient.updateRule(userId, ruleId, {
+        strategy: 'simple_arbitrage',
+        coinUnit: 'btc',
+        currencyUnit: 'jpy',
+        oneSiteName: 'zaif',
+        otherSiteName: 'bitflyer',
+        priority: 7,
+        orderType: 'limit_order',
+        assetRange: 0.1,
+        assetMinLimit: 2000,
+        buyWeightRate: 1.001,
+        sellWeightRate: 0.999,
+        maxFailedLimit: 999,
+        status: 'unavailable',
+      });
+
+      expect(response.status).toBe(200);
+      expect(response.data).toEqual({
+        userId,
+        strategy: 'simple_arbitrage',
+        coinUnit: 'btc',
+        currencyUnit: 'jpy',
+        oneSiteName: 'zaif',
+        otherSiteName: 'bitflyer',
+        counts: {
+          executionCount: 0,
+          successCount: 0,
+          failureCount: 0,
+          cancellationCount: 0,
+        },
+        priority: 7,
+        orderType: 'limit_order',
+        assetRange: 0.1,
+        assetMinLimit: 2000,
+        buyWeightRate: 1.001,
+        sellWeightRate: 0.999,
+        maxFailedLimit: 999,
+        ruleId,
+        totalProfit: 0,
+        status: 'unavailable',
+        modifiedAt: '2018-07-26T03:41:50.346Z',
+        version: 1,
+        createdAt: '2018-07-26T03:41:50.346Z',
+        updatedAt: '2018-07-26T03:41:50.346Z',
+      });
+    });
+
+    test('should update only status', async () => {
+      const userId = '91c2a74a-4cab-4457-9eaf-74be4e99e289';
+      const ruleId = '0da72fac-bf71-4b8d-af2f-ee354ba31016';
+      nock(TEST_API_BASE_URL)
+        .patch(`/rules/${userId}/${ruleId}`)
+        .reply(200, {
+          userId,
+          strategy: 'simple_arbitrage',
+          coinUnit: 'btc',
+          currencyUnit: 'jpy',
+          oneSiteName: 'zaif',
+          otherSiteName: 'bitflyer',
+          counts: {
+            executionCount: 0,
+            successCount: 0,
+            failureCount: 0,
+            cancellationCount: 0,
+          },
+          priority: 7,
+          orderType: 'limit_order',
+          assetRange: 0.1,
+          assetMinLimit: 2000,
+          buyWeightRate: 1.001,
+          sellWeightRate: 0.999,
+          maxFailedLimit: 999,
+          ruleId,
+          totalProfit: 0,
+          status: 'unavailable',
+          modifiedAt: '2018-07-26T03:41:50.346Z',
+          version: 1,
+          createdAt: '2018-07-26T03:41:50.346Z',
+          updatedAt: '2018-07-26T03:41:50.346Z',
+        });
+
+      const response = await apiClient.updateRule(userId, ruleId, {
+        status: 'unavailable',
+      });
+
+      expect(response.status).toBe(200);
+      expect(response.data).toEqual({
+        userId,
+        strategy: 'simple_arbitrage',
+        coinUnit: 'btc',
+        currencyUnit: 'jpy',
+        oneSiteName: 'zaif',
+        otherSiteName: 'bitflyer',
+        counts: {
+          executionCount: 0,
+          successCount: 0,
+          failureCount: 0,
+          cancellationCount: 0,
+        },
+        priority: 7,
+        orderType: 'limit_order',
+        assetRange: 0.1,
+        assetMinLimit: 2000,
+        buyWeightRate: 1.001,
+        sellWeightRate: 0.999,
+        maxFailedLimit: 999,
+        ruleId,
+        totalProfit: 0,
+        status: 'unavailable',
+        modifiedAt: '2018-07-26T03:41:50.346Z',
+        version: 1,
         createdAt: '2018-07-26T03:41:50.346Z',
         updatedAt: '2018-07-26T03:41:50.346Z',
       });

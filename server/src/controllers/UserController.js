@@ -1,6 +1,6 @@
 const _ = require('lodash');
-const { User } = require('../models/User');
-const { BackendApiClient } = require('../utils/BackendApiClient');
+const { User } = require('../models');
+const { BackendApiClient } = require('../utils');
 
 const apiClient = new BackendApiClient();
 
@@ -44,7 +44,7 @@ class UserController {
                 apiSecret,
               });
               return {
-                _id: response.data.secretId,
+                secretId: response.data.secretId,
                 apiProvider,
                 apiKeyTail: `xxxxxx${apiKey.slice(-4)}`,
                 apiSecretTail: `xxxxxx${apiSecret.slice(-4)}`,
@@ -71,11 +71,11 @@ class UserController {
         // Remove secrets from backend
         const removeSecretPromises = presentSecretsModel
           .filter(secret => removableSecretsMap[secret.apiProvider])
-          .map(async ({ _id, apiProvider, apiKeyTail, apiSecretTail }) => {
+          .map(async ({ secretId, apiProvider, apiKeyTail, apiSecretTail }) => {
             try {
-              await apiClient.removeSecret(userId, _id);
+              await apiClient.removeSecret(userId, secretId);
               return {
-                _id,
+                secretId,
                 apiProvider,
                 apiKeyTail,
                 apiSecretTail,

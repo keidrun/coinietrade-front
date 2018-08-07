@@ -1,11 +1,13 @@
 const AuthController = require('./AuthController');
-const EventController = require('./EventController');
+const EventsController = require('./EventsController');
 const PassportController = require('./PassportController');
 const UserController = require('./UserController');
+const RulesController = require('./RulesController');
 
 module.exports = {
   AuthController,
-  EventController,
+  EventsController,
   PassportController,
   UserController,
+  RulesController,
 };

@@ -111,6 +111,18 @@ class BackendApiClient {
     }
   }
 
+  async updateRule(userId, ruleId, data) {
+    try {
+      const response = await this.client.patch(
+        `/rules/${userId}/${ruleId}`,
+        data,
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async removeRule(userId, ruleId) {
     try {
       const response = await this.client.delete(`/rules/${userId}/${ruleId}`);
@@ -142,4 +154,4 @@ class BackendApiClient {
   }
 }
 
-module.exports = { BackendApiClient };
+module.exports = BackendApiClient;

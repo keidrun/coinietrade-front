@@ -22,30 +22,6 @@ const EXCHANGE_SITES = {
   ZAIF: 'zaif',
 };
 
-const childSecretSchema = new Schema({
-  _id: {
-    type: String,
-    required: true,
-    default: () => uuid.v4(),
-  },
-  apiProvider: {
-    type: String,
-    unique: true,
-    required: true,
-    enum: Object.values(EXCHANGE_SITES),
-  },
-  apiKeyTail: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  apiSecretTail: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-});
-
 const userSchema = new Schema({
   _id: {
     type: String,
@@ -101,7 +77,8 @@ const userSchema = new Schema({
     id: String,
   },
   secrets: {
-    type: [childSecretSchema],
+    type: Array,
+    default: [],
   },
 });
 

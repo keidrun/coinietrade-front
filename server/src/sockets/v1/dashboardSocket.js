@@ -1,4 +1,4 @@
-const { getAllTickers } = require('../../utils/exchangeApi');
+const { ExchangeApiClient } = require('../../utils');
 
 const INTERVAL_MSEC = 1000;
 const CLEAR_INTERVAL_MSEC = 1000;
@@ -9,7 +9,7 @@ const dashboardSocket = io => {
 
     const dashboardTimer = setInterval(async () => {
       try {
-        const response = await getAllTickers();
+        const response = await ExchangeApiClient.getAllTickers();
         socket.emit('update:dashboard', response);
       } catch (error) {
         socket.emit('update:dashboard', {});

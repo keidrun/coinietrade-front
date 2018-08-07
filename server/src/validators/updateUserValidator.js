@@ -1,6 +1,6 @@
 const { checkSchema } = require('express-validator/check');
 const { isEmpty, isEmail } = require('validator');
-const { GENDER, LANGUAGE, EXCHANGE_SITES } = require('../models/User');
+const { GENDER, LANGUAGE, EXCHANGE_SITES } = require('../models');
 
 const customChecks = {
   isEmptyOrEmail: params => (isEmpty(params) ? true : isEmail(params)),
@@ -44,7 +44,7 @@ const updateUserValidator = checkSchema({
       options: { min: 1, max: 50 },
       errorMessage: 'The length of a displayName must be between 1 and 50.',
     },
-    errorMessage: 'The format of an displayName was wrong.',
+    errorMessage: 'The format of a displayName was wrong.',
   },
   email: {
     optional: true,

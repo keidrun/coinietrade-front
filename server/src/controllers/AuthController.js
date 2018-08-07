@@ -1,7 +1,7 @@
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 class AuthController {
-  static find(req, res) {
+  static findLoggedInUser(req, res) {
     const { user } = req;
     if (!user) {
       return res.status(404).json({
