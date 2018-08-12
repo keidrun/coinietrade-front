@@ -1,3 +1,4 @@
 import { validateSettingForm } from './validateSettingForm';
+import { validateRulesNewForm } from './validateRulesNewForm';
 
-export { validateSettingForm };
+export { validateSettingForm, validateRulesNewForm };

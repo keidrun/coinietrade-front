@@ -1,0 +1,66 @@
+.rules_new {
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+}
+
+.flex_wrapper {
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.form {
+  margin-top: 20px;
+  border: dashed 5px #000;
+  background-color: white;
+  width: 1000px;
+}
+
+.text_field {
+  margin: 20px auto;
+}
+
+.text_field h4 {
+  margin-left: 20px;
+  font-size: 3rem;
+  display: inline;
+}
+
+.text_field h5 {
+  margin-left: 40px;
+  font-size: 2.5rem;
+  display: inline;
+}
+
+.text_field input {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.select_field {
+  margin: 20px;
+}
+
+.select_field h4 {
+  font-size: 3rem;
+  display: inline;
+}
+
+.select_field div {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.select_item div {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.button_area div {
+  color: white;
+  font-size: 2rem;
+}

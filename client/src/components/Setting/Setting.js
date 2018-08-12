@@ -3,38 +3,12 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../actions';
 import { validateSettingForm as validate } from '../../validates';
+import { renderTextField, renderSelectField } from '../../utils/renderFields';
 
 import styles from './Setting.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import { pinkA200 } from 'material-ui/styles/colors';
-
-const muiStyles = {
-  button: {
-    width: 200,
-    height: 50,
-    marginTop: 20,
-    marginBottom: 20,
-    marginLeft: '75%',
-  },
-  textField: {
-    width: 800,
-    height: 50,
-    fontSize: '4rem',
-    marginLeft: '10%',
-  },
-  selectField: {
-    width: 800,
-    height: 50,
-    fontSize: '4rem',
-    marginLeft: '10%',
-  },
-  underlineStyle: {
-    borderColor: pinkA200,
-  },
-};
+import { muiStyles } from '../../utils/muiStyles';
 
 const LANGUAGE = {
   ENGLISH: 'en',
@@ -113,22 +87,6 @@ class Setting extends Component {
     return this.props.updateProfile(profile);
   }
 
-  renderTextField({ input, meta: { touched, error }, ...custom }) {
-    return <TextField {...input} errorText={touched && error} {...custom} />;
-  }
-
-  renderSelectField({ input, meta: { touched, error }, children, ...custom }) {
-    return (
-      <SelectField
-        {...input}
-        errorText={touched && error}
-        onChange={(event, index, value) => input.onChange(value)}
-        children={children}
-        {...custom}
-      />
-    );
-  }
-
   render() {
     const { handleSubmit, pristine, submitting } = this.props;
 
@@ -145,7 +103,7 @@ class Setting extends Component {
               <br />
               <Field
                 name="displayName"
-                component={this.renderTextField}
+                component={renderTextField}
                 type="text"
                 placeholder="Enter name"
                 style={muiStyles.textField}
@@ -157,7 +115,7 @@ class Setting extends Component {
               <br />
               <Field
                 name="email"
-                component={this.renderTextField}
+                component={renderTextField}
                 type="email"
                 placeholder="Enter email"
                 style={muiStyles.textField}
@@ -169,7 +127,7 @@ class Setting extends Component {
               <br />
               <Field
                 name="language"
-                component={this.renderSelectField}
+                component={renderSelectField}
                 style={muiStyles.selectField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               >
@@ -190,7 +148,7 @@ class Setting extends Component {
               <br />
               <Field
                 name="gender"
-                component={this.renderSelectField}
+                component={renderSelectField}
                 style={muiStyles.selectField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               >
@@ -216,7 +174,7 @@ class Setting extends Component {
                 <br />
                 <Field
                   name="bitflyerApiKey"
-                  component={this.renderTextField}
+                  component={renderTextField}
                   type="text"
                   placeholder="Enter API Key"
                   style={muiStyles.textField}
@@ -224,7 +182,7 @@ class Setting extends Component {
                 />
                 <Field
                   name="bitflyerApiSecret"
-                  component={this.renderTextField}
+                  component={renderTextField}
                   type="text"
                   placeholder="Enter API Secret"
                   style={muiStyles.textField}
@@ -236,7 +194,7 @@ class Setting extends Component {
                 <br />
                 <Field
                   name="zaifApiKey"
-                  component={this.renderTextField}
+                  component={renderTextField}
                   type="text"
                   placeholder="Enter API Key"
                   style={muiStyles.textField}
@@ -244,7 +202,7 @@ class Setting extends Component {
                 />
                 <Field
                   name="zaifApiSecret"
-                  component={this.renderTextField}
+                  component={renderTextField}
                   type="text"
                   placeholder="Enter API Secret"
                   style={muiStyles.textField}
