@@ -16,9 +16,9 @@ class RulesList extends Component {
     return _.map(this.props.rules, rule => (
       <tr key={rule.ruleId}>
         <td>{rule.ruleId.substr(0, 8)}</td>
-        <td>{`${rule.coinUnit}/${rule.currencyUnit}`}</td>
         <td>{rule.oneSiteName}</td>
         <td>{rule.otherSiteName}</td>
+        <td>{`${rule.coinUnit}/${rule.currencyUnit}`}</td>
         <td>{rule.strategy}</td>
         <td>{rule.orderType}</td>
         <td>{rule.assetRange}</td>
@@ -28,9 +28,9 @@ class RulesList extends Component {
         <td>{rule.totalProfit}</td>
         <td>{rule.status}</td>
         <td>
-          <button>
-            <Link to={`/rules/${rule.ruleId}`}>Detail</Link>
-          </button>
+          <Link to={`/rules/${rule.ruleId}`}>
+            <button>Detail</button>
+          </Link>
         </td>
       </tr>
     ));
@@ -41,9 +41,9 @@ class RulesList extends Component {
     const ruleLimit = this.props.policy.ruleLimit;
 
     return isFinite(rulesNum) && isFinite(ruleLimit) && rulesNum < ruleLimit ? (
-      <button>
-        <Link to="/rules/new">Create a new rule</Link>
-      </button>
+      <Link to="/rules/new">
+        <button>Create a new rule</button>
+      </Link>
     ) : (
       ''
     );
@@ -52,15 +52,15 @@ class RulesList extends Component {
   render() {
     return (
       <div className={styles.rules_list}>
-        <h2>Rules</h2>
+        <h2>Trade Rules</h2>
         <div>{this.renderCreateButton()}</div>
         <table>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Pair</th>
               <th>Site A</th>
               <th>Site B</th>
+              <th>Pair</th>
               <th>Strategy</th>
               <th>Order Type</th>
               <th>Asset Range</th>

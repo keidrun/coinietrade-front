@@ -85,23 +85,6 @@ class RulesNew extends Component {
             onSubmit={handleSubmit(this.onSubmit.bind(this))}
           >
             <div className={styles.select_field}>
-              <h4>Pair</h4>
-              <br />
-              <Field
-                name="coinsPair"
-                component={renderSelectField}
-                style={muiStyles.selectField}
-                underlineFocusStyle={muiStyles.underlineStyle}
-              >
-                <MenuItem
-                  className={styles.select_item}
-                  value={COINS_PAIR.BTC_JPY}
-                  primaryText="BTC <=> JPY"
-                />
-              </Field>
-            </div>
-
-            <div className={styles.select_field}>
               <h4>Exchange Site A</h4>
               <br />
               <Field
@@ -141,6 +124,23 @@ class RulesNew extends Component {
                   className={styles.select_item}
                   value={EXCHANGE_SITES.ZAIF}
                   primaryText="Zaif"
+                />
+              </Field>
+            </div>
+
+            <div className={styles.select_field}>
+              <h4>Pair</h4>
+              <br />
+              <Field
+                name="coinsPair"
+                component={renderSelectField}
+                style={muiStyles.selectField}
+                underlineFocusStyle={muiStyles.underlineStyle}
+              >
+                <MenuItem
+                  className={styles.select_item}
+                  value={COINS_PAIR.BTC_JPY}
+                  primaryText="BTC <=> JPY"
                 />
               </Field>
             </div>
@@ -186,6 +186,8 @@ class RulesNew extends Component {
                 name="assetMinLimit"
                 component={renderTextField}
                 type="number"
+                min="0"
+                step="1"
                 placeholder="Enter a number >= 0"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
@@ -198,7 +200,10 @@ class RulesNew extends Component {
                 name="assetRange"
                 component={renderTextField}
                 type="number"
-                placeholder="Enter 0 to 1"
+                min="0.000"
+                max="1.000"
+                step="0.001"
+                placeholder="Enter 0.000 to 1.000"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
@@ -210,7 +215,10 @@ class RulesNew extends Component {
                 name="buyWeightRate"
                 component={renderTextField}
                 type="number"
-                placeholder="Enter 0 to 1"
+                min="0.000"
+                max="2.000"
+                step="0.001"
+                placeholder="Enter 0.000 to 2.000"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
@@ -222,7 +230,10 @@ class RulesNew extends Component {
                 name="sellWeightRate"
                 component={renderTextField}
                 type="number"
-                placeholder="Enter 0 to 1"
+                min="0.000"
+                max="2.000"
+                step="0.001"
+                placeholder="Enter 0.000 to 2.000"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
@@ -248,6 +259,15 @@ class RulesNew extends Component {
 export default reduxForm({
   form: 'RulesNewForm',
   validate,
+  initialValues: {
+    coinsPair: COINS_PAIR.BTC_JPY,
+    strategy: STRATEGIES.SIMPLE_ARBITRAGE,
+    orderType: ORDER_TYPES.LIMIT_ORDER,
+    assetMinLimit: '0',
+    assetRange: '1.000',
+    buyWeightRate: '1.000',
+    sellWeightRate: '1.000',
+  },
 })(
   connect(
     null,

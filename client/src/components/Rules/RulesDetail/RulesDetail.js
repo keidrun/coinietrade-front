@@ -43,13 +43,13 @@ class RulesDetail extends Component {
         <button onClick={this.onDeleteClick.bind(this)}>Delete</button>
         <div>
           <h4>ID:</h4>
+          <p>{rule.ruleId}</p>
+          <h4>Exchange Site A:</h4>
+          <p>{rule.oneSiteName}</p>
+          <h4>Exchange Site B:</h4>
+          <p>{rule.otherSiteName}</p>
           <h4>Pair:</h4>
           <p>{`${rule.coinUnit}/${rule.currencyUnit}`}</p>
-          <p>{rule.ruleId}</p>
-          <h4>Site A:</h4>
-          <p>{rule.oneSiteName}</p>
-          <h4>Site B:</h4>
-          <p>{rule.otherSiteName}</p>
           <h4>Strategy:</h4>
           <p>{rule.strategy}</p>
           <h4>Order Type:</h4>
