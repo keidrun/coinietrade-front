@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { isSpaceIncluded } from '../utils/smallFunctions';
+import { isSpaceIncluded } from '../utils';
 
 export function validateSettingForm(values) {
   const errors = {};

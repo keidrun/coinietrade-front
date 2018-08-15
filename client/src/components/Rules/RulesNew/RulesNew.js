@@ -4,15 +4,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createRule } from '../../../actions';
 import { validateRulesNewForm as validate } from '../../../validates';
-import {
-  renderTextField,
-  renderSelectField,
-} from '../../../utils/renderFields';
+import { renderTextField, renderSelectField, muiStyles } from '../../../utils';
 
 import styles from './RulesNew.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
-import { muiStyles } from '../../../utils/muiStyles';
 
 const STRATEGIES = {
   SIMPLE_ARBITRAGE: 'simple_arbitrage',

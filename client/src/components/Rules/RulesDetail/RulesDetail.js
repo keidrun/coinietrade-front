@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchRule, deleteRule } from '../../../actions';
 
 import styles from './RulesDetail.css';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class RulesDetail extends Component {
   componentDidMount() {
@@ -18,11 +19,19 @@ class RulesDetail extends Component {
     });
   }
 
+  renderLoading() {
+    return (
+      <div className={styles.loading}>
+        <CircularProgress size={180} thickness={10} color="#000000" />
+      </div>
+    );
+  }
+
   render() {
     const rule = this.props.rule;
 
     if (!rule) {
-      return <div>Loading...</div>;
+      return this.renderLoading();
     }
 
     return (

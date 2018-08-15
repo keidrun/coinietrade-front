@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchEvents, clearEvents } from '../../actions';
-import { getPosition } from '../../utils/geoLocation';
+import { getPosition } from '../../utils';
 
 import styles from './Event.css';
 import GridEventList from './GridList/GridEventList';
@@ -79,7 +79,7 @@ class Events extends Component {
   renderLoading = () => {
     return this.state.loading ? (
       <div className={styles.loading}>
-        <CircularProgress size={180} thickness={10} color="#f0f0f0" />
+        <CircularProgress size={180} thickness={10} color="#000000" />
       </div>
     ) : null;
   };

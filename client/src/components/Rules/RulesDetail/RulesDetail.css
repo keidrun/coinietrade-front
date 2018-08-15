@@ -12,3 +12,7 @@
   box-sizing: border-box;
   align-items: center;
 }
+
+.loading {
+  text-align: center;
+}

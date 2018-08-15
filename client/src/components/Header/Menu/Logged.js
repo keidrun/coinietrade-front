@@ -9,7 +9,7 @@ import FontAwesome from 'react-fontawesome';
 
 import styles from './Menu.css';
 
-import { BASE_URI } from '../../../utils/apiVersion';
+import { BASE_URI } from '../../../utils';
 
 class Logged extends Component {
   static muiName = 'IconMenu';
@@ -28,7 +28,7 @@ class Logged extends Component {
       },
       {
         icon: 'meetup',
-        text: 'Meetup',
+        text: 'Find Events',
         link: '/meetup',
       },
       {

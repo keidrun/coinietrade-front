@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import axios from 'axios';
-import { BASE_URI } from '../utils/apiVersion';
-import { mapToArray } from '../utils/smallFunctions';
+import { BASE_URI, mapToArray } from '../utils';
 
 export const FETCH_USER = 'fetch_user';
 export const FETCH_EVENTS = 'fetch_events';

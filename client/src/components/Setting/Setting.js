@@ -3,12 +3,11 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../actions';
 import { validateSettingForm as validate } from '../../validates';
-import { renderTextField, renderSelectField } from '../../utils/renderFields';
+import { renderTextField, renderSelectField, muiStyles } from '../../utils';
 
 import styles from './Setting.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
-import { muiStyles } from '../../utils/muiStyles';
 
 const LANGUAGE = {
   ENGLISH: 'en',

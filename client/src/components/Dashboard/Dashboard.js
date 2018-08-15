@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Chart from '../../widgets/Chart';
+import Chart from './Chart/Chart';
 import styles from './Dashboard.css';
 
-import { BASE_URI } from '../../utils/apiVersion';
+import { BASE_URI } from '../../utils';
 
 import io from 'socket.io-client';
 let socket;
