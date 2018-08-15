@@ -7,6 +7,7 @@ const rulesRoutes = new Router();
 const rulesController = new RulesController();
 
 rulesRoutes.get('/', auth, rulesController.findAll);
+rulesRoutes.get('/:ruleId', auth, rulesController.findOne);
 rulesRoutes.post(
   '/',
   auth,

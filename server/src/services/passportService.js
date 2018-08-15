@@ -29,7 +29,7 @@ const configureStrategies = passport => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          const user = await User.findOne({ 'facebook.id': profile.id });
+          const user = await User.findOne({ 'authProvider.id': profile.id });
           if (user) {
             // Login
             const loggedinUser = await user.generateToken();
@@ -43,6 +43,9 @@ const configureStrategies = passport => {
           });
 
           // Sign up
+          if (!profile) {
+            return done(null, false);
+          }
           const facebookId = profile.id;
           const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
           const newUser = await new User({
@@ -54,10 +57,11 @@ const configureStrategies = passport => {
             email: profile.email,
             avatarUrl: profile.profileUrl || profilePictureURL,
             gender: profile.gender,
-            facebook: {
+            authProvider: {
+              name: 'facebook',
+              id: facebookId,
               accessToken,
               refreshToken,
-              id: facebookId,
             },
           }).save();
 
@@ -79,7 +83,7 @@ const configureStrategies = passport => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          const user = await User.findOne({ 'google.id': profile.id });
+          const user = await User.findOne({ 'authProvider.id': profile.id });
           if (user) {
             // Login
             const loggedinUser = await user.generateToken();
@@ -93,6 +97,9 @@ const configureStrategies = passport => {
           });
 
           // Sign up
+          if (!profile) {
+            return done(null, false);
+          }
           const newUser = await new User({
             _id: userId,
             displayName: profile.displayName,
@@ -102,10 +109,11 @@ const configureStrategies = passport => {
             avatarUrl: profile.photos[0].value,
             gender: profile.gender,
             language: profile.language,
-            google: {
+            authProvider: {
+              name: 'google',
+              id: profile.id,
               accessToken,
               refreshToken,
-              id: profile.id,
             },
           }).save();
 

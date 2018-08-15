@@ -102,6 +102,15 @@ class BackendApiClient {
     }
   }
 
+  async getRule(userId, ruleId) {
+    try {
+      const response = await this.client.get(`/rules/${userId}/${ruleId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addRule(data) {
     try {
       const response = await this.client.post('/rules', data);

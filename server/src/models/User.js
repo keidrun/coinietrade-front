@@ -28,6 +28,15 @@ const userSchema = new Schema({
     required: true,
     default: () => uuid.v4(),
   },
+  authProvider: {
+    name: String,
+    id: {
+      type: String,
+      unique: true,
+    },
+    accessToken: String,
+    refreshToken: String,
+  },
   token: String,
   displayName: {
     type: String,
@@ -55,6 +64,7 @@ const userSchema = new Schema({
     type: String,
     trim: true,
     unique: true,
+    sparse: true,
   },
   avatarUrl: String,
   gender: {
@@ -65,16 +75,6 @@ const userSchema = new Schema({
     type: String,
     enum: Object.values(LANGUAGE),
     default: LANGUAGE.ENGLISH,
-  },
-  facebook: {
-    accessToken: String,
-    refreshToken: String,
-    id: String,
-  },
-  google: {
-    accessToken: String,
-    refreshToken: String,
-    id: String,
   },
   secrets: {
     type: Array,

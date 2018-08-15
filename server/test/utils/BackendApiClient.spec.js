@@ -518,6 +518,75 @@ describe('BackendApiClient', () => {
     });
   });
 
+  describe('getRule function', () => {
+    test('should fetch a rule', async () => {
+      const userId = 'b7cecc1e-cc05-4315-8bdf-d92c1c88b991';
+      const ruleId = 'dcfb5c61-ac9c-42e3-a9be-bd770de1ba03';
+      nock(TEST_API_BASE_URL)
+        .get(`/rules/${userId}/${ruleId}`)
+        .reply(200, {
+          orderType: 'limit_order',
+          otherSiteName: 'zaif',
+          totalProfit: 0,
+          counts: {
+            executionCount: 0,
+            successCount: 0,
+            failureCount: 0,
+            cancellationCount: 0,
+          },
+          modifiedAt: '2018-08-14T07:40:00.111Z',
+          priority: 0,
+          userId: 'b7cecc1e-cc05-4315-8bdf-d92c1c88b991',
+          version: 2,
+          assetMinLimit: 2000,
+          createdAt: '2018-08-14T07:39:04.044Z',
+          oneSiteName: 'bitflyer',
+          buyWeightRate: 1.001,
+          maxFailedLimit: 999,
+          assetRange: 0.1,
+          ruleId: 'dcfb5c61-ac9c-42e3-a9be-bd770de1ba03',
+          strategy: 'simple_arbitrage',
+          coinUnit: 'btc',
+          currencyUnit: 'jpy',
+          sellWeightRate: 0.999,
+          status: 'available',
+          updatedAt: '2018-08-14T07:40:00.133Z',
+        });
+
+      const response = await apiClient.getRule(userId, ruleId);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toEqual({
+        orderType: 'limit_order',
+        otherSiteName: 'zaif',
+        totalProfit: 0,
+        counts: {
+          executionCount: 0,
+          successCount: 0,
+          failureCount: 0,
+          cancellationCount: 0,
+        },
+        modifiedAt: '2018-08-14T07:40:00.111Z',
+        priority: 0,
+        userId: 'b7cecc1e-cc05-4315-8bdf-d92c1c88b991',
+        version: 2,
+        assetMinLimit: 2000,
+        createdAt: '2018-08-14T07:39:04.044Z',
+        oneSiteName: 'bitflyer',
+        buyWeightRate: 1.001,
+        maxFailedLimit: 999,
+        assetRange: 0.1,
+        ruleId: 'dcfb5c61-ac9c-42e3-a9be-bd770de1ba03',
+        strategy: 'simple_arbitrage',
+        coinUnit: 'btc',
+        currencyUnit: 'jpy',
+        sellWeightRate: 0.999,
+        status: 'available',
+        updatedAt: '2018-08-14T07:40:00.133Z',
+      });
+    });
+  });
+
   describe('addRule function', () => {
     test('should fetch added rule data', async () => {
       nock(TEST_API_BASE_URL)

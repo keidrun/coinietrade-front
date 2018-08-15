@@ -3,6 +3,7 @@ const EventsController = require('./EventsController');
 const PassportController = require('./PassportController');
 const UserController = require('./UserController');
 const RulesController = require('./RulesController');
+const PolicyController = require('./PolicyController');
 
 module.exports = {
   AuthController,
@@ -10,4 +11,5 @@ module.exports = {
   PassportController,
   UserController,
   RulesController,
+  PolicyController,
 };

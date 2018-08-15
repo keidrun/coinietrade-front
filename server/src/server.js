@@ -6,12 +6,10 @@ const passport = require('passport');
 const socketIO = require('socket.io');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const mongooseService = require('./services/mongooseService');
-const passportService = require('./services/passportService');
+const { mongooseService, passportService } = require('./services');
 const routes = require('./routes/v1');
 const sockets = require('./sockets/v1');
-
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware');
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -41,6 +39,7 @@ app.use('/api/v1/auth', routes.authRoutes);
 app.use('/api/v1/events', routes.eventsRoutes);
 app.use('/api/v1/user', routes.userRoutes);
 app.use('/api/v1/rules', routes.rulesRoutes);
+app.use('/api/v1/policy', routes.policyRoutes);
 
 sockets.dashboardSocket(
   socketIO(server, {

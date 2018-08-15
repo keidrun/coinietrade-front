@@ -5,6 +5,7 @@ class RulesController {
     this.apiClient = new BackendApiClient();
 
     this.findAll = this.findAll.bind(this);
+    this.findOne = this.findOne.bind(this);
     this.add = this.add.bind(this);
     this.update = this.update.bind(this);
     this.remove = this.remove.bind(this);
@@ -14,6 +15,24 @@ class RulesController {
     try {
       const userId = req.user._id;
       const response = await this.apiClient.getRulesByUserId(userId);
+      return res.json(response.data);
+    } catch (error) {
+      return res.status(400).json({
+        errors: [
+          {
+            message: error.message,
+            errorType: 'clientError',
+          },
+        ],
+      });
+    }
+  }
+
+  async findOne(req, res) {
+    try {
+      const userId = req.user._id;
+      const { ruleId } = req.params;
+      const response = await this.apiClient.getRule(userId, ruleId);
       return res.json(response.data);
     } catch (error) {
       return res.status(400).json({

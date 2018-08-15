@@ -3,6 +3,7 @@ const authRoutes = require('./authRoutes');
 const eventsRoutes = require('./eventsRoutes');
 const userRoutes = require('./userRoutes');
 const rulesRoutes = require('./rulesRoutes');
+const policyRoutes = require('./policyRoutes');
 
 module.exports = {
   passportRoutes,
@@ -10,4 +11,5 @@ module.exports = {
   eventsRoutes,
   userRoutes,
   rulesRoutes,
+  policyRoutes,
 };

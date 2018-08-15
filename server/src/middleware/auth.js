@@ -4,6 +4,17 @@ const keys = require('../../config/keys').get(process.env.NODE_ENV);
 const auth = async (req, res, next) => {
   const token = req.cookies[keys.cookieKey];
 
+  if (!token) {
+    return res.status(401).json({
+      errors: [
+        {
+          message: 'Login Required.',
+          errorType: 'clientError',
+        },
+      ],
+    });
+  }
+
   try {
     const user = await User.findByToken(token);
     if (!user) {
