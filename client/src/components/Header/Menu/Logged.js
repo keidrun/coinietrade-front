@@ -46,13 +46,15 @@ class Logged extends Component {
     return menuItems.map((item, i) => {
       return (
         <div key={i}>
-          <MenuItem
-            primaryText={
-              <Link to={item.link} className={styles.nav_logged_link}>
-                <FontAwesome name={item.icon} /> {item.text}
-              </Link>
-            }
-          />
+          <Link to={item.link} className={styles.nav_logged_link}>
+            <MenuItem
+              primaryText={
+                <span>
+                  <FontAwesome name={item.icon} /> {item.text}
+                </span>
+              }
+            />
+          </Link>
         </div>
       );
     });
@@ -77,7 +79,9 @@ class Logged extends Component {
               href={`${BASE_URI}/auth/logout`}
               className={styles.nav_logged_link}
             >
-              <FontAwesome name="sign-out" /> Sign out
+              <span>
+                <FontAwesome name="sign-out" /> Sign out
+              </span>
             </a>
           }
         />
