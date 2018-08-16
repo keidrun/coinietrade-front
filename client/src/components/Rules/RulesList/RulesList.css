@@ -31,3 +31,8 @@
 .table td {
   padding: 5px;
 }
+
+.loading {
+  padding-top: 20px;
+  text-align: center;
+}

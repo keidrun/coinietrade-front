@@ -9,6 +9,7 @@ import {
   showPair,
   showStrategy,
   showOrderType,
+  showAssetMinLimit,
   showProfit,
   showStatus,
 } from '../rulesUtils';
@@ -82,12 +83,14 @@ class RulesDetail extends Component {
               <div>{showOrderType(rule.orderType)}</div>
             </div>
             <div className={styles.field}>
-              <h4>Asset Range:</h4>
-              <div>{rule.assetRange}</div>
+              <h4>Asset Minimum Limit:</h4>
+              <div>
+                {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}
+              </div>
             </div>
             <div className={styles.field}>
-              <h4>Asset Minimum Limit:</h4>
-              <div>{rule.assetMinLimit}</div>
+              <h4>Asset Range:</h4>
+              <div>{rule.assetRange}</div>
             </div>
             <div className={styles.field}>
               <h4>Buy Weight Rate:</h4>

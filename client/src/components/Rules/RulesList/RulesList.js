@@ -10,11 +10,13 @@ import {
   showPair,
   showStrategy,
   showOrderType,
+  showAssetMinLimit,
   showProfit,
   showStatus,
 } from '../rulesUtils';
 
 import styles from './RulesList.css';
+import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class RulesList extends Component {
@@ -32,8 +34,8 @@ class RulesList extends Component {
         <td>{showPair(getPair(rule.coinUnit, rule.currencyUnit))}</td>
         <td>{showStrategy(rule.strategy)}</td>
         <td>{showOrderType(rule.orderType)}</td>
+        <td> {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}</td>
         <td>{rule.assetRange}</td>
-        <td>{rule.assetMinLimit}</td>
         <td>{rule.buyWeightRate}</td>
         <td>{rule.sellWeightRate}</td>
         <td>{showProfit(rule.totalProfit, rule.currencyUnit)}</td>
@@ -68,7 +70,19 @@ class RulesList extends Component {
     );
   }
 
+  renderLoading() {
+    return (
+      <div className={styles.loading}>
+        <CircularProgress size={180} thickness={10} color="#000000" />
+      </div>
+    );
+  }
+
   render() {
+    if (!this.props.rules || !this.props.policy) {
+      return this.renderLoading();
+    }
+
     return (
       <div className={styles.rules_list}>
         <h2>
@@ -85,8 +99,8 @@ class RulesList extends Component {
                 <th>Pair</th>
                 <th>Strategy</th>
                 <th>Order Type</th>
-                <th>Asset Range</th>
                 <th>Asset Minimum Limit</th>
+                <th>Asset Range</th>
                 <th>Buy Weight Rate</th>
                 <th>Sell Weight Rate</th>
                 <th>Profit</th>

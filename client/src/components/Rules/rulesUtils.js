@@ -96,6 +96,19 @@ export const showOrderType = orderType => {
   }
 };
 
+export const showAssetMinLimit = (assetMinLimit, currencyUnit) => {
+  switch (currencyUnit) {
+    case CURRENCY_UNITS.JPY:
+      return `${assetMinLimit} [JPY]`;
+    case CURRENCY_UNITS.CAD:
+      return `${assetMinLimit} [CAD]`;
+    case CURRENCY_UNITS.USD:
+      return `${assetMinLimit} [USD]`;
+    default:
+      return '-';
+  }
+};
+
 export const showProfit = (profit, currencyUnit) => {
   switch (currencyUnit) {
     case CURRENCY_UNITS.JPY:
