@@ -71,7 +71,9 @@ class RulesList extends Component {
   render() {
     return (
       <div className={styles.rules_list}>
-        <h2>Trade Rules</h2>
+        <h2>
+          Trade Rules <div>Expired At: {this.props.policy.expiredAt}</div>
+        </h2>
         <div>{this.renderCreateButton()}</div>
         <div className={styles.flex_wrapper}>
           <table className={styles.table}>
