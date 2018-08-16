@@ -13,6 +13,34 @@
   align-items: center;
 }
 
+.content {
+  margin-top: 20px;
+  border: dashed 5px #000;
+  background-color: white;
+  width: 1000px;
+}
+
+.field {
+  padding: 15px;
+}
+
+.field h4 {
+  margin-left: 20px;
+  font-size: 3rem;
+  display: inline;
+}
+
+.field div {
+  margin-top: 20px;
+  font-size: 3rem;
+  text-align: center;
+}
+
 .loading {
   text-align: center;
+}
+
+.button_area div {
+  color: white;
+  font-size: 2rem;
 }

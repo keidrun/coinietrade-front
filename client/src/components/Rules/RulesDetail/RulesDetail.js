@@ -2,9 +2,20 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchRule, deleteRule } from '../../../actions';
+import { muiStyles } from '../../../utils';
+import {
+  getPair,
+  showExchangeSite,
+  showPair,
+  showStrategy,
+  showOrderType,
+  showProfit,
+  showStatus,
+} from '../rulesUtils';
 
 import styles from './RulesDetail.css';
 import CircularProgress from 'material-ui/CircularProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class RulesDetail extends Component {
   componentDidMount() {
@@ -37,37 +48,77 @@ class RulesDetail extends Component {
     return (
       <div className={styles.rules_detail}>
         <h2>Rule Detail</h2>
-        <Link to="/rules">
-          <button> &lt;&lt; Back</button>
-        </Link>
-        <button onClick={this.onDeleteClick.bind(this)}>Delete</button>
-        <div>
-          <h4>ID:</h4>
-          <p>{rule.ruleId}</p>
-          <h4>Exchange Site A:</h4>
-          <p>{rule.oneSiteName}</p>
-          <h4>Exchange Site B:</h4>
-          <p>{rule.otherSiteName}</p>
-          <h4>Pair:</h4>
-          <p>{`${rule.coinUnit}/${rule.currencyUnit}`}</p>
-          <h4>Strategy:</h4>
-          <p>{rule.strategy}</p>
-          <h4>Order Type:</h4>
-          <p>{rule.orderType}</p>
-          <h4>Asset Range:</h4>
-          <p>{rule.assetRange}</p>
-          <h4>Asset Minimum Limit:</h4>
-          <p>{rule.assetMinLimit}</p>
-          <h4>Buy Weight Rate:</h4>
-          <p>{rule.buyWeightRate}</p>
-          <h4>Sell Weight Rate:</h4>
-          <p>{rule.sellWeightRate}</p>
-          <h4>Profit:</h4>
-          <p>{rule.totalProfit}</p>
-          <h4>Status:</h4>
-          <p>{rule.status}</p>
-          <h4>Modified At:</h4>
-          <p>{rule.modifiedAt}</p>
+        <div className={styles.button_area}>
+          <Link to="/rules">
+            <RaisedButton secondary={true} style={muiStyles.backButton}>
+              &lt;&lt; Back
+            </RaisedButton>
+          </Link>
+        </div>
+        <div className={styles.flex_wrapper}>
+          <div className={styles.content}>
+            <div className={styles.field}>
+              <h4>ID:</h4>
+              <div>{rule.ruleId}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Exchange Site A:</h4>
+              <div>{showExchangeSite(rule.oneSiteName)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Exchange Site B:</h4>
+              <div>{showExchangeSite(rule.otherSiteName)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Pair:</h4>
+              <div>{showPair(getPair(rule.coinUnit, rule.currencyUnit))}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Strategy:</h4>
+              <div>{showStrategy(rule.strategy)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Order Type:</h4>
+              <div>{showOrderType(rule.orderType)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Asset Range:</h4>
+              <div>{rule.assetRange}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Asset Minimum Limit:</h4>
+              <div>{rule.assetMinLimit}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Buy Weight Rate:</h4>
+              <div>{rule.buyWeightRate}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Sell Weight Rate:</h4>
+              <div>{rule.sellWeightRate}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Profit:</h4>
+              <div>{showProfit(rule.totalProfit, rule.currencyUnit)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Status:</h4>
+              <div>{showStatus(rule.status)}</div>
+            </div>
+            <div className={styles.field}>
+              <h4>Modified At:</h4>
+              <div>{rule.modifiedAt}</div>
+            </div>
+            <div className={styles.button_area}>
+              <RaisedButton
+                secondary={true}
+                style={muiStyles.button}
+                onClick={this.onDeleteClick.bind(this)}
+              >
+                Delete
+              </RaisedButton>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -15,6 +15,17 @@ export function validateRulesNewForm(values) {
     errors.otherSiteName = 'Select an exchange site B.';
   }
 
+  if (
+    values.oneSiteName &&
+    values.otherSiteName &&
+    values.oneSiteName === values.otherSiteName
+  ) {
+    errors.oneSiteName =
+      'Select a different exchange site in a site A and a site B.';
+    errors.otherSiteName =
+      'Select a different exchange site in a site A and a site B.';
+  }
+
   if (!values.coinsPair) {
     errors.coinsPair = 'Select a pair.';
   }

@@ -5,53 +5,17 @@ import { connect } from 'react-redux';
 import { createRule } from '../../../actions';
 import { validateRulesNewForm as validate } from '../../../validates';
 import { renderTextField, renderSelectField, muiStyles } from '../../../utils';
+import {
+  STRATEGIES,
+  ORDER_TYPES,
+  COINS_PAIR,
+  getUnits,
+  EXCHANGE_SITES,
+} from '../rulesUtils';
 
 import styles from './RulesNew.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
-
-const STRATEGIES = {
-  SIMPLE_ARBITRAGE: 'simple_arbitrage',
-};
-
-const ORDER_TYPES = {
-  LIMIT_ORDER: 'limit_order',
-  MARKET_ORDER: 'market_order',
-};
-
-const COINS_PAIR = {
-  BTC_JPY: 'btc_jpy',
-};
-
-const COIN_UNITS = {
-  BTC: 'btc',
-};
-
-const CURRENCY_UNITS = {
-  JPY: 'jpy',
-  USD: 'usd',
-  CAD: 'cad',
-};
-
-const getUnits = coinsPair => {
-  switch (coinsPair) {
-    case COINS_PAIR.BTC_JPY:
-      return {
-        coinUnit: COIN_UNITS.BTC,
-        currencyUnit: CURRENCY_UNITS.JPY,
-      };
-    default:
-      return {
-        coinUnit: COIN_UNITS.BTC,
-        currencyUnit: CURRENCY_UNITS.JPY,
-      };
-  }
-};
-
-const EXCHANGE_SITES = {
-  BITFLYER: 'bitflyer',
-  ZAIF: 'zaif',
-};
 
 class RulesNew extends Component {
   onSubmit(values) {

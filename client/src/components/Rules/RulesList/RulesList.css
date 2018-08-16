@@ -12,3 +12,22 @@
   box-sizing: border-box;
   align-items: center;
 }
+
+.button_area div {
+  color: white;
+  font-size: 2rem;
+}
+
+.table {
+  margin-top: 20px;
+  padding: 5px;
+  border: dashed 5px #000;
+  background-color: white;
+  width: 1000px;
+  font-size: 7rem;
+  text-align: center;
+}
+
+.table td {
+  padding: 5px;
+}

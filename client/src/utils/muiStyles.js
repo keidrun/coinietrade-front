@@ -13,6 +13,11 @@ export const muiStyles = {
     height: 50,
     marginLeft: '15%',
   },
+  tableButton: {
+    width: 100,
+    height: 50,
+    margin: 5,
+  },
   textField: {
     width: 800,
     height: 50,

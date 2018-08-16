@@ -28,7 +28,7 @@ class Logged extends Component {
       },
       {
         icon: 'meetup',
-        text: 'Find Events',
+        text: 'Events',
         link: '/meetup',
       },
       {
