@@ -12,6 +12,8 @@ import RulesNew from './Rules/RulesNew/RulesNew';
 import RulesDetail from './Rules/RulesDetail/RulesDetail';
 import Settings from './Setting/Setting';
 import Help from './Help/Help';
+import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
+import TermsOfService from './TermsOfService/TermsOfService';
 
 export default class Routes extends Component {
   render() {
@@ -30,6 +32,8 @@ export default class Routes extends Component {
             <Route path="/meetup" exact component={Auth(Events, true)} />
             <Route path="/settings" exact component={Auth(Settings, true)} />
             <Route path="/help" exact component={Auth(Help, true)} />
+            <Route path="/privacy" exact component={PrivacyPolicy} />
+            <Route path="/terms" exact component={TermsOfService} />
             <Route path="/" component={Auth(Landing, false)} />
           </Switch>
         </Layout>

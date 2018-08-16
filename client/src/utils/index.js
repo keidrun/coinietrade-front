@@ -1,10 +1,11 @@
-import { API_VERSION, BASE_URI } from './apiVersion';
+import { TAG, API_VERSION, BASE_URI } from './version';
 import { getPosition } from './geoLocation';
 import { muiStyles } from './muiStyles';
 import { renderTextField, renderSelectField } from './renderFields';
 import { isSpaceIncluded, mapToArray } from './smallFunctions';
 
 export {
+  TAG,
   API_VERSION,
   BASE_URI,
   getPosition,

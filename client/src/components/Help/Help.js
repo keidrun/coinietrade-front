@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './Help.css';
+import { Link } from 'react-router-dom';
+import { TAG } from '../../utils';
 
-const TAG = '0.1.0';
+import styles from './Help.css';
 
 const Help = () => (
   <div className={styles.help}>
@@ -31,6 +32,18 @@ const Help = () => (
           >
             CoinieTrade Documents
           </a>
+        </p>
+        <h4>Privacy Policy & Terms Of Service</h4>
+        <p>
+          <Link to={`/privacy`}>Privacy Policy</Link>
+        </p>
+        <p>
+          <Link to={`/terms`}>Terms Of Service</Link>
+        </p>
+        <h4>Support</h4>
+        <p>
+          If you have any quiestions about this site, please send your email to{' '}
+          <a href="mailto:support@coinietrade.com?subject=[SUPPORT]">HERE</a>!
         </p>
         <h4>Feedback</h4>
         <p>I really need your feedback to make this site much better.</p>

@@ -1,4 +1,4 @@
-.help {
+.terms_of_service {
   margin: 0 auto;
   padding-top: 20px;
   padding-bottom: 40px;
@@ -27,7 +27,11 @@
 
 .content p {
   font-size: 3rem;
-  margin: 20px;
+  padding: 20px;
+}
+
+.content p strong {
+  font-size: 3.5rem;
 }
 
 .content a {
@@ -37,4 +41,13 @@
 
 .content a:hover {
   color: #ff80ab;
+}
+
+.content li {
+  font-size: 2.5rem;
+  margin-left: 40px;
+}
+
+.content li strong {
+  font-size: 2.5rem;
 }
