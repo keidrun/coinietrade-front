@@ -26,31 +26,37 @@ class RulesList extends Component {
   }
 
   renderRules() {
-    return _.map(this.props.rules, rule => (
-      <tr key={rule.ruleId}>
-        <td>{rule.ruleId.substr(0, 8)}</td>
-        <td>{showExchangeSite(rule.oneSiteName)}</td>
-        <td>{showExchangeSite(rule.otherSiteName)}</td>
-        <td>{showPair(getPair(rule.coinUnit, rule.currencyUnit))}</td>
-        <td>{showStrategy(rule.strategy)}</td>
-        <td>{showOrderType(rule.orderType)}</td>
-        <td> {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}</td>
-        <td>{rule.assetRange}</td>
-        <td>{rule.buyWeightRate}</td>
-        <td>{rule.sellWeightRate}</td>
-        <td>{showProfit(rule.totalProfit, rule.currencyUnit)}</td>
-        <td>{showStatus(rule.status)}</td>
-        <td>
-          <span className={styles.button_area}>
-            <Link to={`/rules/${rule.ruleId}`}>
-              <RaisedButton secondary={true} style={muiStyles.tableButton}>
-                Detail
-              </RaisedButton>
-            </Link>
-          </span>
-        </td>
-      </tr>
-    ));
+    return _.map(
+      this.props.rules,
+      rule =>
+        rule.ruleId ? (
+          <tr key={rule.ruleId}>
+            <td>{rule.ruleId.substr(0, 8)}</td>
+            <td>{showExchangeSite(rule.oneSiteName)}</td>
+            <td>{showExchangeSite(rule.otherSiteName)}</td>
+            <td>{showPair(getPair(rule.coinUnit, rule.currencyUnit))}</td>
+            <td>{showStrategy(rule.strategy)}</td>
+            <td>{showOrderType(rule.orderType)}</td>
+            <td> {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}</td>
+            <td>{rule.assetRange}</td>
+            <td>{rule.buyWeightRate}</td>
+            <td>{rule.sellWeightRate}</td>
+            <td>{showProfit(rule.totalProfit, rule.currencyUnit)}</td>
+            <td>{showStatus(rule.status)}</td>
+            <td>
+              <span className={styles.button_area}>
+                <Link to={`/rules/${rule.ruleId}`}>
+                  <RaisedButton secondary={true} style={muiStyles.tableButton}>
+                    Detail
+                  </RaisedButton>
+                </Link>
+              </span>
+            </td>
+          </tr>
+        ) : (
+          <tr key="0" />
+        ),
+    );
   }
 
   renderCreateButton() {
