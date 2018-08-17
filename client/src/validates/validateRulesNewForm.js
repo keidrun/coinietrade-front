@@ -46,28 +46,40 @@ export function validateRulesNewForm(values) {
     errors.assetMinLimit = 'The number must be greater than or equal to 0.';
   }
 
-  if (!values.assetRange) {
-    errors.assetRange = 'Enter an asset range.';
-  } else if (!validator.isNumeric(values.assetRange)) {
-    errors.assetRange = 'Must be number.';
-  } else if (values.assetRange < 0 || values.assetRange > 1) {
-    errors.assetRange = 'The number must be between 0 and 1.';
+  if (!values.assetRangePercentage) {
+    errors.assetRangePercentage = 'Enter an asset range.';
+  } else if (!validator.isNumeric(values.assetRangePercentage)) {
+    errors.assetRangePercentage = 'Must be number.';
+  } else if (
+    values.assetRangePercentage < 0 ||
+    values.assetRangePercentage > 100
+  ) {
+    errors.assetRangePercentage =
+      'The number must be between 0 [%] and 100 [%].';
   }
 
-  if (!values.buyWeightRate) {
-    errors.buyWeightRate = 'Enter a buy weight rate.';
-  } else if (!validator.isNumeric(values.buyWeightRate)) {
-    errors.buyWeightRate = 'Must be number.';
-  } else if (values.buyWeightRate < 0 || values.buyWeightRate > 2) {
-    errors.buyWeightRate = 'The number must be between 0 and 2.';
+  if (!values.buyWeightRatePercentage) {
+    errors.buyWeightRatePercentage = 'Enter a buy weight rate.';
+  } else if (!validator.isNumeric(values.buyWeightRatePercentage)) {
+    errors.buyWeightRatePercentage = 'Must be number.';
+  } else if (
+    values.buyWeightRatePercentage < 0 ||
+    values.buyWeightRatePercentage > 200
+  ) {
+    errors.buyWeightRatePercentage =
+      'The number must be between 0 [%] and 200 [%].';
   }
 
-  if (!values.sellWeightRate) {
-    errors.sellWeightRate = 'Enter a sell weight rate.';
-  } else if (!validator.isNumeric(values.sellWeightRate)) {
-    errors.sellWeightRate = 'Must be number.';
-  } else if (values.sellWeightRate < 0 || values.sellWeightRate > 2) {
-    errors.sellWeightRate = 'The number must be between 0 and 2.';
+  if (!values.sellWeightRatePercentage) {
+    errors.sellWeightRatePercentage = 'Enter a sell weight rate.';
+  } else if (!validator.isNumeric(values.sellWeightRatePercentage)) {
+    errors.sellWeightRatePercentage = 'Must be number.';
+  } else if (
+    values.sellWeightRatePercentage < 0 ||
+    values.sellWeightRatePercentage > 200
+  ) {
+    errors.sellWeightRatePercentage =
+      'The number must be between 0 [%] and 200 [%].';
   }
 
   return errors;

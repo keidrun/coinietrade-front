@@ -13,6 +13,7 @@ import {
   showAssetMinLimit,
   showProfit,
   showStatus,
+  showAsPercentage,
 } from '../rulesUtils';
 
 import styles from './RulesList.css';
@@ -38,9 +39,9 @@ class RulesList extends Component {
             <td>{showStrategy(rule.strategy)}</td>
             <td>{showOrderType(rule.orderType)}</td>
             <td> {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}</td>
-            <td>{rule.assetRange}</td>
-            <td>{rule.buyWeightRate}</td>
-            <td>{rule.sellWeightRate}</td>
+            <td>{showAsPercentage(rule.assetRange)}</td>
+            <td>{showAsPercentage(rule.buyWeightRate)}</td>
+            <td>{showAsPercentage(rule.sellWeightRate)}</td>
             <td>{showProfit(rule.totalProfit, rule.currencyUnit)}</td>
             <td>{showStatus(rule.status)}</td>
             <td>

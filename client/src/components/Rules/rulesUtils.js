@@ -134,3 +134,7 @@ export const showStatus = status => {
       return '-';
   }
 };
+
+export const showAsPercentage = number => {
+  return `${number * 100} [%]`;
+};

@@ -12,6 +12,7 @@ import {
   showAssetMinLimit,
   showProfit,
   showStatus,
+  showAsPercentage,
 } from '../rulesUtils';
 
 import styles from './RulesDetail.css';
@@ -90,15 +91,15 @@ class RulesDetail extends Component {
             </div>
             <div className={styles.field}>
               <h4>Asset Range:</h4>
-              <div>{rule.assetRange}</div>
+              <div>{showAsPercentage(rule.assetRange)}</div>
             </div>
             <div className={styles.field}>
               <h4>Buy Weight Rate:</h4>
-              <div>{rule.buyWeightRate}</div>
+              <div>{showAsPercentage(rule.buyWeightRate)}</div>
             </div>
             <div className={styles.field}>
               <h4>Sell Weight Rate:</h4>
-              <div>{rule.sellWeightRate}</div>
+              <div>{showAsPercentage(rule.sellWeightRate)}</div>
             </div>
             <div className={styles.field}>
               <h4>Profit:</h4>

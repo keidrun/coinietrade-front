@@ -24,6 +24,10 @@ class RulesNew extends Component {
     rule.coinUnit = units.coinUnit;
     rule.currencyUnit = units.currencyUnit;
 
+    rule.assetRange = rule.assetRangePercentage / 100;
+    rule.buyWeightRate = rule.buyWeightRatePercentage / 100;
+    rule.sellWeightRate = rule.sellWeightRatePercentage / 100;
+
     this.props.createRule(rule, () => {
       this.props.history.push('/rules');
     });
@@ -158,46 +162,46 @@ class RulesNew extends Component {
               />
             </div>
             <div className={styles.text_field}>
-              <h4>Asset Range</h4>
+              <h4>Asset Range [%]</h4>
               <br />
               <Field
-                name="assetRange"
+                name="assetRangePercentage"
                 component={renderTextField}
                 type="number"
-                min="0.000"
-                max="1.000"
-                step="0.001"
-                placeholder="Enter 0.000 to 1.000"
+                min="0"
+                max="100"
+                step="1"
+                placeholder="Enter 0 [%] to 100 [%]"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
             </div>
             <div className={styles.text_field}>
-              <h4>Buy Weight Rate</h4>
+              <h4>Buy Weight Rate [%]</h4>
               <br />
               <Field
-                name="buyWeightRate"
+                name="buyWeightRatePercentage"
                 component={renderTextField}
                 type="number"
                 min="0.000"
-                max="2.000"
+                max="200.000"
                 step="0.001"
-                placeholder="Enter 0.000 to 2.000"
+                placeholder="Enter 0.000 [%] to 200.000 [%]"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
             </div>
             <div className={styles.text_field}>
-              <h4>Sell Weight Rate</h4>
+              <h4>Sell Weight Rate [%]</h4>
               <br />
               <Field
-                name="sellWeightRate"
+                name="sellWeightRatePercentage"
                 component={renderTextField}
                 type="number"
                 min="0.000"
-                max="2.000"
+                max="200.000"
                 step="0.001"
-                placeholder="Enter 0.000 to 2.000"
+                placeholder="Enter 0.000 [%] to 200.000 [%]"
                 style={muiStyles.textField}
                 underlineFocusStyle={muiStyles.underlineStyle}
               />
@@ -228,9 +232,9 @@ export default reduxForm({
     strategy: STRATEGIES.SIMPLE_ARBITRAGE,
     orderType: ORDER_TYPES.LIMIT_ORDER,
     assetMinLimit: '0',
-    assetRange: '1.000',
-    buyWeightRate: '1.000',
-    sellWeightRate: '1.000',
+    assetRangePercentage: '100',
+    buyWeightRatePercentage: '100.000',
+    sellWeightRatePercentage: '100.000',
   },
 })(
   connect(
