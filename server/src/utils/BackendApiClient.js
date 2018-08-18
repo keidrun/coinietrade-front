@@ -4,7 +4,7 @@ const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
 const API_VERSION = 'v1';
 const API_BASE_URL = `${keys.endpointApiURL}/${API_VERSION}`;
-const DEFAULT_API_TIMEOUT_MILLIS = 1000;
+const DEFAULT_API_TIMEOUT_MILLIS = 2000;
 const DEFAULT_RULE_LIMIT = 3;
 const DEFAULT_RULE_EXPIRED_DATE = moment()
   .add(6, 'months')

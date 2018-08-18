@@ -16,8 +16,8 @@ import {
 } from '../rulesUtils';
 
 import styles from './RulesDetail.css';
-import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loading from '../../Landing/Landing';
 
 class RulesDetail extends Component {
   componentDidMount() {
@@ -32,24 +32,16 @@ class RulesDetail extends Component {
     });
   }
 
-  renderLoading() {
-    return (
-      <div className={styles.loading}>
-        <CircularProgress size={180} thickness={10} color="#000000" />
-      </div>
-    );
-  }
-
   render() {
     const { rule, error } = this.props;
 
     if (!rule) {
-      return this.renderLoading();
+      return <Loading style={styles.loading} />;
     }
 
     return (
       <div>
-        {error ? renderErrors(error) : <div />}
+        {error ? renderErrors(error) : null}
         <div className={styles.rules_detail}>
           <h2>Rule Detail</h2>
           <div className={styles.button_area}>

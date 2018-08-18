@@ -96,7 +96,7 @@ class Setting extends Component {
 
     return (
       <div>
-        {error ? renderErrors(error) : <div />}
+        {error ? renderErrors(error) : null}
         <div className={styles.setting}>
           <h2>Settings</h2>
           <div className={styles.flex_wrapper}>

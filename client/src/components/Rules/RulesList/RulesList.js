@@ -17,8 +17,8 @@ import {
 } from '../rulesUtils';
 
 import styles from './RulesList.css';
-import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loading from '../../Landing/Landing';
 
 class RulesList extends Component {
   componentDidMount() {
@@ -77,24 +77,16 @@ class RulesList extends Component {
     );
   }
 
-  renderLoading() {
-    return (
-      <div className={styles.loading}>
-        <CircularProgress size={180} thickness={10} color="#000000" />
-      </div>
-    );
-  }
-
   render() {
     const { rules, policy, error } = this.props;
 
     if (!rules || !policy) {
-      return this.renderLoading();
+      return <Loading style={styles.loading} />;
     }
 
     return (
       <div>
-        {error ? renderErrors(error) : <div />}
+        {error ? renderErrors(error) : null}
         <div className={styles.rules_list}>
           <h2>
             Trade Rules <div>Expired At: {policy.expiredAt}</div>

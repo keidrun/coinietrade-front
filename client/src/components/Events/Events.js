@@ -6,7 +6,7 @@ import { getPosition, renderErrors } from '../../utils';
 import styles from './Event.css';
 import GridEventList from './GridList/GridEventList';
 import FlatButton from 'material-ui/FlatButton';
-import CircularProgress from 'material-ui/CircularProgress';
+import Loading from '../Loading/Loading';
 
 const SEARCH_TEXT = 'bitcoin';
 const EVENTS_NUM = 6;
@@ -76,23 +76,15 @@ class Events extends Component {
       </div>
     ) : null;
 
-  renderLoading = () => {
-    return this.state.loading ? (
-      <div className={styles.loading}>
-        <CircularProgress size={180} thickness={10} color="#000000" />
-      </div>
-    ) : null;
-  };
-
   render() {
     const { error } = this.props;
 
     return (
       <div>
-        {error ? renderErrors(error) : <div />}
+        {error ? renderErrors(error) : null}
         <div className={styles.event}>
           <h2>Upcoming Events about Bitcoin</h2>
-          {this.renderLoading()}
+          {this.state.loading ? <Loading style={styles.loading} /> : null}
           <div className={styles.flex_wrapper}>
             {this.renderEvents(this.props.events)}
           </div>

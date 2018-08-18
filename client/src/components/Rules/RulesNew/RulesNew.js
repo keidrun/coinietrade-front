@@ -43,7 +43,7 @@ class RulesNew extends Component {
 
     return (
       <div>
-        {error ? renderErrors(error) : <div />}
+        {error ? renderErrors(error) : null}
         <div className={styles.rules_new}>
           <h3>New Rule</h3>
           <div className={styles.button_area}>
