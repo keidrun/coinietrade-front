@@ -5,13 +5,17 @@ import { BASE_URI, mapToArray } from '../utils';
 export const FETCH_USER = 'fetch_user';
 export const FETCH_EVENTS = 'fetch_events';
 export const CLEAR_EVENTS = 'clear_events';
+export const EVENTS_REQUEST_FAILED = 'event_request_failed';
 export const FETCH_PROFILE = 'fetch_profile';
 export const UPDATE_PROFILE = 'update_profile';
+export const PROFILE_REQUEST_FAILED = 'profile_request_failed';
 export const FETCH_RULES = 'fetch_rules';
 export const FETCH_RULE = 'fetch_rule';
 export const DELETE_RULE = 'delete_rule';
 export const CREATE_RULE = 'create_rule';
+export const RULES_REQUEST_FAILED = 'rules_request_failed';
 export const FETCH_POLICY = 'fetch_policy';
+export const POLICY_REQUEST_FAILED = 'plicy_request_failed';
 
 export const fetchUser = () => async dispatch => {
   try {
@@ -56,8 +60,8 @@ export const fetchEvents = (
     }
   } catch (error) {
     dispatch({
-      type: FETCH_EVENTS,
-      payload: { error: error.response.data },
+      type: EVENTS_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -87,8 +91,8 @@ export const fetchProfile = () => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: FETCH_PROFILE,
-      payload: { error: error.response.data },
+      type: PROFILE_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -107,8 +111,8 @@ export const updateProfile = ({ user }) => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: UPDATE_PROFILE,
-      payload: { user, error: error.response.data },
+      type: PROFILE_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -122,8 +126,8 @@ export const fetchRules = () => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: FETCH_RULES,
-      payload: { error: error.response.data },
+      type: RULES_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -137,8 +141,8 @@ export const fetchRule = id => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: FETCH_RULE,
-      payload: { error: error.response.data },
+      type: RULES_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -154,8 +158,8 @@ export const deleteRule = (id, callback) => async dispatch => {
     };
   } catch (error) {
     dispatch({
-      type: DELETE_RULE,
-      payload: { error: error.response.data },
+      type: RULES_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -171,8 +175,8 @@ export const createRule = (values, callback) => async dispatch => {
     };
   } catch (error) {
     dispatch({
-      type: CREATE_RULE,
-      payload: { error: error.response.data },
+      type: RULES_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };
@@ -186,8 +190,8 @@ export const fetchPolicy = () => async dispatch => {
     });
   } catch (error) {
     dispatch({
-      type: FETCH_POLICY,
-      payload: { error: error.response.data },
+      type: POLICY_REQUEST_FAILED,
+      payload: error.response.data || error,
     });
   }
 };

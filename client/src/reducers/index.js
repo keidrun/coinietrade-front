@@ -5,6 +5,7 @@ import eventsReducer from './eventsReducer';
 import profileReducer from './profileReducer';
 import rulesReducer from './rulesRedoucer';
 import policyReducer from './policyReducer';
+import errorReducer from './errorReducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   rules: rulesReducer,
   policy: policyReducer,
+  error: errorReducer,
 });
 
 export default rootReducer;

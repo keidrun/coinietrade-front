@@ -3,7 +3,12 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../actions';
 import { validateSettingForm as validate } from '../../validates';
-import { renderTextField, renderSelectField, muiStyles } from '../../utils';
+import {
+  renderTextField,
+  renderSelectField,
+  muiStyles,
+  renderErrors,
+} from '../../utils';
 
 import styles from './Setting.css';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -87,148 +92,151 @@ class Setting extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting } = this.props;
+    const { error, handleSubmit, pristine, submitting } = this.props;
 
     return (
-      <div className={styles.setting}>
-        <h2>Settings</h2>
-        <div className={styles.flex_wrapper}>
-          <form
-            className={styles.form}
-            onSubmit={handleSubmit(this.onSubmit.bind(this))}
-          >
-            <div className={styles.text_field}>
-              <h4>Name</h4>
-              <br />
-              <Field
-                name="displayName"
-                component={renderTextField}
-                type="text"
-                placeholder="Enter name"
-                style={muiStyles.textField}
-                underlineFocusStyle={muiStyles.underlineStyle}
-              />
-            </div>
-            <div className={styles.text_field}>
-              <h4>Email</h4>
-              <br />
-              <Field
-                name="email"
-                component={renderTextField}
-                type="email"
-                placeholder="Enter email"
-                style={muiStyles.textField}
-                underlineFocusStyle={muiStyles.underlineStyle}
-              />
-            </div>
-            <div className={styles.select_field}>
-              <h4>Language</h4>
-              <br />
-              <Field
-                name="language"
-                component={renderSelectField}
-                style={muiStyles.selectField}
-                underlineFocusStyle={muiStyles.underlineStyle}
-              >
-                <MenuItem
-                  className={styles.select_item}
-                  value={LANGUAGE.ENGLISH}
-                  primaryText="English"
-                />
-                <MenuItem
-                  className={styles.select_item}
-                  value={LANGUAGE.JAPANESE}
-                  primaryText="Japanese"
-                />
-              </Field>
-            </div>
-            <div className={styles.select_field}>
-              <h4>Gender</h4>
-              <br />
-              <Field
-                name="gender"
-                component={renderSelectField}
-                style={muiStyles.selectField}
-                underlineFocusStyle={muiStyles.underlineStyle}
-              >
-                <MenuItem
-                  className={styles.select_item}
-                  value={GENDER.MALE}
-                  primaryText="Male"
-                />
-                <MenuItem
-                  className={styles.select_item}
-                  value={GENDER.FEMALE}
-                  primaryText="Female"
-                />
-              </Field>
-            </div>
-
-            <hr />
-            <div className={styles.text_field}>
-              <h4>API Keys and Secrets</h4>
-              <br />
+      <div>
+        {error ? renderErrors(error) : <div />}
+        <div className={styles.setting}>
+          <h2>Settings</h2>
+          <div className={styles.flex_wrapper}>
+            <form
+              className={styles.form}
+              onSubmit={handleSubmit(this.onSubmit.bind(this))}
+            >
               <div className={styles.text_field}>
-                <h5>bitflyer</h5>
+                <h4>Name</h4>
                 <br />
                 <Field
-                  name="bitflyerApiKey"
+                  name="displayName"
                   component={renderTextField}
                   type="text"
-                  placeholder="Enter API Key"
-                  style={muiStyles.textField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
-                />
-                <Field
-                  name="bitflyerApiSecret"
-                  component={renderTextField}
-                  type="text"
-                  placeholder="Enter API Secret"
+                  placeholder="Enter name"
                   style={muiStyles.textField}
                   underlineFocusStyle={muiStyles.underlineStyle}
                 />
               </div>
               <div className={styles.text_field}>
-                <h5>zaif</h5>
+                <h4>Email</h4>
                 <br />
                 <Field
-                  name="zaifApiKey"
+                  name="email"
                   component={renderTextField}
-                  type="text"
-                  placeholder="Enter API Key"
-                  style={muiStyles.textField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
-                />
-                <Field
-                  name="zaifApiSecret"
-                  component={renderTextField}
-                  type="text"
-                  placeholder="Enter API Secret"
+                  type="email"
+                  placeholder="Enter email"
                   style={muiStyles.textField}
                   underlineFocusStyle={muiStyles.underlineStyle}
                 />
               </div>
-            </div>
+              <div className={styles.select_field}>
+                <h4>Language</h4>
+                <br />
+                <Field
+                  name="language"
+                  component={renderSelectField}
+                  style={muiStyles.selectField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                >
+                  <MenuItem
+                    className={styles.select_item}
+                    value={LANGUAGE.ENGLISH}
+                    primaryText="English"
+                  />
+                  <MenuItem
+                    className={styles.select_item}
+                    value={LANGUAGE.JAPANESE}
+                    primaryText="Japanese"
+                  />
+                </Field>
+              </div>
+              <div className={styles.select_field}>
+                <h4>Gender</h4>
+                <br />
+                <Field
+                  name="gender"
+                  component={renderSelectField}
+                  style={muiStyles.selectField}
+                  underlineFocusStyle={muiStyles.underlineStyle}
+                >
+                  <MenuItem
+                    className={styles.select_item}
+                    value={GENDER.MALE}
+                    primaryText="Male"
+                  />
+                  <MenuItem
+                    className={styles.select_item}
+                    value={GENDER.FEMALE}
+                    primaryText="Female"
+                  />
+                </Field>
+              </div>
 
-            <div className={styles.button_area}>
-              <RaisedButton
-                secondary={true}
-                style={muiStyles.button}
-                type="submit"
-                disabled={pristine || submitting}
-              >
-                Update
-              </RaisedButton>
-            </div>
-          </form>
+              <hr />
+              <div className={styles.text_field}>
+                <h4>API Keys and Secrets</h4>
+                <br />
+                <div className={styles.text_field}>
+                  <h5>bitflyer</h5>
+                  <br />
+                  <Field
+                    name="bitflyerApiKey"
+                    component={renderTextField}
+                    type="text"
+                    placeholder="Enter API Key"
+                    style={muiStyles.textField}
+                    underlineFocusStyle={muiStyles.underlineStyle}
+                  />
+                  <Field
+                    name="bitflyerApiSecret"
+                    component={renderTextField}
+                    type="text"
+                    placeholder="Enter API Secret"
+                    style={muiStyles.textField}
+                    underlineFocusStyle={muiStyles.underlineStyle}
+                  />
+                </div>
+                <div className={styles.text_field}>
+                  <h5>zaif</h5>
+                  <br />
+                  <Field
+                    name="zaifApiKey"
+                    component={renderTextField}
+                    type="text"
+                    placeholder="Enter API Key"
+                    style={muiStyles.textField}
+                    underlineFocusStyle={muiStyles.underlineStyle}
+                  />
+                  <Field
+                    name="zaifApiSecret"
+                    component={renderTextField}
+                    type="text"
+                    placeholder="Enter API Secret"
+                    style={muiStyles.textField}
+                    underlineFocusStyle={muiStyles.underlineStyle}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.button_area}>
+                <RaisedButton
+                  secondary={true}
+                  style={muiStyles.button}
+                  type="submit"
+                  disabled={pristine || submitting}
+                >
+                  Update
+                </RaisedButton>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ profile }) {
-  return { profile };
+function mapStateToProps({ profile, error }) {
+  return { profile, error };
 }
 
 export default reduxForm({

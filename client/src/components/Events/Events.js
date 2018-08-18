@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchEvents, clearEvents } from '../../actions';
-import { getPosition } from '../../utils';
+import { getPosition, renderErrors } from '../../utils';
 
 import styles from './Event.css';
 import GridEventList from './GridList/GridEventList';
@@ -85,21 +85,26 @@ class Events extends Component {
   };
 
   render() {
+    const { error } = this.props;
+
     return (
-      <div className={styles.event}>
-        <h2>Upcoming Events about Bitcoin</h2>
-        {this.renderLoading()}
-        <div className={styles.flex_wrapper}>
-          {this.renderEvents(this.props.events)}
+      <div>
+        {error ? renderErrors(error) : <div />}
+        <div className={styles.event}>
+          <h2>Upcoming Events about Bitcoin</h2>
+          {this.renderLoading()}
+          <div className={styles.flex_wrapper}>
+            {this.renderEvents(this.props.events)}
+          </div>
+          {this.renderLoadMore(this.props.events)}
         </div>
-        {this.renderLoadMore(this.props.events)}
       </div>
     );
   }
 }
 
-function mapStateToProps({ events }) {
-  return { events };
+function mapStateToProps({ events, error }) {
+  return { events, error };
 }
 
 export default connect(

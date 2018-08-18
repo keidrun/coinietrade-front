@@ -3,6 +3,7 @@ import { getPosition } from './geoLocation';
 import { muiStyles } from './muiStyles';
 import { renderTextField, renderSelectField } from './renderFields';
 import { isSpaceIncluded, mapToArray } from './smallFunctions';
+import { renderErrors } from './renderErrors';
 
 export {
   TAG,
@@ -14,4 +15,5 @@ export {
   renderSelectField,
   isSpaceIncluded,
   mapToArray,
+  renderErrors,
 };

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchRules, fetchPolicy } from '../../../actions';
-import { muiStyles } from '../../../utils';
+import { muiStyles, renderErrors } from '../../../utils';
 import {
   getPair,
   showExchangeSite,
@@ -86,45 +86,50 @@ class RulesList extends Component {
   }
 
   render() {
-    if (!this.props.rules || !this.props.policy) {
+    const { rules, policy, error } = this.props;
+
+    if (!rules || !policy) {
       return this.renderLoading();
     }
 
     return (
-      <div className={styles.rules_list}>
-        <h2>
-          Trade Rules <div>Expired At: {this.props.policy.expiredAt}</div>
-        </h2>
-        <div>{this.renderCreateButton()}</div>
-        <div className={styles.flex_wrapper}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Site A</th>
-                <th>Site B</th>
-                <th>Pair</th>
-                <th>Strategy</th>
-                <th>Order Type</th>
-                <th>Asset Minimum Limit</th>
-                <th>Asset Range</th>
-                <th>Buy Weight Rate</th>
-                <th>Sell Weight Rate</th>
-                <th>Profit</th>
-                <th>Status</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>{this.renderRules()}</tbody>
-          </table>
+      <div>
+        {error ? renderErrors(error) : <div />}
+        <div className={styles.rules_list}>
+          <h2>
+            Trade Rules <div>Expired At: {policy.expiredAt}</div>
+          </h2>
+          <div>{this.renderCreateButton()}</div>
+          <div className={styles.flex_wrapper}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Site A</th>
+                  <th>Site B</th>
+                  <th>Pair</th>
+                  <th>Strategy</th>
+                  <th>Order Type</th>
+                  <th>Asset Minimum Limit</th>
+                  <th>Asset Range</th>
+                  <th>Buy Weight Rate</th>
+                  <th>Sell Weight Rate</th>
+                  <th>Profit</th>
+                  <th>Status</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>{this.renderRules()}</tbody>
+            </table>
+          </div>
         </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ rules, policy }) {
-  return { rules, policy };
+function mapStateToProps({ rules, policy, error }) {
+  return { rules, policy, error };
 }
 
 export default connect(
