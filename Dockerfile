@@ -1,4 +1,4 @@
-FROM node:10.6.0-alpine
+FROM node:10.9.0-alpine
 
 LABEL maintainer="Keid"
 
@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN npm config set registry "https://registry.npmjs.org"
-RUN npm install -g yarn@1.7.0 nodemon
+RUN npm install -g yarn@1.9.4
 RUN chmod +x /usr/local/bin/yarn
 
 COPY package.json package.json

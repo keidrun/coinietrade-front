@@ -5,7 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": ">=10.0.0",
-    "yarn": ">=1.6.0"
+    "yarn": ">=1.9.0"
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
   "author": "keidrun",
