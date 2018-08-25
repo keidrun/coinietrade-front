@@ -28,7 +28,10 @@ app.use(
     xssFilter: true,
   }),
 );
+app.disable('x-powered-by');
+
 app.use(morgan('combined'));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
