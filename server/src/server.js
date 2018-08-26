@@ -1,3 +1,4 @@
+const path = require('path');
 const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -57,8 +58,6 @@ if (
 ) {
   app.use(express.static('client/build'));
 
-  // eslint-disable-next-line global-require
-  const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(
       path.resolve(__dirname, '../../client', 'build', 'index.html'),

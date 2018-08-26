@@ -28,6 +28,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "qs": "^6.5.1",
+    "sitemap": "^1.13.0",
     "socket.io": "^2.0.4",
     "uuid": "^3.2.1",
     "validator": "^10.4.0"
@@ -83,7 +84,8 @@
     "watch:lint": "nodemon --exec yarn lint",
     "watch:test": "nodemon --exec yarn test",
     "watch": "npm-run-all -p watch:*",
-    "build": "yarn --cwd client build",
+    "build-sitemap": "node server/scripts/build-sitemap.js",
+    "build": "yarn build-sitemap && yarn --cwd client build",
     "base64": "cat .env | base64",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
