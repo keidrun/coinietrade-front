@@ -1,6 +1,6 @@
 const { checkSchema } = require('express-validator/check');
 const { isEmpty, isEmail } = require('validator');
-const { GENDER, LANGUAGE, EXCHANGE_SITES } = require('../models');
+const { GENDER, LANGUAGE, EXCHANGE_SITES } = require('../../models');
 
 const customChecks = {
   isEmptyOrEmail: params => (isEmpty(params) ? true : isEmail(params)),

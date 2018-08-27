@@ -1,6 +1,9 @@
 const { Router } = require('express');
 const { auth, handleValidationErrors } = require('../../middleware');
-const { addRuleValidator, updateRuleValidator } = require('../../validators');
+const {
+  addRuleValidator,
+  updateRuleValidator,
+} = require('../../middleware/validators');
 const { RulesController } = require('../../controllers');
 
 const rulesRoutes = new Router();
