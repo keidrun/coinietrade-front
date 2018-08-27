@@ -1,4 +1,5 @@
 const uuid = require('uuid');
+const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
@@ -8,7 +9,7 @@ const { BackendApiClient } = require('../utils');
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 const apiClient = new BackendApiClient();
 
-const configureStrategies = passport => {
+const configureStrategies = () => {
   passport.serializeUser((user, done) => done(null, user._id));
 
   passport.deserializeUser(async (_id, done) => {
@@ -127,4 +128,6 @@ const configureStrategies = passport => {
   );
 };
 
-module.exports = { configureStrategies };
+const initialize = () => passport.initialize();
+
+module.exports = { configureStrategies, initialize };

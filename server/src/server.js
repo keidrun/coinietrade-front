@@ -3,7 +3,6 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
 const socketIO = require('socket.io');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -15,7 +14,7 @@ const { errorHandler } = require('./middleware');
 const PORT = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
-passportService.configureStrategies(passport);
+passportService.configureStrategies();
 mongooseService.connect();
 
 app.use(
@@ -29,14 +28,13 @@ app.use(
     xssFilter: true,
   }),
 );
-app.disable('x-powered-by');
 
 app.use(morgan('combined'));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(passport.initialize());
+app.use(passportService.initialize());
 
 app.use('/auth', routes.passportRoutes);
 app.use('/api/v1/auth', routes.authRoutes);
