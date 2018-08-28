@@ -9,9 +9,10 @@ const { BackendApiClient } = require('../utils');
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 const apiClient = new BackendApiClient();
 
-const configureStrategies = () => {
+const serializeUser = () =>
   passport.serializeUser((user, done) => done(null, user._id));
 
+const deserializeUser = () =>
   passport.deserializeUser(async (_id, done) => {
     try {
       const user = await User.findById(_id);
@@ -21,113 +22,132 @@ const configureStrategies = () => {
     }
   });
 
-  passport.use(
-    new FacebookStrategy(
-      {
-        clientID: keys.facebookClientId,
-        clientSecret: keys.facebookClientSecret,
-        callbackURL: `${proxyURL}/auth/facebook/callback`,
-      },
-      async (accessToken, refreshToken, profile, done) => {
-        try {
-          const user = await User.findOne({ 'authProvider.id': profile.id });
-          if (user) {
-            // Login
-            const loggedinUser = await user.generateToken();
-            return done(null, loggedinUser);
+const configureStrategy = {
+  withFacebook: () =>
+    passport.use(
+      new FacebookStrategy(
+        {
+          clientID: keys.facebookClientId,
+          clientSecret: keys.facebookClientSecret,
+          callbackURL: `${proxyURL}/auth/facebook/callback`,
+        },
+        async (accessToken, refreshToken, profile, done) => {
+          try {
+            const user = await User.findOne({ 'authProvider.id': profile.id });
+            if (user) {
+              // Login
+              const loggedinUser = await user.generateToken();
+              return done(null, loggedinUser);
+            }
+
+            // Add policy to backend
+            const userId = uuid.v4();
+            await apiClient.addPolicy({
+              userId,
+            });
+
+            // Sign up
+            if (!profile) {
+              return done(null, false);
+            }
+            const facebookId = profile.id;
+            const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
+            const newUser = await new User({
+              _id: userId,
+              displayName: profile.displayName,
+              familyName: profile.name.familyName,
+              givenName: profile.name.givenName,
+              middleName: profile.name.middleName,
+              email: profile.email,
+              avatarUrl: profile.profileUrl || profilePictureURL,
+              gender: profile.gender,
+              authProvider: {
+                name: 'facebook',
+                id: facebookId,
+                accessToken,
+                refreshToken,
+              },
+            }).save();
+
+            const signedupUser = await newUser.generateToken();
+            return done(null, signedupUser);
+          } catch (error) {
+            return done(error);
           }
-
-          // Add policy to backend
-          const userId = uuid.v4();
-          await apiClient.addPolicy({
-            userId,
-          });
-
-          // Sign up
-          if (!profile) {
-            return done(null, false);
-          }
-          const facebookId = profile.id;
-          const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
-          const newUser = await new User({
-            _id: userId,
-            displayName: profile.displayName,
-            familyName: profile.name.familyName,
-            givenName: profile.name.givenName,
-            middleName: profile.name.middleName,
-            email: profile.email,
-            avatarUrl: profile.profileUrl || profilePictureURL,
-            gender: profile.gender,
-            authProvider: {
-              name: 'facebook',
-              id: facebookId,
-              accessToken,
-              refreshToken,
-            },
-          }).save();
-
-          const signedupUser = await newUser.generateToken();
-          return done(null, signedupUser);
-        } catch (error) {
-          return done(error);
-        }
-      },
+        },
+      ),
     ),
-  );
+  withGoogle: () =>
+    passport.use(
+      new GoogleStrategy(
+        {
+          clientID: keys.googleClientId,
+          clientSecret: keys.googleClientSecret,
+          callbackURL: `${proxyURL}/auth/google/callback`,
+        },
+        async (accessToken, refreshToken, profile, done) => {
+          try {
+            const user = await User.findOne({ 'authProvider.id': profile.id });
+            if (user) {
+              // Login
+              const loggedinUser = await user.generateToken();
+              return done(null, loggedinUser);
+            }
 
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: keys.googleClientId,
-        clientSecret: keys.googleClientSecret,
-        callbackURL: `${proxyURL}/auth/google/callback`,
-      },
-      async (accessToken, refreshToken, profile, done) => {
-        try {
-          const user = await User.findOne({ 'authProvider.id': profile.id });
-          if (user) {
-            // Login
-            const loggedinUser = await user.generateToken();
-            return done(null, loggedinUser);
+            // Add policy to backend
+            const userId = uuid.v4();
+            await apiClient.addPolicy({
+              userId,
+            });
+
+            // Sign up
+            if (!profile) {
+              return done(null, false);
+            }
+            const newUser = await new User({
+              _id: userId,
+              displayName: profile.displayName,
+              familyName: profile.name.familyName,
+              givenName: profile.name.givenName,
+              email: profile.emails[0].value,
+              avatarUrl: profile.photos[0].value,
+              gender: profile.gender,
+              language: profile.language,
+              authProvider: {
+                name: 'google',
+                id: profile.id,
+                accessToken,
+                refreshToken,
+              },
+            }).save();
+
+            const signedupUser = await newUser.generateToken();
+            return done(null, signedupUser);
+          } catch (error) {
+            return done(error);
           }
-
-          // Add policy to backend
-          const userId = uuid.v4();
-          await apiClient.addPolicy({
-            userId,
-          });
-
-          // Sign up
-          if (!profile) {
-            return done(null, false);
-          }
-          const newUser = await new User({
-            _id: userId,
-            displayName: profile.displayName,
-            familyName: profile.name.familyName,
-            givenName: profile.name.givenName,
-            email: profile.emails[0].value,
-            avatarUrl: profile.photos[0].value,
-            gender: profile.gender,
-            language: profile.language,
-            authProvider: {
-              name: 'google',
-              id: profile.id,
-              accessToken,
-              refreshToken,
-            },
-          }).save();
-
-          const signedupUser = await newUser.generateToken();
-          return done(null, signedupUser);
-        } catch (error) {
-          return done(error);
-        }
-      },
+        },
+      ),
     ),
-  );
 };
 
-const initialize = () => passport.initialize();
+const initialize = () => {
+  serializeUser();
+  deserializeUser();
+  configureStrategy.withFacebook();
+  configureStrategy.withGoogle();
+  return passport.initialize();
+};
 
-module.exports = { configureStrategies, initialize };
+const authenticate = {
+  withFacebook: () =>
+    passport.authenticate('facebook', {
+      scope: ['public_profile', 'email'],
+    }),
+  withGoogle: () =>
+    passport.authenticate('google', {
+      scope: ['profile', 'email'],
+    }),
+};
+
+module.exports = { initialize, authenticate };

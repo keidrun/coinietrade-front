@@ -11,11 +11,11 @@ const routes = require('./routes/v1');
 const sockets = require('./sockets/v1');
 const { errorHandler } = require('./middleware');
 
+mongooseService.connect();
+
 const PORT = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
-passportService.configureStrategies();
-mongooseService.connect();
 
 app.use(
   helmet({

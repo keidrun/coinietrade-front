@@ -1,32 +1,22 @@
 const { Router } = require('express');
-const passport = require('passport');
+const { passportService } = require('../../services');
 const { PassportController } = require('../../controllers');
 
 const passportRoutes = new Router();
 
-passportRoutes.get(
-  '/facebook',
-  passport.authenticate('facebook', {
-    scope: ['public_profile', 'email'],
-  }),
-);
+passportRoutes.get('/facebook', passportService.authenticate.withFacebook());
 
 passportRoutes.get(
   '/facebook/callback',
-  passport.authenticate('facebook'),
+  passportService.authenticate.withFacebook(),
   PassportController.redirectDashboard,
 );
 
-passportRoutes.get(
-  '/google',
-  passport.authenticate('google', {
-    scope: ['profile', 'email'],
-  }),
-);
+passportRoutes.get('/google', passportService.authenticate.withGoogle());
 
 passportRoutes.get(
   '/google/callback',
-  passport.authenticate('google'),
+  passportService.authenticate.withGoogle(),
   PassportController.redirectDashboard,
 );
 
