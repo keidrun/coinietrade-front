@@ -1,10 +1,8 @@
 import React from 'react';
 import { injectGlobal } from 'styled-components';
 
-import baseMuiTheme from '../theme/baseMuiTheme';
-import { white } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import muiTheme from '../theme/muiTheme';
 
 import Header from '../components/Header/Header';
 import Body from '../components/common/Body';
@@ -56,15 +54,6 @@ injectGlobal`
     text-decoration: none;
   }
 `;
-
-const muiTheme = getMuiTheme(baseMuiTheme, {
-  appBar: {
-    height: 80,
-  },
-  flatButton: {
-    buttonFilterColor: white,
-  },
-});
 
 const Layout = props => (
   <div>

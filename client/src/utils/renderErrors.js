@@ -1,5 +1,5 @@
 import React from 'react';
-import ErrorBar from '../components/ErrorBar/ErrorBar';
+import ErrorBar from '../components/common/ErrorBar';
 
 export const renderErrors = error => {
   if (error.errors) {

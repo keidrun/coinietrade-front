@@ -11,9 +11,9 @@ import RulesList from './Rules/RulesList/RulesList';
 import RulesNew from './Rules/RulesNew/RulesNew';
 import RulesDetail from './Rules/RulesDetail/RulesDetail';
 import Settings from './Setting/Setting';
-import Help from './Help/Help';
-import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
-import TermsOfService from './TermsOfService/TermsOfService';
+import Help from './pages/Help';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 export default class Routes extends Component {
   render() {

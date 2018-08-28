@@ -1,11 +1,65 @@
 import React from 'react';
-import styles from './PrivacyPolicy.css';
+import styled from 'styled-components';
+
+const PrivacyPolicyWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledContent = styled.div`
+  margin-top: 20px;
+  border: dashed 5px #000;
+  padding: 20px;
+  background-color: white;
+  width: 1000px;
+
+  h4 {
+    text-align: left;
+  }
+
+  p {
+    font-size: 3rem;
+    padding: 20px;
+  }
+
+  p strong {
+    font-size: 3.5rem;
+  }
+
+  a {
+    font-size: 3rem;
+    color: #ff4081;
+  }
+
+  a:hover {
+    color: #ff80ab;
+  }
+
+  li {
+    font-size: 2.5rem;
+    margin-left: 40px;
+  }
+
+  li strong {
+    font-size: 2.5rem;
+  }
+`;
 
 const PrivacyPolicy = () => (
-  <div className={styles.privacy_policy}>
+  <PrivacyPolicyWrapper>
     <h2>Privacy Policy</h2>
-    <div className={styles.flex_wrapper}>
-      <div className={styles.content}>
+    <FlexWrapper>
+      <StyledContent>
         <p>Effective date: August 16, 2018</p>
 
         <p>
@@ -174,8 +228,8 @@ const PrivacyPolicy = () => (
 
         <h2>Transfer Of Data</h2>
         <p>
-          Your information, including Personal Data, may be transferred to — and
-          maintained on — computers located outside of your state, province,
+          Your information, including Personal Data, may be transferred to ï¿½ and
+          maintained on ï¿½ computers located outside of your state, province,
           country or other governmental jurisdiction where the data protection
           laws may differ than those from your jurisdiction.
         </p>
@@ -287,9 +341,9 @@ const PrivacyPolicy = () => (
         <ul>
           <li>By email: support@coinietrade.com</li>
         </ul>
-      </div>
-    </div>
-  </div>
+      </StyledContent>
+    </FlexWrapper>
+  </PrivacyPolicyWrapper>
 );
 
 export default PrivacyPolicy;

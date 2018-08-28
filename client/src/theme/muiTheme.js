@@ -13,8 +13,9 @@ import {
 } from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-export default {
+const customMuiTheme = {
   spacing: spacing,
   fontfamily: "'Oleo Script', cursive",
   palette: {
@@ -34,3 +35,14 @@ export default {
     shadowColor: fullBlack,
   },
 };
+
+const muiTheme = getMuiTheme(customMuiTheme, {
+  appBar: {
+    height: 80,
+  },
+  flatButton: {
+    buttonFilterColor: white,
+  },
+});
+
+export default muiTheme;

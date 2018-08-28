@@ -1,11 +1,65 @@
 import React from 'react';
-import styles from './TermsOfService.css';
+import styled from 'styled-components';
+
+const TermsOfServiceWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledContent = styled.div`
+  margin-top: 20px;
+  border: dashed 5px #000;
+  padding: 20px;
+  background-color: white;
+  width: 1000px;
+
+  h4 {
+    text-align: left;
+  }
+
+  p {
+    font-size: 3rem;
+    padding: 20px;
+  }
+
+  p strong {
+    font-size: 3.5rem;
+  }
+
+  a {
+    font-size: 3rem;
+    color: #ff4081;
+  }
+
+  a:hover {
+    color: #ff80ab;
+  }
+
+  li {
+    font-size: 2.5rem;
+    margin-left: 40px;
+  }
+
+  li strong {
+    font-size: 2.5rem;
+  }
+`;
 
 const TermsOfService = () => (
-  <div className={styles.terms_of_service}>
+  <TermsOfServiceWrapper>
     <h2>Terms Of Service ("Terms")</h2>
-    <div className={styles.flex_wrapper}>
-      <div className={styles.content}>
+    <FlexWrapper>
+      <StyledContent>
         <p>Last updated: August 16, 2018</p>
 
         <p>
@@ -151,9 +205,9 @@ const TermsOfService = () => (
         <ul>
           <li>By email: support@coinietrade.com</li>
         </ul>
-      </div>
-    </div>
-  </div>
+      </StyledContent>
+    </FlexWrapper>
+  </TermsOfServiceWrapper>
 );
 
 export default TermsOfService;
