@@ -6,7 +6,7 @@ import { getPosition, renderErrors } from '../../utils';
 import styles from './Event.css';
 import GridEventList from './GridList/GridEventList';
 import FlatButton from 'material-ui/FlatButton';
-import Loading from '../Loading/Loading';
+import Loading from '../common/Loading';
 
 const SEARCH_TEXT = 'bitcoin';
 const EVENTS_NUM = 6;
@@ -84,7 +84,7 @@ class Events extends Component {
         {error ? renderErrors(error) : null}
         <div className={styles.event}>
           <h2>Upcoming Events about Bitcoin</h2>
-          {this.state.loading ? <Loading style={styles.loading} /> : null}
+          {this.state.loading ? <Loading /> : null}
           <div className={styles.flex_wrapper}>
             {this.renderEvents(this.props.events)}
           </div>

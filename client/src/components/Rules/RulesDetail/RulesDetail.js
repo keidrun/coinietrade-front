@@ -17,7 +17,7 @@ import {
 
 import styles from './RulesDetail.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import Loading from '../../Landing/Landing';
+import Loading from '../../common/Loading';
 
 class RulesDetail extends Component {
   componentDidMount() {
@@ -36,7 +36,7 @@ class RulesDetail extends Component {
     const { rule, error } = this.props;
 
     if (!rule) {
-      return <Loading style={styles.loading} />;
+      return <Loading />;
     }
 
     return (

@@ -16,7 +16,6 @@ import spacing from 'material-ui/styles/spacing';
 
 export default {
   spacing: spacing,
-  // fontFamily: 'Roboto, sans-serif',
   fontfamily: "'Oleo Script', cursive",
   palette: {
     primary1Color: black,

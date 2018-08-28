@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Layout from '../hoc/Layout/Layout';
-import Auth from '../hoc/Auth/Auth';
+import Layout from '../hoc/Layout';
+import Auth from '../hoc/Auth';
 
 import Landing from './Landing/Landing';
 import Dashboard from './Dashboard/Dashboard';

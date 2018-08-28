@@ -18,7 +18,7 @@ import {
 
 import styles from './RulesList.css';
 import RaisedButton from 'material-ui/RaisedButton';
-import Loading from '../../Landing/Landing';
+import Loading from '../../common/Loading';
 
 class RulesList extends Component {
   componentDidMount() {
@@ -81,7 +81,7 @@ class RulesList extends Component {
     const { rules, policy, error } = this.props;
 
     if (!rules || !policy) {
-      return <Loading style={styles.loading} />;
+      return <Loading />;
     }
 
     return (
