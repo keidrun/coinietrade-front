@@ -1,10 +1,14 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchRules, fetchPolicy } from '../../../actions';
-import { muiStyles, renderErrors } from '../../../utils';
-import {
+import { fetchRules, fetchPolicy } from '../../actions/';
+import { renderErrors, rulesUtils } from '../../utils';
+import Loading from '../common/Loading';
+import Button from '../common/Button';
+
+const {
   getPair,
   showExchangeSite,
   showPair,
@@ -14,11 +18,36 @@ import {
   showProfit,
   showStatus,
   showAsPercentage,
-} from '../rulesUtils';
+} = rulesUtils;
 
-import styles from './RulesList.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import Loading from '../../common/Loading';
+const RulesListWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledTable = styled.table`
+  margin-top: 20px;
+  padding: 5px;
+  border: dashed 5px #000;
+  background-color: white;
+  width: 1000px;
+  font-size: 7rem;
+  text-align: center;
+
+  td {
+    padding: 5px;
+  }
+`;
 
 class RulesList extends Component {
   componentDidMount() {
@@ -45,13 +74,9 @@ class RulesList extends Component {
             <td>{showProfit(rule.totalProfit, rule.currencyUnit)}</td>
             <td>{showStatus(rule.status)}</td>
             <td>
-              <span className={styles.button_area}>
-                <Link to={`/rules/${rule.ruleId}`}>
-                  <RaisedButton secondary={true} style={muiStyles.tableButton}>
-                    Detail
-                  </RaisedButton>
-                </Link>
-              </span>
+              <Link to={`/rules/${rule.ruleId}`}>
+                <Button btnType="table">Detail</Button>
+              </Link>
             </td>
           </tr>
         ) : (
@@ -65,13 +90,9 @@ class RulesList extends Component {
     const ruleLimit = this.props.policy.ruleLimit;
 
     return isFinite(rulesNum) && isFinite(ruleLimit) && rulesNum < ruleLimit ? (
-      <div className={styles.button_area}>
-        <Link to="/rules/new">
-          <RaisedButton secondary={true} style={muiStyles.backButton}>
-            Create a new rule
-          </RaisedButton>
-        </Link>
-      </div>
+      <Link to="/rules/new">
+        <Button btnType="back">Create a new rule</Button>
+      </Link>
     ) : (
       ''
     );
@@ -87,13 +108,13 @@ class RulesList extends Component {
     return (
       <div>
         {error ? renderErrors(error) : null}
-        <div className={styles.rules_list}>
+        <RulesListWrapper>
           <h2>
             Trade Rules <div>Expired At: {policy.expiredAt}</div>
           </h2>
           <div>{this.renderCreateButton()}</div>
-          <div className={styles.flex_wrapper}>
-            <table className={styles.table}>
+          <FlexWrapper>
+            <StyledTable>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -112,9 +133,9 @@ class RulesList extends Component {
                 </tr>
               </thead>
               <tbody>{this.renderRules()}</tbody>
-            </table>
-          </div>
-        </div>
+            </StyledTable>
+          </FlexWrapper>
+        </RulesListWrapper>
       </div>
     );
   }

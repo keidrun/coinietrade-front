@@ -4,13 +4,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Layout from '../hoc/Layout';
 import Auth from '../hoc/Auth';
 
-import Landing from './Landing/Landing';
-import Dashboard from './Dashboard/Dashboard';
-import Events from './Events/Events';
-import RulesList from './Rules/RulesList/RulesList';
-import RulesNew from './Rules/RulesNew/RulesNew';
-import RulesDetail from './Rules/RulesDetail/RulesDetail';
-import Settings from './Setting/Setting';
+import Landing from './containers/Landing';
+import Dashboard from './containers/Dashboard';
+import Events from './containers/Events';
+import RulesList from './containers/RulesList';
+import RulesNew from './containers/RulesNew';
+import RulesDetail from './containers/RulesDetail';
+import Settings from './containers/Setting';
+
 import Help from './pages/Help';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';

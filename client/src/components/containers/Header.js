@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchUser } from '../../actions';
 
 import AppBar from 'material-ui/AppBar';
-import Login from './Menu/Login';
-import Logged from './Menu/Logged';
+import Login from './widgets/Login';
+import Logged from './widgets/Logged';
 
-import styles from './Header.css';
+const StyledLink = styled(Link)`
+  color: white;
+  font-size: 5rem;
+  font-family: 'Monoton', cursive;
+  font-weight: 400;
+`;
 
 class Header extends Component {
   componentDidMount() {
@@ -18,12 +24,7 @@ class Header extends Component {
     const isLoggedin = this.props.user;
 
     return (
-      <Link
-        to={isLoggedin ? '/dashboard' : '/'}
-        className={styles.main_icon_link}
-      >
-        CoinieTrade
-      </Link>
+      <StyledLink to={isLoggedin ? '/dashboard' : '/'}>CoinieTrade</StyledLink>
     );
   }
 

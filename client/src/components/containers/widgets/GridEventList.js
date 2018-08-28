@@ -1,14 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
 import { GridList, GridTile } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import GridIcon from 'material-ui/svg-icons/action/open-in-new';
 
-import styles from './GridEventList.css';
+const GridEventListWrapper = styled.div`
+  margin: 20px;
+  width: 500;
+  height: 450;
+  overflowy: 'auto';
+
+  div {
+    color: white;
+  }
+
+  span {
+    color: white;
+  }
+`;
 
 const randomIndex = () => Math.floor(Math.random() * 10) + 0;
 
 const GridEventList = ({ events }) => (
-  <div className={styles.grid_event_list}>
+  <GridEventListWrapper>
     <GridList cellHeight={180}>
       {events.map(event => (
         <GridTile
@@ -38,7 +52,7 @@ const GridEventList = ({ events }) => (
         </GridTile>
       ))}
     </GridList>
-  </div>
+  </GridEventListWrapper>
 );
 
 export default GridEventList;

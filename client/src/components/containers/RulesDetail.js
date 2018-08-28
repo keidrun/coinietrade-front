@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchRule, deleteRule } from '../../../actions';
-import { muiStyles, renderErrors } from '../../../utils';
-import {
+import { fetchRule, deleteRule } from '../../actions';
+import { renderErrors, rulesUtils } from '../../utils';
+
+import Loading from '../common/Loading';
+import Button from '../common/Button';
+
+const {
   getPair,
   showExchangeSite,
   showPair,
@@ -13,11 +18,44 @@ import {
   showProfit,
   showStatus,
   showAsPercentage,
-} from '../rulesUtils';
+} = rulesUtils;
 
-import styles from './RulesDetail.css';
-import RaisedButton from 'material-ui/RaisedButton';
-import Loading from '../../common/Loading';
+const RulesDetailWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledContent = styled.div`
+  margin-top: 20px;
+  border: dashed 5px #000;
+  background-color: white;
+  width: 1000px;
+`;
+
+const StyledFiledArea = styled.div`
+  padding: 15px;
+
+  h4 {
+    margin-left: 20px;
+    font-size: 3rem;
+    display: inline;
+  }
+  div {
+    margin-top: 20px;
+    font-size: 3rem;
+    text-align: center;
+  }
+`;
 
 class RulesDetail extends Component {
   componentDidMount() {
@@ -42,83 +80,71 @@ class RulesDetail extends Component {
     return (
       <div>
         {error ? renderErrors(error) : null}
-        <div className={styles.rules_detail}>
+        <RulesDetailWrapper>
           <h2>Rule Detail</h2>
-          <div className={styles.button_area}>
-            <Link to="/rules">
-              <RaisedButton secondary={true} style={muiStyles.backButton}>
-                &lt;&lt; Back
-              </RaisedButton>
-            </Link>
-          </div>
-          <div className={styles.flex_wrapper}>
-            <div className={styles.content}>
-              <div className={styles.field}>
+          <Link to="/rules">
+            <Button btnType="back">&lt;&lt; Back</Button>
+          </Link>
+          <FlexWrapper>
+            <StyledContent>
+              <StyledFiledArea>
                 <h4>ID:</h4>
                 <div>{rule.ruleId}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Exchange Site A:</h4>
                 <div>{showExchangeSite(rule.oneSiteName)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Exchange Site B:</h4>
                 <div>{showExchangeSite(rule.otherSiteName)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Pair:</h4>
                 <div>{showPair(getPair(rule.coinUnit, rule.currencyUnit))}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Strategy:</h4>
                 <div>{showStrategy(rule.strategy)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Order Type:</h4>
                 <div>{showOrderType(rule.orderType)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Asset Minimum Limit:</h4>
                 <div>
                   {showAssetMinLimit(rule.assetMinLimit, rule.currencyUnit)}
                 </div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Asset Range:</h4>
                 <div>{showAsPercentage(rule.assetRange)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Buy Weight Rate:</h4>
                 <div>{showAsPercentage(rule.buyWeightRate)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Sell Weight Rate:</h4>
                 <div>{showAsPercentage(rule.sellWeightRate)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Profit:</h4>
                 <div>{showProfit(rule.totalProfit, rule.currencyUnit)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Status:</h4>
                 <div>{showStatus(rule.status)}</div>
-              </div>
-              <div className={styles.field}>
+              </StyledFiledArea>
+              <StyledFiledArea>
                 <h4>Modified At:</h4>
                 <div>{rule.modifiedAt}</div>
-              </div>
-              <div className={styles.button_area}>
-                <RaisedButton
-                  secondary={true}
-                  style={muiStyles.button}
-                  onClick={this.onDeleteClick.bind(this)}
-                >
-                  Delete
-                </RaisedButton>
-              </div>
-            </div>
-          </div>
-        </div>
+              </StyledFiledArea>
+              <Button onClick={this.onDeleteClick.bind(this)}>Delete</Button>
+            </StyledContent>
+          </FlexWrapper>
+        </RulesDetailWrapper>
       </div>
     );
   }

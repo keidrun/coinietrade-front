@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 
 import FlatButton from 'material-ui/FlatButton';
 import FontAwesome from 'react-fontawesome';
 
-import styles from './Menu.css';
+const StyledAnchorLink = styled.a`
+  color: white;
+  font-size: 2rem;
+
+  span {
+    color: white;
+    font-size: 2rem;
+  }
+`;
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -15,9 +24,9 @@ class Login extends Component {
           {...this.props}
           label={
             <span>
-              <a href="/auth/facebook" className={styles.nav_login_link}>
+              <StyledAnchorLink href="/auth/facebook">
                 <FontAwesome name="fab fa-facebook" /> Login
-              </a>
+              </StyledAnchorLink>
             </span>
           }
         />
@@ -26,9 +35,9 @@ class Login extends Component {
           {...this.props}
           label={
             <span>
-              <a href="/auth/google" className={styles.nav_login_link}>
+              <StyledAnchorLink href="/auth/google">
                 <FontAwesome name="fab fa-google" /> Login
-              </a>
+              </StyledAnchorLink>
             </span>
           }
         />

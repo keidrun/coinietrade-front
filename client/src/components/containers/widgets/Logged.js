@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import IconButton from 'material-ui/IconButton';
@@ -7,9 +8,21 @@ import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import FontAwesome from 'react-fontawesome';
 
-import styles from './Menu.css';
-
 import { BASE_URI } from '../../../utils';
+
+const StyledLink = styled(Link)`
+  span {
+    color: #f50057;
+    font-size: 2rem;
+  }
+`;
+
+const StyledAnchorLink = styled.a`
+  span {
+    color: #f50057;
+    font-size: 2rem;
+  }
+`;
 
 class Logged extends Component {
   static muiName = 'IconMenu';
@@ -46,7 +59,7 @@ class Logged extends Component {
     return menuItems.map((item, i) => {
       return (
         <div key={i}>
-          <Link to={item.link} className={styles.nav_logged_link}>
+          <StyledLink to={item.link}>
             <MenuItem
               primaryText={
                 <span>
@@ -54,7 +67,7 @@ class Logged extends Component {
                 </span>
               }
             />
-          </Link>
+          </StyledLink>
         </div>
       );
     });
@@ -75,14 +88,11 @@ class Logged extends Component {
         {this.renderMenu()}
         <MenuItem
           primaryText={
-            <a
-              href={`${BASE_URI}/auth/logout`}
-              className={styles.nav_logged_link}
-            >
+            <StyledAnchorLink href={`${BASE_URI}/auth/logout`}>
               <span>
                 <FontAwesome name="sign-out" /> Sign out
               </span>
-            </a>
+            </StyledAnchorLink>
           }
         />
       </IconMenu>

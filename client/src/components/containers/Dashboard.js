@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Chart from './Chart/Chart';
-import styles from './Dashboard.css';
+import styled from 'styled-components';
+import Chart from './widgets/Chart';
 
 import { BASE_URI } from '../../utils';
 
@@ -20,6 +20,27 @@ if (
 }
 
 const X_AXIS_NUM = 61;
+
+const DashbordWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+`;
+
+const StyledChartArea = styled.div`
+  margin: 20px;
+  padding: 20px;
+  background-color: white;
+  display: inline-block;
+  width: 78%;
+`;
 
 class Dashboard extends Component {
   state = {
@@ -106,10 +127,10 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div className={styles.dashboard}>
+      <DashbordWrapper>
         <h2>Dashboard</h2>
-        <div className={styles.content}>
-          <div className={styles.chart}>
+        <FlexWrapper>
+          <StyledChartArea>
             <h4>Bid and Ask of Bitcoin [JPY/BTC]</h4>
             <Chart
               xAxisNum={X_AXIS_NUM}
@@ -120,9 +141,9 @@ class Dashboard extends Component {
               zaifBids={this.state.zaif.bidPrices}
               zaifAsks={this.state.zaif.askPrices}
             />
-          </div>
-        </div>
-      </div>
+          </StyledChartArea>
+        </FlexWrapper>
+      </DashbordWrapper>
     );
   }
 }

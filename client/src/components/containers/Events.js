@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { fetchEvents, clearEvents } from '../../actions';
 import { getPosition, renderErrors } from '../../utils';
 
-import styles from './Event.css';
-import GridEventList from './GridList/GridEventList';
+import GridEventList from './widgets/GridEventList';
 import FlatButton from 'material-ui/FlatButton';
 import Loading from '../common/Loading';
 
 const SEARCH_TEXT = 'bitcoin';
 const EVENTS_NUM = 6;
+
+const EventWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledLoadMore = styled.div`
+  :hover {
+    background-color: rgba(0, 0, 0, 0);
+  }
+`;
 
 class Events extends Component {
   state = {
@@ -71,9 +90,9 @@ class Events extends Component {
     events.events &&
     events.events.length > 0 &&
     events.events.length < events.total ? (
-      <div className={styles.loadmore} onClick={this.loadmore}>
+      <StyledLoadMore onClick={this.loadmore}>
         <FlatButton label="More" fullWidth={true} primary={true} />
-      </div>
+      </StyledLoadMore>
     ) : null;
 
   render() {
@@ -82,14 +101,12 @@ class Events extends Component {
     return (
       <div>
         {error ? renderErrors(error) : null}
-        <div className={styles.event}>
+        <EventWrapper>
           <h2>Upcoming Events about Bitcoin</h2>
           {this.state.loading ? <Loading /> : null}
-          <div className={styles.flex_wrapper}>
-            {this.renderEvents(this.props.events)}
-          </div>
+          <FlexWrapper>{this.renderEvents(this.props.events)}</FlexWrapper>
           {this.renderLoadMore(this.props.events)}
-        </div>
+        </EventWrapper>
       </div>
     );
   }

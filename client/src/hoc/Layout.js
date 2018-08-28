@@ -4,7 +4,7 @@ import { injectGlobal } from 'styled-components';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from '../theme/muiTheme';
 
-import Header from '../components/Header/Header';
+import Header from '../components/containers/Header';
 import Body from '../components/common/Body';
 
 injectGlobal`

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import styled from 'styled-components';
+import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { fetchProfile, updateProfile } from '../../actions';
 import { validateSettingForm as validate } from '../../validates';
-import {
-  renderTextField,
-  renderSelectField,
-  muiStyles,
-  renderErrors,
-} from '../../utils';
+import { renderErrors } from '../../utils';
 
-import styles from './Setting.css';
-import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
+import Form from '../common/Form';
+import Button from '../common/Button';
+import ReduxFormTextField from '../common/ReduxFormTextField';
+import ReduxFormSelectField from '../common/ReduxFormSelectField';
 
 const LANGUAGE = {
   ENGLISH: 'en',
@@ -23,6 +21,63 @@ const GENDER = {
   MALE: 'male',
   FEMALE: 'female',
 };
+
+const SettingWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  height: 100%;
+`;
+
+const FlexWrapper = styled.div`
+  display: flex;
+  flex-wrap: 'wrap';
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+`;
+
+const StyledTextFieldArea = styled.div`
+  margin: 20px auto;
+
+  h4 {
+    margin-left: 20px;
+    font-size: 3rem;
+    display: inline;
+  }
+
+  h5 {
+    margin-left: 40px;
+    font-size: 2.5rem;
+    display: inline;
+  }
+
+  input {
+    font-size: 4rem;
+    text-align: center;
+  }
+`;
+
+const StyledSelectFieldArea = styled.div`
+  margin: 20px;
+
+  h4 {
+    font-size: 3rem;
+    display: inline;
+  }
+
+  div {
+    font-size: 3rem;
+    text-align: center;
+  }
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  div {
+    font-size: 2rem;
+    text-align: center;
+  }
+`;
 
 class Setting extends Component {
   state = {
@@ -97,139 +152,91 @@ class Setting extends Component {
     return (
       <div>
         {error ? renderErrors(error) : null}
-        <div className={styles.setting}>
+        <SettingWrapper>
           <h2>Settings</h2>
-          <div className={styles.flex_wrapper}>
-            <form
-              className={styles.form}
-              onSubmit={handleSubmit(this.onSubmit.bind(this))}
-            >
-              <div className={styles.text_field}>
+          <FlexWrapper>
+            <Form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+              <StyledTextFieldArea>
                 <h4>Name</h4>
                 <br />
-                <Field
+                <ReduxFormTextField
                   name="displayName"
-                  component={renderTextField}
                   type="text"
                   placeholder="Enter name"
-                  style={muiStyles.textField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
                 />
-              </div>
-              <div className={styles.text_field}>
+              </StyledTextFieldArea>
+              <StyledTextFieldArea>
                 <h4>Email</h4>
                 <br />
-                <Field
+                <ReduxFormTextField
                   name="email"
-                  component={renderTextField}
                   type="email"
                   placeholder="Enter email"
-                  style={muiStyles.textField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
                 />
-              </div>
-              <div className={styles.select_field}>
+              </StyledTextFieldArea>
+              <StyledSelectFieldArea>
                 <h4>Language</h4>
                 <br />
-                <Field
-                  name="language"
-                  component={renderSelectField}
-                  style={muiStyles.selectField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
-                >
-                  <MenuItem
-                    className={styles.select_item}
+                <ReduxFormSelectField name="language">
+                  <StyledMenuItem
                     value={LANGUAGE.ENGLISH}
                     primaryText="English"
                   />
-                  <MenuItem
-                    className={styles.select_item}
+                  <StyledMenuItem
                     value={LANGUAGE.JAPANESE}
                     primaryText="Japanese"
                   />
-                </Field>
-              </div>
-              <div className={styles.select_field}>
+                </ReduxFormSelectField>
+              </StyledSelectFieldArea>
+              <StyledSelectFieldArea>
                 <h4>Gender</h4>
                 <br />
-                <Field
-                  name="gender"
-                  component={renderSelectField}
-                  style={muiStyles.selectField}
-                  underlineFocusStyle={muiStyles.underlineStyle}
-                >
-                  <MenuItem
-                    className={styles.select_item}
-                    value={GENDER.MALE}
-                    primaryText="Male"
-                  />
-                  <MenuItem
-                    className={styles.select_item}
-                    value={GENDER.FEMALE}
-                    primaryText="Female"
-                  />
-                </Field>
-              </div>
+                <ReduxFormSelectField name="gender">
+                  <StyledMenuItem value={GENDER.MALE} primaryText="Male" />
+                  <StyledMenuItem value={GENDER.FEMALE} primaryText="Female" />
+                </ReduxFormSelectField>
+              </StyledSelectFieldArea>
 
               <hr />
-              <div className={styles.text_field}>
+              <StyledTextFieldArea>
                 <h4>API Keys and Secrets</h4>
                 <br />
-                <div className={styles.text_field}>
+                <StyledTextFieldArea>
                   <h5>bitflyer</h5>
                   <br />
-                  <Field
+                  <ReduxFormTextField
                     name="bitflyerApiKey"
-                    component={renderTextField}
                     type="text"
                     placeholder="Enter API Key"
-                    style={muiStyles.textField}
-                    underlineFocusStyle={muiStyles.underlineStyle}
                   />
-                  <Field
+                  <ReduxFormTextField
                     name="bitflyerApiSecret"
-                    component={renderTextField}
                     type="text"
                     placeholder="Enter API Secret"
-                    style={muiStyles.textField}
-                    underlineFocusStyle={muiStyles.underlineStyle}
                   />
-                </div>
-                <div className={styles.text_field}>
+                </StyledTextFieldArea>
+                <StyledTextFieldArea>
                   <h5>zaif</h5>
                   <br />
-                  <Field
+                  <ReduxFormTextField
                     name="zaifApiKey"
-                    component={renderTextField}
                     type="text"
                     placeholder="Enter API Key"
-                    style={muiStyles.textField}
-                    underlineFocusStyle={muiStyles.underlineStyle}
                   />
-                  <Field
+                  <ReduxFormTextField
                     name="zaifApiSecret"
-                    component={renderTextField}
                     type="text"
                     placeholder="Enter API Secret"
-                    style={muiStyles.textField}
-                    underlineFocusStyle={muiStyles.underlineStyle}
                   />
-                </div>
-              </div>
+                </StyledTextFieldArea>
+              </StyledTextFieldArea>
 
-              <div className={styles.button_area}>
-                <RaisedButton
-                  secondary={true}
-                  style={muiStyles.button}
-                  type="submit"
-                  disabled={pristine || submitting}
-                >
-                  Update
-                </RaisedButton>
-              </div>
-            </form>
-          </div>
-        </div>
+              <Button type="submit" disabled={pristine || submitting}>
+                Update
+              </Button>
+            </Form>
+          </FlexWrapper>
+        </SettingWrapper>
       </div>
     );
   }
