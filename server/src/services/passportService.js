@@ -4,7 +4,7 @@ const FacebookStrategy = require('passport-facebook').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 const { User } = require('../models');
-const { BackendApiClient } = require('../utils');
+const { BackendApiClient } = require('../utils/clients');
 
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 const apiClient = new BackendApiClient();

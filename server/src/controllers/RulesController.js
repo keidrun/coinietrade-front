@@ -1,4 +1,4 @@
-const { BackendApiClient } = require('../utils');
+const { BackendApiClient } = require('../utils/clients');
 
 class RulesController {
   constructor() {

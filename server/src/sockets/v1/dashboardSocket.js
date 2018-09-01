@@ -1,4 +1,4 @@
-const { ExchangeApiClient } = require('../../utils');
+const { ExchangeApiClient } = require('../../utils/clients');
 
 const INTERVAL_MSEC = 1000;
 const CLEAR_INTERVAL_MSEC = 1000;

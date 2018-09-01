@@ -1,6 +1,6 @@
 const axios = require('axios');
 const moment = require('moment');
-const keys = require('../../config/keys').get(process.env.NODE_ENV);
+const keys = require('../../../config/keys').get(process.env.NODE_ENV);
 
 const API_VERSION = 'v1';
 const API_BASE_URL = `${keys.endpointApiURL}/${API_VERSION}`;

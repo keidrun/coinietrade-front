@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { User } = require('../models');
-const { BackendApiClient } = require('../utils');
+const { BackendApiClient } = require('../utils/clients');
 
 const apiClient = new BackendApiClient();
 
