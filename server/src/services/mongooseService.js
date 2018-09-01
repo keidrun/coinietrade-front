@@ -7,4 +7,6 @@ const connect = () =>
     { useNewUrlParser: true },
   );
 
-module.exports = { connect };
+const disconnect = () => mongoose.disconnect();
+
+module.exports = { connect, disconnect };

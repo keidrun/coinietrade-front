@@ -1,18 +1,23 @@
 const { Router } = require('express');
-const { auth, handleValidationErrors } = require('../../middleware');
+const { authorize, handleValidationErrors } = require('../../middleware');
+const { PRIVILEGE_PERMISSIONS } = require('../../models');
 const { updateUserValidator } = require('../../middleware/validators');
 const { UserController } = require('../../controllers');
 
 const userRoutes = new Router();
 
-userRoutes.get('/', auth, UserController.find);
+userRoutes.get('/', authorize(PRIVILEGE_PERMISSIONS.USER), UserController.find);
 userRoutes.put(
   '/',
-  auth,
+  authorize(PRIVILEGE_PERMISSIONS.USER),
   updateUserValidator,
   handleValidationErrors,
   UserController.update,
 );
-userRoutes.delete('/', auth, UserController.remove);
+userRoutes.delete(
+  '/',
+  authorize(PRIVILEGE_PERMISSIONS.USER),
+  UserController.remove,
+);
 
 module.exports = userRoutes;

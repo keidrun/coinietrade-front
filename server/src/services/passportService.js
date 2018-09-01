@@ -9,18 +9,18 @@ const { BackendApiClient } = require('../utils');
 const proxyURL = process.env.PROXY_URL || keys.proxyURL || '';
 const apiClient = new BackendApiClient();
 
-const serializeUser = () =>
-  passport.serializeUser((user, done) => done(null, user._id));
+// const serializeUser = () =>
+//   passport.serializeUser((user, done) => done(null, user._id));
 
-const deserializeUser = () =>
-  passport.deserializeUser(async (_id, done) => {
-    try {
-      const user = await User.findById(_id);
-      return done(null, user);
-    } catch (error) {
-      return done(error);
-    }
-  });
+// const deserializeUser = () =>
+//   passport.deserializeUser(async (_id, done) => {
+//     try {
+//       const user = await User.findById(_id);
+//       return done(null, user);
+//     } catch (error) {
+//       return done(error);
+//     }
+//   });
 
 const configureStrategy = {
   withFacebook: () =>
@@ -32,6 +32,10 @@ const configureStrategy = {
           callbackURL: `${proxyURL}/auth/facebook/callback`,
         },
         async (accessToken, refreshToken, profile, done) => {
+          if (!profile) {
+            return done(null, false);
+          }
+
           try {
             const user = await User.findOne({ 'authProvider.id': profile.id });
             if (user) {
@@ -47,9 +51,6 @@ const configureStrategy = {
             });
 
             // Sign up
-            if (!profile) {
-              return done(null, false);
-            }
             const facebookId = profile.id;
             const profilePictureURL = `https://graph.facebook.com/${facebookId}/picture?type=square`;
             const newUser = await new User({
@@ -86,6 +87,10 @@ const configureStrategy = {
           callbackURL: `${proxyURL}/auth/google/callback`,
         },
         async (accessToken, refreshToken, profile, done) => {
+          if (!profile) {
+            return done(null, false);
+          }
+
           try {
             const user = await User.findOne({ 'authProvider.id': profile.id });
             if (user) {
@@ -101,9 +106,6 @@ const configureStrategy = {
             });
 
             // Sign up
-            if (!profile) {
-              return done(null, false);
-            }
             const newUser = await new User({
               _id: userId,
               displayName: profile.displayName,
@@ -132,8 +134,8 @@ const configureStrategy = {
 };
 
 const initialize = () => {
-  serializeUser();
-  deserializeUser();
+  // serializeUser();
+  // deserializeUser();
   configureStrategy.withFacebook();
   configureStrategy.withGoogle();
   return passport.initialize();
@@ -143,10 +145,12 @@ const authenticate = {
   withFacebook: () =>
     passport.authenticate('facebook', {
       scope: ['public_profile', 'email'],
+      session: false,
     }),
   withGoogle: () =>
     passport.authenticate('google', {
       scope: ['profile', 'email'],
+      session: false,
     }),
 };
 

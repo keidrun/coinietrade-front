@@ -1,7 +1,7 @@
-const { User } = require('../models');
+const { User, Privilege } = require('../models');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
 
-const auth = async (req, res, next) => {
+const authorize = privilege => async (req, res, next) => {
   const token = req.cookies[keys.cookieKey];
 
   if (!token) {
@@ -28,6 +28,20 @@ const auth = async (req, res, next) => {
       });
     }
 
+    // Check privilege
+    const userPrivilege = await Privilege.findOne({ role: user.role });
+    user.permissions = userPrivilege.permissions || [];
+    if (user.permissions.indexOf(privilege) === -1) {
+      return res.status(401).json({
+        errors: [
+          {
+            message: "The user doesn't have enough permissions.",
+            errorType: 'clientError',
+          },
+        ],
+      });
+    }
+
     req.token = token;
     req.user = user;
 
@@ -37,4 +51,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-module.exports = auth;
+module.exports = authorize;

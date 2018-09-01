@@ -1,10 +1,19 @@
 const { Router } = require('express');
-const { auth } = require('../../middleware');
+const { authorize } = require('../../middleware');
+const { PRIVILEGE_PERMISSIONS } = require('../../models');
 const { AuthController } = require('../../controllers');
 
 const authRoutes = new Router();
 
-authRoutes.get('/', auth, AuthController.findLoggedInUser);
-authRoutes.get('/logout', auth, AuthController.logout);
+authRoutes.get(
+  '/',
+  authorize(PRIVILEGE_PERMISSIONS.AUTH),
+  AuthController.findLoggedInUser,
+);
+authRoutes.get(
+  '/logout',
+  authorize(PRIVILEGE_PERMISSIONS.AUTH),
+  AuthController.logout,
+);
 
 module.exports = authRoutes;

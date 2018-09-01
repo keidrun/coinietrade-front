@@ -1,9 +1,14 @@
 const { Router } = require('express');
-const { auth } = require('../../middleware');
+const { authorize } = require('../../middleware');
+const { PRIVILEGE_PERMISSIONS } = require('../../models');
 const { EventsController } = require('../../controllers');
 
 const eventsRoutes = new Router();
 
-eventsRoutes.get('/', auth, EventsController.find);
+eventsRoutes.get(
+  '/',
+  authorize(PRIVILEGE_PERMISSIONS.EVENTS),
+  EventsController.find,
+);
 
 module.exports = eventsRoutes;

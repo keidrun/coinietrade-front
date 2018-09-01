@@ -24,7 +24,7 @@ class AuthController {
   static async logout(req, res) {
     const { user } = req;
 
-    req.logout(); // clear cookie['user'] with passport
+    req.logout(); // remove the req.user with passport
 
     try {
       await user.deleteToken();

@@ -4,6 +4,7 @@ const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const keys = require('../../config/keys').get(process.env.NODE_ENV);
+const { PRIVILEGE_ROLES } = require('./Privilege');
 
 const { Schema } = mongoose;
 const verifyPromise = promisify(jwt.verify);
@@ -45,6 +46,11 @@ const userSchema = new Schema(
     },
     token: String,
     tokenExpiredAt: Date,
+    role: {
+      type: String,
+      required: true,
+      default: PRIVILEGE_ROLES.DEFAULT,
+    },
     displayName: {
       type: String,
       minlength: 1,
