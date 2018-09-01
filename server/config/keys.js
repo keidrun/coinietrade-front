@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const config = {
   production: {
+    logLevel: process.env.PROD_LOG_LEVEL,
     mongoURL: process.env.PROD_MONGO_URI,
     tokenSecret: process.env.PROD_TOKEN_SECRET,
     cookieKey: process.env.PROD_COOKIE_KEY,
@@ -17,6 +18,7 @@ const config = {
     endpointApiKey: process.env.PROD_ENDPOINT_API_KEY,
   },
   staging: {
+    logLevel: process.env.STAGING_LOG_LEVEL,
     mongoURL: process.env.STAGING_MONGO_URI,
     tokenSecret: process.env.STAGING_TOKEN_SECRET,
     cookieKey: process.env.STAGING_COOKIE_KEY,
@@ -31,6 +33,7 @@ const config = {
     endpointApiKey: process.env.STAGING_ENDPOINT_API_KEY,
   },
   ci: {
+    logLevel: process.env.PRE_LOG_LEVEL,
     mongoURL: process.env.PRE_MONGO_URI,
     tokenSecret: process.env.PRE_TOKEN_SECRET,
     cookieKey: process.env.PRE_COOKIE_KEY,
@@ -45,6 +48,7 @@ const config = {
     endpointApiKey: process.env.PRE_ENDPOINT_API_KEY,
   },
   test: {
+    logLevel: process.env.TEST_LOG_LEVEL,
     mongoURL: process.env.TEST_MONGO_URI,
     tokenSecret: process.env.TEST_TOKEN_SECRET,
     cookieKey: process.env.TEST_COOKIE_KEY,
@@ -59,6 +63,7 @@ const config = {
     endpointApiKey: process.env.TEST_ENDPOINT_API_KEY,
   },
   default: {
+    logLevel: process.env.DEV_LOG_LEVEL,
     mongoURL: process.env.DEV_MONGO_URI,
     tokenSecret: process.env.DEV_TOKEN_SECRET,
     cookieKey: process.env.DEV_COOKIE_KEY,
