@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
+import { unregister } from './registerServiceWorker';
 
 import Routes from './components/Routes';
 
@@ -15,3 +16,5 @@ ReactDOM.render(
   </Provider>,
   document.querySelector('#root'),
 );
+
+unregister();
