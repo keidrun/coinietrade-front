@@ -1,7 +1,7 @@
 const path = require('path');
 const nock = require('nock');
-const keys = require('../../../config/keys').get(process.env.NODE_ENV);
-const { BackendApiClient } = require('../../../src/utils/clients');
+const keys = require('../../../../config/keys').get(process.env.NODE_ENV);
+const { BackendApiClient } = require('../../../../src/utils/clients');
 
 // eslint-disable-next-line import/no-dynamic-require
 const http = require(path.join(
