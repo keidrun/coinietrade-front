@@ -1,6 +1,6 @@
-const _ = require('lodash');
 const faker = require('faker');
 const uuid = require('uuid');
+const { mockResponse } = require('../../helpers/mock');
 const { AuthController } = require('../../../src/controllers');
 
 const users = [
@@ -31,11 +31,7 @@ describe('AuthController', () => {
     const req = {
       user: users[0],
     };
-    const res = {
-      json(messageObj) {
-        return messageObj;
-      },
-    };
+    const res = mockResponse();
 
     const response = AuthController.findLoggedInUser(req, res);
 
@@ -48,15 +44,7 @@ describe('AuthController', () => {
 
   test('should return 404 error response when the user not found', () => {
     const req = {};
-    const res = {
-      json(messageObj) {
-        return messageObj;
-      },
-      status(responseStatus) {
-        this.responseStatus = responseStatus;
-        return this;
-      },
-    };
+    const res = mockResponse();
 
     const errorResponse = AuthController.findLoggedInUser(req, res);
 
