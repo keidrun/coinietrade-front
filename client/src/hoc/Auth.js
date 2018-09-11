@@ -20,25 +20,25 @@ export default function(ComposedClass, shouldComponentReload) {
       this.props.fetchUser();
     }
 
-    componentWillReceiveProps(nextProps) {
-      this.setState({ loading: false });
-
-      const isLogged = nextProps.user;
+    static getDerivedStateFromProps(props, state) {
+      const isLogged = props.user;
 
       switch (isLogged) {
         case null: // API not working
-          return;
+          break;
         case false:
           if (shouldComponentReload) {
-            return this.props.history.push('/');
+            props.history.push('/');
           }
           break;
         default:
           if (shouldComponentReload === false) {
-            return this.props.history.push('/dashboard');
+            props.history.push('/dashboard');
           }
           break;
       }
+
+      return { loading: false };
     }
 
     render() {

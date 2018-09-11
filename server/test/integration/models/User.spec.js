@@ -1,11 +1,6 @@
 const _ = require('lodash');
 const uuid = require('uuid');
 const { User } = require('../../../src/models/User');
-const { setupDatabase } = require('../../helpers/databaseHelper');
-
-beforeAll(async () => {
-  await setupDatabase();
-});
 
 beforeEach(async () => {
   await User.remove({});

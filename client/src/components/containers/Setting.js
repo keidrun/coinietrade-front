@@ -88,9 +88,9 @@ class Setting extends Component {
     this.props.fetchProfile();
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { user } = nextProps.profile;
-    if (!nextProps.initialized && user && user.secrets) {
+  static getDerivedStateFromProps(props, state) {
+    const { user } = props.profile;
+    if (!props.initialized && user && user.secrets) {
       const { secrets } = user;
       const initialValues = user
         ? {
@@ -106,7 +106,7 @@ class Setting extends Component {
             zaifApiSecret: secrets.zaif ? secrets.zaif.apiSecretTail : '',
           }
         : {};
-      nextProps.initialize(initialValues);
+      props.initialize(initialValues);
       return { initialFormValues: initialValues };
     }
     return null;

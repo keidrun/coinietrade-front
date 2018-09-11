@@ -39,7 +39,7 @@ const GridEventList = ({ events }) => (
           }
           actionIcon={
             <IconButton>
-              <a href={event.link} target="_blank">
+              <a href={event.link} target="_blank" rel="noopener noreferrer">
                 <GridIcon color="white" />
               </a>
             </IconButton>

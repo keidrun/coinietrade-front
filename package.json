@@ -37,7 +37,6 @@
   },
   "devDependencies": {
     "dotenv": "^6.0.0",
-    "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-plugin-import": "^2.13.0",
@@ -61,6 +60,7 @@
     ]
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test/helpers/setupTests.js",
     "testRegex": "(/__test__/.*|(\\.|/)(test|spec))\\.js$",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
@@ -76,6 +76,10 @@
     },
     "rootDir": "server/"
   },
+  "resolutions": {
+    "react-scripts/eslint": "^5.5.0",
+    "react-scripts/jest": "^23.6.0"
+  },
   "scripts": {
     "start": "node server/src/server.js ",
     "lint": "eslint --fix server/src/**/**.js",
@@ -88,7 +92,7 @@
     "watch:test": "nodemon --exec yarn test",
     "watch": "npm-run-all -p watch:*",
     "build-sitemap": "node server/scripts/build-sitemap.js",
-    "build": "yarn build-sitemap && yarn --cwd client build",
+    "build": "yarn build-sitemap && SKIP_PREFLIGHT_CHECK=true yarn --cwd client build",
     "base64": "cat .env | base64",
     "up": "docker-compose -f docker-compose.dev.yml up -d",
     "web:up": "docker-compose -f docker-compose.dev.yml up -d web",
@@ -97,7 +101,7 @@
     "ps": "docker-compose -f docker-compose.dev.yml ps",
     "dev:mongo": "docker ps | grep 27019 || yarn db:up",
     "dev:server": "sleep 5 && nodemon server/src/server.js",
-    "dev:client": "yarn --cwd client start",
+    "dev:client": "SKIP_PREFLIGHT_CHECK=true yarn --cwd client start",
     "dev": "npm-run-all -p dev:*",
     "ci_ps": "docker-compose -f docker-compose.ci.yml ps",
     "ci:up": "yarn build && docker-compose -f docker-compose.ci.yml up -d",

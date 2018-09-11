@@ -61,9 +61,9 @@ class Events extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.events.hasOwnProperty('events')) {
-      this.setState({ loading: false });
+  static getDerivedStateFromProps(props, state) {
+    if (props.events.hasOwnProperty('events')) {
+      return { loading: false };
     }
   }
 

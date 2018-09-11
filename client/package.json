@@ -16,7 +16,6 @@
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",
@@ -25,14 +24,14 @@
     "validator": "^10.7.0"
   },
   "devDependencies": {
-    "eslint": "^5.4.0",
     "eslint-config-prettier": "^3.0.1",
     "eslint-config-react-app": "^2.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.11.1",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "react-scripts": "^1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",
