@@ -1,6 +1,7 @@
 const _ = require('lodash');
+const faker = require('faker');
 const uuid = require('uuid');
-const { User } = require('../../../src/models/User');
+const { User } = require('../../../src/models');
 
 beforeEach(async () => {
   await User.remove({});
@@ -17,12 +18,12 @@ const users = [
       refreshToken:
         'UNKGIUINLHIHKNU787678KHBGUTYUYKGIUfjbguhjKNBJFVBUKNBGF868766HJKBGIVKUBGIYNBKUIUNKGIUINLHIHKNU787678KHBGUTYUYKGIUfjbguhjKNBJFVBUKNBGF868766HJKBGIVKUBGIYNBKUIUNKGIUINLHIHKNU787678',
     },
-    displayName: 'Peter Griffin with Facebook',
-    familyName: 'Griffin',
-    givenName: 'Peter',
-    middleName: 'Guy',
-    email: 'peter@example.com',
-    avatarUrl: 'https://somewhere/avatar',
+    displayName: faker.internet.userName(),
+    familyName: faker.name.lastName(),
+    givenName: faker.name.firstName(),
+    middleName: faker.name.lastName(),
+    email: faker.internet.email(),
+    avatarUrl: faker.internet.url(),
     gender: 'male',
     language: 'en',
     secrets: [],
@@ -37,12 +38,12 @@ const users = [
       refreshToken:
         'UNKGIUINLHIHKNU787678KHBGUTYUYKGIUfjbguhjKNBJFVBUKNBGF868766HJKBGIVKUBGIYNBKUIUNKGIUINLHIHKNU787678KHBGUTYUYKGIUfjbguhjKNBJFVBUKNBGF868766HJKBGIVKUBGIYNBKUIUNKGIUINLHIHKNU787678',
     },
-    displayName: 'Peter Griffin with Google',
-    familyName: 'Griffin',
-    givenName: 'Peter',
-    middleName: 'Guy',
-    email: 'peter@example.com',
-    avatarUrl: 'https://somewhere/avatar',
+    displayName: faker.internet.userName(),
+    familyName: faker.name.lastName(),
+    givenName: faker.name.firstName(),
+    middleName: faker.name.lastName(),
+    email: faker.internet.email(),
+    avatarUrl: faker.internet.url(),
     gender: 'male',
     language: 'en',
     secrets: [],

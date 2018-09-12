@@ -74,6 +74,9 @@ if (
 // Final error handler
 app.use(errorHandler);
 
+// Listen
 server.listen(PORT, () => {
   console.log(`Server up on ${PORT}`);
 });
+
+module.exports = server;
