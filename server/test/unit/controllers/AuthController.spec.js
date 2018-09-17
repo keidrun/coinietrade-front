@@ -91,15 +91,7 @@ describe('AuthController', () => {
       },
       logout: jest.fn(),
     };
-    const res = {
-      json(messageObj) {
-        return messageObj;
-      },
-      status(responseStatus) {
-        this.responseStatus = responseStatus;
-        return this;
-      },
-    };
+    const res = mockResponse();
 
     const errorResponse = await AuthController.logout(req, res);
 
