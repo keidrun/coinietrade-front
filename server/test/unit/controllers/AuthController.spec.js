@@ -1,6 +1,7 @@
+/* eslint-disable node/no-unpublished-require */
 const faker = require('faker');
 const uuid = require('uuid');
-const { mockResponse } = require('../../helpers/mock');
+const { mockResponse } = require('../../helpers/mocks');
 const { AuthController } = require('../../../src/controllers');
 
 const users = [

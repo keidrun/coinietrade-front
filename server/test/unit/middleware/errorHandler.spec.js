@@ -1,4 +1,4 @@
-const { mockResponse } = require('../../helpers/mock');
+const { mockResponse } = require('../../helpers/mocks');
 const { errorHandler } = require('../../../src/middleware');
 
 describe('errorHandler', () => {

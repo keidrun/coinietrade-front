@@ -1,3 +1,4 @@
+/* eslint-disable node/no-unpublished-require */
 const _ = require('lodash');
 const faker = require('faker');
 const uuid = require('uuid');

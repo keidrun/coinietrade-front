@@ -1,20 +1,17 @@
-const path = require('path');
+/* eslint-disable node/no-unpublished-require */
 const nock = require('nock');
 const keys = require('../../../../config/keys').get(process.env.NODE_ENV);
+const { httpAdapter } = require('../../../helpers/utils');
+
 const { BackendApiClient } = require('../../../../src/utils/clients');
 
-// eslint-disable-next-line import/no-dynamic-require
-const http = require(path.join(
-  path.dirname(require.resolve('axios')),
-  'lib/adapters/http',
-));
 const TEST_API_VERSION = 'v1';
 const TEST_API_BASE_URL = `${keys.endpointApiURL}/${TEST_API_VERSION}`;
 
-describe('BackendApiClient', () => {
-  const apiClient = new BackendApiClient();
-  apiClient.setAdapter(http);
+const apiClient = new BackendApiClient();
+apiClient.setAdapter(httpAdapter);
 
+describe('BackendApiClient', () => {
   describe('getPolicies function', () => {
     test('should fetch policies data', async () => {
       nock(TEST_API_BASE_URL)
