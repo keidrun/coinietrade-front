@@ -58,10 +58,24 @@ const StyledLoginArea = styled.div`
     font-weight: 400;
     font-size: 1.7rem;
   }
+
+  p {
+    margin-top: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  a {
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: underline;
+  }
 `;
 
 const StyledLoginButtonArea = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
 
   span {
     color: white;
@@ -117,6 +131,17 @@ const Landing = () => (
             icon={<FontAwesome name="fab fa-google fa-2x" />}
           />
         </StyledLoginButtonArea>
+        <p>
+          If you'd like to know this site in detail in advance, read{' '}
+          <a
+            href="https://docs.coinietrade.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            documents
+          </a>
+          .
+        </p>
       </StyledLoginArea>
 
       <StyledFooter>
