@@ -4,7 +4,7 @@ const {
 } = require('../../../../src/middleware/validators');
 const { GENDER, LANGUAGE, EXCHANGE_SITES } = require('../../../../src/models');
 
-describe('updateUserValidator', () => {
+describe('updateUserValidator test', () => {
   test('should call next if the user is verified', async () => {
     const req = {
       body: {
