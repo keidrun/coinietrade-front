@@ -9,4 +9,5 @@ node_modules/
 .vscode/
 .env
 db/
+client/build/
 client/public/sitemap.xml

@@ -18,15 +18,15 @@ jobs:
             # install nvm and nodejs
             curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
             source ~/.bash_profile
-            nvm install v10.9.0
-            nvm alias default  v10.9.0
+            nvm install v10.12.0
+            nvm alias default  v10.12.0
 
             # Add nvm settings to circleci's build environment
             echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
             echo "[ -s \"$NVM_DIR/nvm.sh\" ] && . \"$NVM_DIR/nvm.sh\"" >> $BASH_ENV
 
             # Install yarn
-            npm install -g yarn@1.9.4
+            npm install -g yarn@1.10.1
       - run:
           name: Setup Heroku
           command: bash .circleci/setup-heroku.sh
@@ -63,7 +63,7 @@ jobs:
           name: Wait for db
           command: dockerize -wait tcp://localhost:27017 -timeout 1m
       - run:
-          name: Rub lint for Server
+          name: Run lint for Server
           command: yarn ci:lint
       - run:
           name: Run tests for Server and Report coverage to Codecov
