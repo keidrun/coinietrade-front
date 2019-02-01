@@ -1,5 +1,5 @@
 import React from 'react';
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import muiTheme from '../theme/muiTheme';
@@ -7,7 +7,7 @@ import muiTheme from '../theme/muiTheme';
 import Header from '../components/containers/Header';
 import Body from '../components/common/Body';
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
   * {
     color: #000;
     box-sizing: border-box;
@@ -56,14 +56,11 @@ injectGlobal`
 `;
 
 const Layout = props => (
-  <div>
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <div>
-        <Header />
-        <Body>{props.children}</Body>
-      </div>
-    </MuiThemeProvider>
-  </div>
+  <MuiThemeProvider muiTheme={muiTheme}>
+    <Header />
+    <Body>{props.children}</Body>
+    <GlobalStyle />
+  </MuiThemeProvider>
 );
 
 export default Layout;
