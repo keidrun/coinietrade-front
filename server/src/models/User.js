@@ -120,7 +120,6 @@ userSchema.methods.generateToken = function generateToken() {
 
 userSchema.statics.findByToken = function findByToken(token) {
   const user = this;
-
   const now = moment().toISOString();
 
   return new Promise(async (resolve, reject) => {

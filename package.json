@@ -4,8 +4,8 @@
   "description": "CoinieTrade front end and Gateway.",
   "main": "index.js",
   "engines": {
-    "node": ">=10.0.0",
-    "yarn": ">=1.9.0"
+    "node": ">=11.8.0",
+    "yarn": ">=1.13.0"
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
   "author": "keidrun",
@@ -16,6 +16,7 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "csurf": "^1.9.0",
+    "eslint": "^5.5.0",
     "express": "^4.16.2",
     "express-request-id": "^1.4.0",
     "express-validator": "^5.3.0",

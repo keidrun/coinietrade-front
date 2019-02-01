@@ -2,9 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "yarn": ">=1.9.4"
-  },
   "dependencies": {
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
