@@ -9,7 +9,7 @@
   },
   "repository": "https://github.com/keidrun/coinietrade-front.git",
   "author": "keidrun",
-  "license": "No license",
+  "license": "GPL 3.0",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
