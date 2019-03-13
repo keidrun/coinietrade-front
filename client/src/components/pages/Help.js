@@ -52,13 +52,12 @@ const Help = () => (
         <h4>Auther</h4>
         <p>
           <a
-            href="https://www.linkedin.com/in/keisuke-sasaki-03b124109/"
+            href="https://github.com/keidrun"
             target="_blank"
             rel="noopener noreferrer"
           >
             Keisuke Sasaki
-          </a>{' '}
-          (Linkedin profile)
+          </a>
         </p>
         <p />
         <h4>Version</h4>
